@@ -29,7 +29,7 @@ export default function Vendors() {
                     className={`rounded-full px-6 py-2 text-sm font-semibold transition-colors ${
                         activeTab === "food"
                             ? "bg-blossom-400 text-white"
-                            : "border border-night-600 text-warm-white/70 hover:border-blossom-400/40"
+                            : "border border-night-600 text-warm-white/90 hover:border-blossom-400/40"
                     }`}
                     onClick={() => setActiveTab("food")}
                 >
@@ -39,7 +39,7 @@ export default function Vendors() {
                     className={`rounded-full px-6 py-2 text-sm font-semibold transition-colors ${
                         activeTab === "arts"
                             ? "bg-blossom-400 text-white"
-                            : "border border-night-600 text-warm-white/70 hover:border-blossom-400/40"
+                            : "border border-night-600 text-warm-white/90 hover:border-blossom-400/40"
                     }`}
                     onClick={() => setActiveTab("arts")}
                 >
@@ -57,10 +57,10 @@ export default function Vendors() {
                         {/* TODO: Add vendor logo / images */}
                         <div className="mb-4 h-32 w-full rounded-lg bg-night-700" />
 
-                        <h3 className="mb-1 font-display text-lg font-semibold text-lantern-200">
+                        <h3 className="mb-1 font-display text-lg font-semibold text-warm-white">
                             {name}
                         </h3>
-                        <p className="text-sm text-warm-white/60">
+                        <p className="text-sm text-warm-white/80">
                             {description}
                         </p>
                     </div>

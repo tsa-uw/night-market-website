@@ -1,11 +1,11 @@
 @import "tailwindcss";
 
 @theme {
-    --color-night-900: #0a0a1a;
-    --color-night-800: #121228;
-    --color-night-700: #1a1a36;
-    --color-night-600: #252545;
-    --color-night-500: #3a3a5c;
+    --color-night-900: #dcefff;
+    --color-night-800: #ecf6ff;
+    --color-night-700: #d5e8f8;
+    --color-night-600: #b9d2e8;
+    --color-night-500: #8ca9c2;
 
     --color-blossom-100: #fce4ec;
     --color-blossom-200: #f8bbd0;
@@ -20,7 +20,7 @@
     --color-lantern-500: #ff8f00;
 
     --color-gold: #d4a574;
-    --color-warm-white: #faf5f0;
+    --color-warm-white: #1f2d5a;
 
     --font-display: "Georgia", serif;
     --font-body: "Inter", system-ui, sans-serif;

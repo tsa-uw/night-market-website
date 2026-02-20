@@ -11,7 +11,7 @@ const SPONSORS = [
 export default function Sponsors() {
     return (
         <Section id="sponsors" title="Sponsors">
-            <p className="mb-8 text-center text-warm-white/70">
+            <p className="mb-8 text-center text-warm-white/85">
                 Thank you to our sponsors for making this event possible!
             </p>
 
@@ -22,7 +22,7 @@ export default function Sponsors() {
                         className="flex h-28 items-center justify-center rounded-xl border border-night-600 bg-night-800/60"
                     >
                         {/* TODO: Replace with sponsor logo images */}
-                        <span className="text-sm text-warm-white/40">
+                        <span className="text-sm text-warm-white/75">
                             {name}
                         </span>
                     </div>

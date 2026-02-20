@@ -10,15 +10,15 @@ export default function Hero() {
             {/* Cherry blossom decoration placeholders */}
             {/* TODO: Replace with drawn cherry blossom assets */}
 
-            <h1 className="font-display text-5xl font-bold leading-tight text-blossom-300 md:text-7xl">
+            <h1 className="font-display text-5xl font-bold leading-tight text-warm-white md:text-7xl">
                 TSA Night Market
             </h1>
 
-            <p className="mt-4 text-xl font-medium text-lantern-300 md:text-2xl">
+            <p className="mt-4 text-xl font-medium text-blossom-500 md:text-2xl">
                 May 23, 2026
             </p>
 
-            <p className="mt-2 text-lg text-warm-white/70">
+            <p className="mt-2 text-lg text-warm-white/85">
                 {/* TODO: Fill in actual times */}
                 00:00 – 00:00 @ Red Square
             </p>
@@ -26,7 +26,7 @@ export default function Hero() {
             {/* Scroll indicator */}
             <div className="absolute bottom-8 animate-bounce">
                 <svg
-                    className="h-6 w-6 text-warm-white/50"
+                    className="h-6 w-6 text-warm-white/70"
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"

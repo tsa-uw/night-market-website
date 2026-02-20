@@ -40,7 +40,7 @@ function Accordion({ question, answer }: FAQItem) {
                     {question}
                 </span>
                 <svg
-                    className={`h-5 w-5 shrink-0 text-blossom-300 transition-transform ${open ? "rotate-180" : ""}`}
+                    className={`h-5 w-5 shrink-0 text-blossom-500 transition-transform ${open ? "rotate-180" : ""}`}
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"
@@ -54,7 +54,7 @@ function Accordion({ question, answer }: FAQItem) {
                 </svg>
             </button>
             {open && (
-                <div className="pb-4 text-sm leading-relaxed text-warm-white/60">
+                <div className="pb-4 text-sm leading-relaxed text-warm-white/80">
                     {answer}
                 </div>
             )}
