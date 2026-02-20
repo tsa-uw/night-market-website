@@ -1,43 +1,50 @@
 import { useEffect, useState } from "react";
 
 /**
- * Observes all sections matching the given IDs and returns the one
- * currently most visible in the viewport.
+ * Returns the section whose bounds contain the viewport midpoint.
+ * This prevents switching to the next section too early.
  */
 export function useActiveSection(sectionIds: string[]) {
     const [activeId, setActiveId] = useState(sectionIds[0]);
 
     useEffect(() => {
-        const observers: IntersectionObserver[] = [];
-        const visibilityMap = new Map<string, number>();
+        const sections = sectionIds
+            .map((id) => document.getElementById(id))
+            .filter((el): el is HTMLElement => Boolean(el));
 
-        for (const id of sectionIds) {
-            const el = document.getElementById(id);
-            if (!el) continue;
+        if (sections.length === 0) return;
 
-            const observer = new IntersectionObserver(
-                ([entry]) => {
-                    visibilityMap.set(id, entry.intersectionRatio);
+        const updateActiveSection = () => {
+            const threshold = window.innerHeight / 4;
 
-                    // Pick the section with the highest visible ratio
-                    let best = sectionIds[0];
-                    let bestRatio = 0;
-                    for (const [key, ratio] of visibilityMap) {
-                        if (ratio > bestRatio) {
-                            bestRatio = ratio;
-                            best = key;
-                        }
-                    }
-                    setActiveId(best);
-                },
-                { threshold: [0, 0.25, 0.5, 0.75, 1] },
-            );
+            let currentActive = sectionIds[0];
 
-            observer.observe(el);
-            observers.push(observer);
-        }
+            for (const section of sections) {
+                const { top, bottom } = section.getBoundingClientRect();
 
-        return () => observers.forEach((o) => o.disconnect());
+                if (top <= threshold && bottom > threshold) {
+                    currentActive = section.id;
+                    break;
+                }
+
+                if (top <= threshold) {
+                    currentActive = section.id;
+                }
+            }
+
+            setActiveId(currentActive);
+        };
+
+        updateActiveSection();
+        window.addEventListener("scroll", updateActiveSection, {
+            passive: true,
+        });
+        window.addEventListener("resize", updateActiveSection);
+
+        return () => {
+            window.removeEventListener("scroll", updateActiveSection);
+            window.removeEventListener("resize", updateActiveSection);
+        };
     }, [sectionIds]);
 
     return activeId;
