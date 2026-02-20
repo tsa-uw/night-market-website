@@ -1,38 +1,30 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
+import Navbar from "./components/layout/Navbar";
+import Hero from "./components/sections/Hero";
+import Logistics from "./components/sections/Logistics";
+import RaffleTickets from "./components/sections/RaffleTickets";
+import EventTrailer from "./components/sections/EventTrailer";
+import Schedule from "./components/sections/Schedule";
+import Vendors from "./components/sections/Vendors";
+import Sponsors from "./components/sections/Sponsors";
+import FAQ from "./components/sections/FAQ";
 
-function App() {
-    const [count, setCount] = useState(0);
-
+export default function App() {
     return (
         <>
-            <div>
-                <a href="https://vite.dev" target="_blank">
-                    <img src={viteLogo} className="logo" alt="Vite logo" />
-                </a>
-                <a href="https://react.dev" target="_blank">
-                    <img
-                        src={reactLogo}
-                        className="logo react"
-                        alt="React logo"
-                    />
-                </a>
-            </div>
-            <h1>Vite + React</h1>
-            <div className="card">
-                <button onClick={() => setCount((count) => count + 1)}>
-                    count is {count}
-                </button>
-                <p>
-                    Edit <code>src/App.tsx</code> and save to test HMR
-                </p>
-            </div>
-            <p className="read-the-docs">
-                Click on the Vite and React logos to learn more
-            </p>
+            <Navbar />
+            <main>
+                <Hero />
+                <Logistics />
+                <RaffleTickets />
+                <EventTrailer />
+                <Schedule />
+                <Vendors />
+                <Sponsors />
+                <FAQ />
+            </main>
+            <footer className="border-t border-night-600 px-4 py-8 text-center text-sm text-warm-white/40">
+                &copy; 2026 TSA Night Market. All rights reserved.
+            </footer>
         </>
     );
 }
-
-export default App;
