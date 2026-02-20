@@ -24,14 +24,11 @@ jobs:
         with:
           node-version: 20
           cache: pnpm
-          cache-dependency-path: night-market-website/pnpm-lock.yaml
       - run: pnpm install
-        working-directory: night-market-website
       - run: pnpm build
-        working-directory: night-market-website
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: night-market-website/dist
+          path: dist
       - id: deployment
         uses: actions/deploy-pages@v4
