@@ -3,17 +3,68 @@ import Section from "../layout/Section";
 
 type VendorTab = "food" | "arts";
 
-// TODO: Replace with actual vendor data
+// Vendor names sourced from the archived site pages (representative subset)
 const FOOD_VENDORS = [
-    { name: "Vendor 1", description: "Menu and prices coming soon." },
-    { name: "Vendor 2", description: "Menu and prices coming soon." },
-    { name: "Vendor 3", description: "Menu and prices coming soon." },
+    {
+        name: "The Moo Bar",
+        description: "Bubble tea and specialty drinks.",
+        image: "//assets/archive/the-moo-bar-logo.jpeg",
+        page: "/74256206069953c1a1d97d/the-moo-bar.html",
+    },
+    {
+        name: "Pho Ha",
+        description: "Vietnamese pho and noodle bowls.",
+        page: "/74256206069953c1a1d97d/pho-ha.html",
+    },
+    { name: "Phe", description: "Thai-inspired specialties.", page: "/74256206069953c1a1d97d/phe.html" },
+    {
+        name: "Peachy X Noodle",
+        description: "Noodle bowls and snacks.",
+        page: "/74256206069953c1a1d97d/peachyxnoodle.html",
+    },
+    {
+        name: "Sunright",
+        description: "Taiwanese shaved ice and drinks.",
+        image: "//assets/archive/sunkis_orig.jpeg",
+        page: "/74256206069953c1a1d97d/sunright.html",
+    },
+    {
+        name: "Tapioca Express",
+        description: "Bubble tea and refreshments.",
+        page: "/74256206069953c1a1d97d/tapioca-express.html",
+    },
 ];
 
 const ARTS_VENDORS = [
-    { name: "Artist 1", description: "Bio and portfolio coming soon." },
-    { name: "Artist 2", description: "Bio and portfolio coming soon." },
-    { name: "Artist 3", description: "Bio and portfolio coming soon." },
+    {
+        name: "Biscuitfloof Studios",
+        description: "Handmade plush and art prints.",
+        image: "//assets/archive/biscuitfloof-logo.png",
+        page: "/74256206069953c1a1d97d/biscuitfloof-studios.html",
+    },
+    {
+        name: "Clara Jane Studio",
+        description: "Illustration and stationery.",
+        image: "//assets/archive/clara-jane.jpg",
+        page: "/74256206069953c1a1d97d/clara-jane-studio.html",
+    },
+    {
+        name: "Misha Charms",
+        description: "Custom charms and accessories.",
+        image: "//assets/archive/misha-charms.png",
+        page: "/74256206069953c1a1d97d/mishacharms.html",
+    },
+    {
+        name: "Shooley Art",
+        description: "Original prints and enamel pins.",
+        image: "//assets/archive/shooleylogo.jpg",
+        page: "/74256206069953c1a1d97d/shooley-art.html",
+    },
+    {
+        name: "Stephanie Mai Designs",
+        description: "Jewelry and accessories.",
+        page: "/74256206069953c1a1d97d/stephanie-mai-designs.html",
+    },
 ];
 
 export default function Vendors() {
@@ -49,21 +100,29 @@ export default function Vendors() {
 
             {/* Vendor grid */}
             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-                {vendors.map(({ name, description }) => (
-                    <div
-                        key={name}
-                        className="rounded-xl border border-night-600 bg-night-800/60 p-6 transition-colors hover:border-lantern-400/40"
-                    >
-                        {/* TODO: Add vendor logo / images */}
-                        <div className="mb-4 h-32 w-full rounded-lg bg-night-700" />
+                {vendors.map(({ name, description, image, page }) => (
+                    <a key={name} href={page ?? "#"} className="group">
+                        <div className="rounded-xl border border-night-600 bg-night-800/60 p-6 transition-colors hover:border-lantern-400/40">
+                            <div className="mb-4 h-32 w-full overflow-hidden rounded-lg bg-night-700">
+                                {image ? (
+                                    // Use archived asset path so user doesn't need to upload
+                                    // assets into the React app.
+                                    <img
+                                        src={image}
+                                        alt={name}
+                                        className="h-full w-full object-cover transition-transform group-hover:scale-105"
+                                    />
+                                ) : (
+                                    <div className="flex h-full items-center justify-center text-sm text-warm-white/60">No image</div>
+                                )}
+                            </div>
 
-                        <h3 className="mb-1 font-display text-lg font-semibold text-warm-white">
-                            {name}
-                        </h3>
-                        <p className="text-sm text-warm-white/80">
-                            {description}
-                        </p>
-                    </div>
+                            <h3 className="mb-1 font-display text-lg font-semibold text-warm-white">
+                                {name}
+                            </h3>
+                            <p className="text-sm text-warm-white/80">{description}</p>
+                        </div>
+                    </a>
                 ))}
             </div>
         </Section>

@@ -11,16 +11,18 @@ export default function Hero() {
             {/* TODO: Replace with drawn cherry blossom assets */}
 
             <h1 className="font-display text-5xl font-bold leading-tight text-warm-white md:text-7xl">
-                TSA Night Market
+                UW Night Market
             </h1>
 
             <p className="mt-4 text-xl font-medium text-blossom-500 md:text-2xl">
-                May 23, 2026
+                May 3, 2026 — 4:30 PM &ndash; 10:00 PM
             </p>
 
-            <p className="mt-2 text-lg text-warm-white/85">
-                {/* TODO: Fill in actual times */}
-                00:00 – 00:00 @ Red Square
+            <p className="mt-2 max-w-xl text-lg text-warm-white/85">
+                An annual celebration of Taiwan's rich culture through delicious
+                food, activities, and entertainment — proudly presented by the
+                Taiwanese Student Association at the University of Washington.
+                <br />Red Square, University of Washington, Seattle, WA 98195
             </p>
 
             {/* Scroll indicator */}

@@ -3,19 +3,22 @@ import Section from "../layout/Section";
 const INFO_CARDS = [
     {
         heading: "Payment Info",
-        body: "Details about accepted payment methods will go here.",
+        body:
+            "UW Night Market is FREE to attend. Most vendors accept card or Apple Pay for food and activities; cash availability varies by vendor.",
     },
     {
         heading: "Directions & Parking",
-        body: "How to get to Red Square and where to park.",
+        body:
+            "Take Link Light Rail to University of Washington Station, cross the pedestrian bridge, and head northwest along Rainier Vista (about 0.4 miles) to Red Square. We recommend Central Plaza Parking Garage (free starting at noon, first-come, first-served); see UW Maps for lot locations.",
     },
     {
         heading: "Other Information",
-        body: "Important warnings and things to know before you arrive.",
+        body:
+            "Bring a reusable bag, stay hydrated, and expect campus foot traffic. Event setup and vendor locations are shown on our event map.",
     },
     {
         heading: "Questions?",
-        body: "Come find us at the info booth!",
+        body: "Email us at info@uwnightmarket.com or visit the information booth on-site.",
     },
 ] as const;
 
