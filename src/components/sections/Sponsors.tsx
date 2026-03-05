@@ -2,12 +2,12 @@ import Section from "../layout/Section";
 
 // Representative sponsor list pulled from archived site assets
 const SPONSORS = [
-    { name: "ASUW", image: "//assets/archive/asuw_orig.png" },
-    { name: "University of Washington", image: "//assets/archive/uw-parking_orig.png" },
-    { name: "TSAUW", image: "//assets/archive/tsa-logo_1.png" },
-    { name: "TECO Seattle", image: "//assets/archive/teco-seattle_2.jpg" },
-    { name: "Starlux", image: "//assets/archive/starlux_orig.jpg" },
-    { name: "Uwajimaya", image: "//assets/archive/uwajimaya_orig.png" },
+    { name: "ASUW", image: "/assets/archive/asuw_orig.png" },
+    { name: "University of Washington", image: "/assets/archive/uw-parking_orig.png" },
+    { name: "TSAUW", image: "/assets/archive/tsa-logo_1.png" },
+    { name: "TECO Seattle", image: "/assets/archive/teco-seattle_2.jpg" },
+    { name: "Starlux", image: "/assets/archive/starlux_orig.jpg" },
+    { name: "Uwajimaya", image: "/assets/archive/uwajimaya_orig.png" },
 ];
 
 export default function Sponsors() {
