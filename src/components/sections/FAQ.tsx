@@ -10,19 +10,22 @@ interface FAQItem {
 const FAQ_ITEMS: FAQItem[] = [
     {
         question: "When and where is the Night Market?",
-        answer: "May 23, 2026 at Red Square. Specific hours TBA.",
+        answer:
+            "May 3, 2026 — 4:30 PM to 10:00 PM at Red Square, University of Washington (Seattle, WA 98195).",
     },
     {
         question: "Is there an entry fee?",
-        answer: "Entry details coming soon.",
+        answer: "No — the Night Market is free to attend. Food and activities are paid by vendors.",
     },
     {
         question: "What forms of payment are accepted?",
-        answer: "Payment information coming soon.",
+        answer:
+            "Most vendors accept card or Apple Pay. Cash acceptance varies by vendor; bring card or mobile pay when possible.",
     },
     {
         question: "Is parking available?",
-        answer: "Parking and directions information coming soon.",
+        answer:
+            "We recommend the Central Plaza Parking Garage (free starting at noon on a first-come, first-served basis). For transit, take Link Light Rail to University of Washington Station and walk across the pedestrian bridge to campus (~0.4 miles).",
     },
 ];
 

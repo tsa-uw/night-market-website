@@ -1,11 +1,13 @@
 import Section from "../layout/Section";
 
-// TODO: Replace with actual sponsor data & logos
+// Representative sponsor list pulled from archived site assets
 const SPONSORS = [
-    { name: "Sponsor 1" },
-    { name: "Sponsor 2" },
-    { name: "Sponsor 3" },
-    { name: "Sponsor 4" },
+    { name: "ASUW", image: "//assets/archive/asuw_orig.png" },
+    { name: "University of Washington", image: "//assets/archive/uw-parking_orig.png" },
+    { name: "TSAUW", image: "//assets/archive/tsa-logo_1.png" },
+    { name: "TECO Seattle", image: "//assets/archive/teco-seattle_2.jpg" },
+    { name: "Starlux", image: "//assets/archive/starlux_orig.jpg" },
+    { name: "Uwajimaya", image: "//assets/archive/uwajimaya_orig.png" },
 ];
 
 export default function Sponsors() {
@@ -16,15 +18,20 @@ export default function Sponsors() {
             </p>
 
             <div className="grid grid-cols-2 gap-6 sm:grid-cols-4">
-                {SPONSORS.map(({ name }) => (
+                {SPONSORS.map(({ name, image }) => (
                     <div
                         key={name}
-                        className="flex h-28 items-center justify-center rounded-xl border border-night-600 bg-night-800/60"
+                        className="flex h-28 items-center justify-center rounded-xl border border-night-600 bg-night-800/60 overflow-hidden"
                     >
-                        {/* TODO: Replace with sponsor logo images */}
-                        <span className="text-sm text-warm-white/75">
-                            {name}
-                        </span>
+                        {image ? (
+                            <img
+                                src={image}
+                                alt={name}
+                                className="h-full max-h-20 w-auto object-contain"
+                            />
+                        ) : (
+                            <span className="text-sm text-warm-white/75">{name}</span>
+                        )}
                     </div>
                 ))}
             </div>
