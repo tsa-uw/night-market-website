@@ -33,7 +33,7 @@ function Accordion({ question, answer }: FAQItem) {
     const [open, setOpen] = useState(false);
 
     return (
-        <div className="border-b border-night-600">
+        <div className="border-b border-crimson-600">
             <button
                 className="flex w-full items-center justify-between py-4 text-left"
                 onClick={() => setOpen((prev) => !prev)}

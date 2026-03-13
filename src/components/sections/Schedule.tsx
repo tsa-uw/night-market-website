@@ -22,7 +22,7 @@ export default function Schedule() {
                     {SCHEDULE_EVENTS.map(({ time, title }, i) => (
                         <li key={i} className="mb-8 last:mb-0">
                             {/* Dot on timeline */}
-                            <span className="absolute -left-[9px] mt-1.5 h-4 w-4 rounded-full border-2 border-blossom-400 bg-night-900" />
+                            <span className="absolute -left-[9px] mt-1.5 h-4 w-4 rounded-full border-2 border-blossom-400 bg-crimson-900" />
 
                             <time className="text-sm font-semibold text-warm-white">
                                 {time}

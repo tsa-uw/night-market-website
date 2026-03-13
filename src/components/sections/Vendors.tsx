@@ -40,7 +40,7 @@ export default function Vendors() {
                     className={`rounded-full px-6 py-2 text-sm font-semibold transition-colors ${
                         activeTab === "food"
                             ? "bg-blossom-400 text-white"
-                            : "border border-night-600 text-warm-white/90 hover:border-blossom-400/40"
+                            : "border border-crimson-600 text-warm-white/90 hover:border-blossom-400/40"
                     }`}
                     onClick={() => setActiveTab("food")}
                 >
@@ -50,7 +50,7 @@ export default function Vendors() {
                     className={`rounded-full px-6 py-2 text-sm font-semibold transition-colors ${
                         activeTab === "arts"
                             ? "bg-blossom-400 text-white"
-                            : "border border-night-600 text-warm-white/90 hover:border-blossom-400/40"
+                            : "border border-crimson-600 text-warm-white/90 hover:border-blossom-400/40"
                     }`}
                     onClick={() => setActiveTab("arts")}
                 >
@@ -62,8 +62,8 @@ export default function Vendors() {
             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
                 {vendors.map(({ name, description, image, page }) => (
                     <a key={name} href={page ?? "#"} className="group">
-                        <div className="rounded-xl border border-night-600 bg-night-800/60 p-6 transition-colors hover:border-lantern-400/40">
-                            <div className="mb-4 h-32 w-full overflow-hidden rounded-lg bg-night-700">
+                        <div className="rounded-xl border border-crimson-600 bg-crimson-800/60 p-6 transition-colors hover:border-lantern-400/40">
+                            <div className="mb-4 h-32 w-full overflow-hidden rounded-lg bg-crimson-700">
                                 {image ? (
                                     // Use archived asset path so user doesn't need to upload
                                     // assets into the React app.
