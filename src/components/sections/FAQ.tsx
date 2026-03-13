@@ -33,17 +33,17 @@ function Accordion({ question, answer }: FAQItem) {
     const [open, setOpen] = useState(false);
 
     return (
-        <div className="border-b border-crimson-600">
+        <div className="border-b border-black">
             <button
                 className="flex w-full items-center justify-between py-4 text-left"
                 onClick={() => setOpen((prev) => !prev)}
                 aria-expanded={open}
             >
-                <span className="pr-4 font-medium text-warm-gold/90">
+                <span className="pr-4 font-medium text-black/90">
                     {question}
                 </span>
                 <svg
-                    className={`h-5 w-5 shrink-0 text-blossom-500 transition-transform ${open ? "rotate-180" : ""}`}
+                    className={`h-5 w-5 shrink-0 text-black/50 transition-transform ${open ? "rotate-180" : ""}`}
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"
@@ -57,7 +57,7 @@ function Accordion({ question, answer }: FAQItem) {
                 </svg>
             </button>
             {open && (
-                <div className="pb-4 text-sm leading-relaxed text-warm-gold/80">
+                <div className="pb-4 text-sm leading-relaxed text-black/80">
                     {answer}
                 </div>
             )}
