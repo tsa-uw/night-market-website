@@ -62,8 +62,8 @@ export default function Vendors() {
             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
                 {vendors.map(({ name, description, image, page }) => (
                     <a key={name} href={page ?? "#"} className="group">
-                        <div className="rounded-xl border border-crimson-600 bg-crimson-800/60 p-6 transition-colors hover:border-lantern-400/40">
-                            <div className="mb-4 h-32 w-full overflow-hidden rounded-lg bg-crimson-700">
+                        <div className="rounded-xl p-6">
+                            <div className="mb-4 h-32 w-full overflow-hidden rounded-lg">
                                 {image ? (
                                     // Use archived asset path so user doesn't need to upload
                                     // assets into the React app.

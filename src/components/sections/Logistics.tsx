@@ -29,7 +29,7 @@ export default function Logistics() {
                 {INFO_CARDS.map(({ heading, body }) => (
                     <div
                         key={heading}
-                        className="rounded-xl border border-crimson-600 bg-crimson-800/60 p-6 transition-colors hover:border-blossom-400/40"
+                        className="rounded-xl p-6"
                     >
                         <h3 className="mb-2 font-display text-xl font-semibold text-warm-gold">
                             {heading}
