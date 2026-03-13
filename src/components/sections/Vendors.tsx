@@ -3,8 +3,15 @@ import Section from "../layout/Section";
 
 type VendorTab = "food" | "arts";
 
+type Vendor = {
+    name: string;
+    description: string;
+    page: string;
+    image?: string;
+};
+
 // Vendor names sourced from the archived site pages (representative subset)
-const FOOD_VENDORS = [
+const FOOD_VENDORS: Vendor[] = [
     {
         name: "The Moo Bar",
         description: "Bubble tea and specialty drinks.",
@@ -33,7 +40,7 @@ const FOOD_VENDORS = [
     },
 ];
 
-const ARTS_VENDORS = [
+const ARTS_VENDORS: Vendor[] = [
     {
         name: "Biscuitfloof Studios",
         description: "Handmade plush and art prints.",
