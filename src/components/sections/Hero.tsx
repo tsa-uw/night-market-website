@@ -12,9 +12,9 @@ export default function Hero() {
                 UW Night Market
             </h1>
 
-            <div className="mt-8 flex flex-col items-center gap-2 text-warm-gold/90 sm:flex-row sm:gap-6">
+            <div className="mt-8 flex flex-col items-center gap-2 text-warm-gold sm:flex-row sm:gap-6">
                 <span className="text-base font-medium">May 23, 2026 &nbsp;·&nbsp; 4:30 – 10:00 PM</span>
-                <span className="hidden sm:block text-warm-gold/40">|</span>
+                <span className="hidden sm:block">|</span>
                 <span className="text-base">Red Square, University of Washington</span>
             </div>
 

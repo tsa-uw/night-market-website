@@ -39,7 +39,7 @@ function Accordion({ question, answer }: FAQItem) {
                 onClick={() => setOpen((prev) => !prev)}
                 aria-expanded={open}
             >
-                <span className="pr-4 font-medium text-warm-white/90">
+                <span className="pr-4 font-medium text-warm-gold/90">
                     {question}
                 </span>
                 <svg
@@ -57,7 +57,7 @@ function Accordion({ question, answer }: FAQItem) {
                 </svg>
             </button>
             {open && (
-                <div className="pb-4 text-sm leading-relaxed text-warm-white/80">
+                <div className="pb-4 text-sm leading-relaxed text-warm-gold/80">
                     {answer}
                 </div>
             )}
