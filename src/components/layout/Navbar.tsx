@@ -14,8 +14,8 @@ const NAV_ITEMS = [
 ] as const;
 
 const SECTION_IDS = NAV_ITEMS.map((item) => item.id);
-const LOGO_SIZE = 28;
-const LOGO_TEXT_GAP = 2;
+const LOGO_SIZE = 18;
+const LOGO_TEXT_GAP = 8;
 
 interface LogoPos {
     x: number;
@@ -60,11 +60,11 @@ export default function Navbar() {
     }, [recalc]);
 
     return (
-        <nav className="fixed top-4 left-4 z-50 md:left-8">
+        <nav className="fixed top-4 left-0 right-0 z-50 flex justify-center">
             {/* Desktop glassmorphism pill */}
             <div
                 ref={pillRef}
-                className="relative hidden items-center gap-2 rounded-full border border-night-500/20 bg-white/55 px-12 py-3 shadow-lg shadow-night-500/10 backdrop-blur-xl md:flex"
+                className="relative hidden items-center gap-2 rounded-full bg-warm-gold px-8 py-3 shadow-lg md:flex"
             >
                 {/* Logo that slides to the left of the active link */}
                 <motion.div
@@ -89,13 +89,13 @@ export default function Navbar() {
                             ref={(el) => {
                                 if (el) itemRefs.current.set(id, el);
                             }}
-                            className="relative rounded-full px-4 py-2 text-base font-semibold transition-colors"
+                            className="relative inline-flex items-center rounded-full px-4 py-2 text-base font-semibold transition-colors"
                         >
                             <span
                                 className={`relative z-10 ${
                                     activeSection === id
-                                        ? "text-warm-white"
-                                        : "text-warm-white/65 hover:text-warm-white"
+                                        ? "text-crimson-500"
+                                        : "text-crimson-500/60 hover:text-crimson-500"
                                 }`}
                             >
                                 {label}
@@ -106,13 +106,13 @@ export default function Navbar() {
             </div>
 
             {/* Mobile hamburger */}
-            <div className="flex items-center gap-3 rounded-full border border-night-500/20 bg-white/60 px-4 py-2 shadow-lg shadow-night-500/10 backdrop-blur-xl md:hidden">
+            <div className="flex items-center gap-3 rounded-full border border-crimson-500/20 bg-white/60 px-4 py-2 shadow-lg shadow-crimson-500/10 backdrop-blur-xl md:hidden">
                 <img src="/tsa_logo.png" alt="TSA Logo" className="h-6 w-6" />
-                <span className="text-sm font-semibold text-warm-white">
+                <span className="text-sm font-semibold text-warm-gold">
                     Night Market
                 </span>
                 <button
-                    className="ml-2 text-warm-white/80"
+                    className="ml-2 text-warm-gold/80"
                     onClick={() => setMobileOpen((prev) => !prev)}
                     aria-label="Toggle navigation menu"
                     aria-expanded={mobileOpen}
@@ -149,7 +149,7 @@ export default function Navbar() {
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -8 }}
                         transition={{ duration: 0.2 }}
-                        className="mt-2 rounded-2xl border border-night-500/20 bg-white/70 px-4 py-3 shadow-lg shadow-night-500/10 backdrop-blur-xl md:hidden"
+                        className="mt-2 rounded-2xl border border-crimson-500/20 bg-white/70 px-4 py-3 shadow-lg shadow-crimson-500/10 backdrop-blur-xl md:hidden"
                     >
                         {NAV_ITEMS.map(({ label, href, id }) => (
                             <li key={id}>
@@ -157,8 +157,8 @@ export default function Navbar() {
                                     href={href}
                                     className={`block rounded-lg px-3 py-2 text-sm transition-colors ${
                                         activeSection === id
-                                            ? "bg-night-700/60 text-warm-white"
-                                            : "text-warm-white/70 hover:text-warm-white"
+                                            ? "bg-crimson-700/60 text-warm-gold"
+                                            : "text-warm-gold/70 hover:text-warm-gold"
                                     }`}
                                     onClick={() => setMobileOpen(false)}
                                 >

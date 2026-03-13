@@ -4,31 +4,24 @@ export default function Hero() {
             id="home"
             className="relative flex min-h-screen flex-col items-center justify-center px-4 pt-16 text-center"
         >
-            {/* Background placeholder — swap with asset later */}
-            <div className="absolute inset-0 -z-10 bg-gradient-to-b from-night-800 via-night-900 to-night-900" />
+            <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-warm-gold/60">
+                The UW Taiwanese Student Association presents
+            </p>
 
-            {/* Cherry blossom decoration placeholders */}
-            {/* TODO: Replace with drawn cherry blossom assets */}
-
-            <h1 className="font-display text-5xl font-bold leading-tight text-warm-white md:text-7xl">
+            <h1 className="font-display text-6xl font-bold leading-tight text-warm-gold md:text-8xl">
                 UW Night Market
             </h1>
 
-            <p className="mt-4 text-xl font-medium text-blossom-500 md:text-2xl">
-                May 23, 2026 — 4:30 PM &ndash; 10:00 PM
-            </p>
-
-            <p className="mt-2 max-w-xl text-lg text-warm-white/85">
-                An annual celebration of Taiwan's rich culture through delicious
-                food, activities, and entertainment — proudly presented by the
-                Taiwanese Student Association at the University of Washington.
-                <br />Red Square, University of Washington, Seattle, WA 98195
-            </p>
+            <div className="mt-8 flex flex-col items-center gap-2 text-warm-gold/90 sm:flex-row sm:gap-6">
+                <span className="text-base font-medium">May 23, 2026 &nbsp;·&nbsp; 4:30 – 10:00 PM</span>
+                <span className="hidden sm:block text-warm-gold/40">|</span>
+                <span className="text-base">Red Square, University of Washington</span>
+            </div>
 
             {/* Scroll indicator */}
             <div className="absolute bottom-8 animate-bounce">
                 <svg
-                    className="h-6 w-6 text-warm-white/70"
+                    className="h-6 w-6 text-warm-gold/70"
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"

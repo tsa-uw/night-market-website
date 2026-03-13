@@ -17,7 +17,7 @@ export default function Sponsors() {
                 {SPONSORS.map(({ name, image }) => (
                     <div
                         key={name}
-                        className="flex h-28 items-center justify-center rounded-xl border border-night-600 bg-night-800/60 overflow-hidden"
+                        className="flex h-28 items-center justify-center rounded-xl border border-crimson-600 bg-crimson-800/60 overflow-hidden"
                     >
                         {image ? (
                             <img

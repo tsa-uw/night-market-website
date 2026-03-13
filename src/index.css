@@ -1,11 +1,19 @@
 @import "tailwindcss";
 
+@font-face {
+    font-family: "TenPounds";
+    src: url("/fonts/TenPounds-Webfont-Kit/tenpounds-regular-webfont.woff2") format("woff2"),
+         url("/fonts/TenPounds-Webfont-Kit/tenpounds-regular-webfont.woff") format("woff");
+    font-weight: normal;
+    font-style: normal;
+}
+
 @theme {
-    --color-night-900: #dcefff;
-    --color-night-800: #ecf6ff;
-    --color-night-700: #d5e8f8;
-    --color-night-600: #b9d2e8;
-    --color-night-500: #8ca9c2;
+    --color-crimson-900: #fde8ec;
+    --color-crimson-800: #fbc8d0;
+    --color-crimson-700: #f29090;
+    --color-crimson-600: #c45050;
+    --color-crimson-500: #7a2828;
 
     --color-blossom-100: #fce4ec;
     --color-blossom-200: #f8bbd0;
@@ -20,10 +28,10 @@
     --color-lantern-500: #ff8f00;
 
     --color-gold: #d4a574;
-    --color-warm-white: #1f2d5a;
+    --color-warm-gold: #f5d16a;
 
-    --font-display: "Georgia", serif;
-    --font-body: "Inter", system-ui, sans-serif;
+    --font-display: "TenPounds", "Georgia", serif;
+    --font-body: "Figtree", sans-serif;
 }
 
 html {
@@ -32,6 +40,8 @@ html {
 
 body {
     font-family: var(--font-body);
-    color: var(--color-warm-white);
-    background-color: var(--color-night-900);
+    color: var(--color-warm-gold);
+    background: linear-gradient(135deg, #6a0e1a 0%, #a02030 40%, #c0392b 70%, #8b1a1a 100%);
+    background-attachment: fixed;
+    min-height: 100vh;
 }
