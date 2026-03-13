@@ -29,6 +29,18 @@ export default function Navbar() {
     const pillRef = useRef<HTMLDivElement>(null);
 
     const [logoPos, setLogoPos] = useState<LogoPos>({ x: 0 });
+    const [visible, setVisible] = useState(true);
+    const lastScrollY = useRef(0);
+
+    useEffect(() => {
+        const onScroll = () => {
+            const current = window.scrollY;
+            setVisible(current < lastScrollY.current || current < 10);
+            lastScrollY.current = current;
+        };
+        window.addEventListener("scroll", onScroll, { passive: true });
+        return () => window.removeEventListener("scroll", onScroll);
+    }, []);
 
     const recalc = useCallback(() => {
         const pillEl = pillRef.current;
@@ -60,11 +72,15 @@ export default function Navbar() {
     }, [recalc]);
 
     return (
-        <nav className="fixed top-4 left-0 right-0 z-50 flex justify-center">
+        <motion.nav
+            className="fixed top-4 left-0 right-0 z-50 flex justify-center"
+            animate={{ y: visible ? 0 : -100 }}
+            transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+        >
             {/* Desktop glassmorphism pill */}
             <div
                 ref={pillRef}
-                className="relative hidden items-center gap-2 rounded-full bg-warm-gold px-8 py-3 shadow-lg md:flex"
+                className="relative hidden items-center gap-2 bg-warm-gold px-4 py-1.5 shadow-lg md:flex"
             >
                 {/* Logo that slides to the left of the active link */}
                 <motion.div
@@ -106,13 +122,13 @@ export default function Navbar() {
             </div>
 
             {/* Mobile hamburger */}
-            <div className="flex items-center gap-3 rounded-full border border-crimson-500/20 bg-white/60 px-4 py-2 shadow-lg shadow-crimson-500/10 backdrop-blur-xl md:hidden">
+            <div className="flex items-center gap-3 bg-warm-gold px-4 py-2 shadow-lg md:hidden">
                 <img src="/tsa_logo.png" alt="TSA Logo" className="h-6 w-6" />
-                <span className="text-sm font-semibold text-warm-gold">
+                <span className="text-sm font-semibold text-crimson-500">
                     Night Market
                 </span>
                 <button
-                    className="ml-2 text-warm-gold/80"
+                    className="ml-2 text-crimson-500/80"
                     onClick={() => setMobileOpen((prev) => !prev)}
                     aria-label="Toggle navigation menu"
                     aria-expanded={mobileOpen}
@@ -149,7 +165,7 @@ export default function Navbar() {
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -8 }}
                         transition={{ duration: 0.2 }}
-                        className="mt-2 rounded-2xl border border-crimson-500/20 bg-white/70 px-4 py-3 shadow-lg shadow-crimson-500/10 backdrop-blur-xl md:hidden"
+                        className="mt-2 bg-warm-gold px-4 py-3 shadow-lg md:hidden"
                     >
                         {NAV_ITEMS.map(({ label, href, id }) => (
                             <li key={id}>
@@ -157,8 +173,8 @@ export default function Navbar() {
                                     href={href}
                                     className={`block rounded-lg px-3 py-2 text-sm transition-colors ${
                                         activeSection === id
-                                            ? "bg-crimson-700/60 text-warm-gold"
-                                            : "text-warm-gold/70 hover:text-warm-gold"
+                                            ? "text-crimson-500"
+                                            : "text-crimson-500/60 hover:text-crimson-500"
                                     }`}
                                     onClick={() => setMobileOpen(false)}
                                 >
@@ -169,6 +185,6 @@ export default function Navbar() {
                     </motion.ul>
                 )}
             </AnimatePresence>
-        </nav>
+        </motion.nav>
     );
 }

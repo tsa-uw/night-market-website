@@ -24,10 +24,10 @@ export default function Schedule() {
                             {/* Dot on timeline */}
                             <span className="absolute -left-[9px] mt-1.5 h-4 w-4 rounded-full border-2 border-blossom-400 bg-crimson-900" />
 
-                            <time className="text-sm font-semibold text-warm-white">
+                            <time className="text-sm font-semibold text-warm-gold">
                                 {time}
                             </time>
-                            <p className="mt-1 text-lg text-warm-white/90">
+                            <p className="mt-1 text-lg text-warm-gold/90">
                                 {title}
                             </p>
                         </li>

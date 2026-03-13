@@ -31,10 +31,10 @@ export default function Logistics() {
                         key={heading}
                         className="rounded-xl border border-crimson-600 bg-crimson-800/60 p-6 transition-colors hover:border-blossom-400/40"
                     >
-                        <h3 className="mb-2 font-display text-xl font-semibold text-warm-white">
+                        <h3 className="mb-2 font-display text-xl font-semibold text-warm-gold">
                             {heading}
                         </h3>
-                        <p className="text-sm leading-relaxed text-warm-white/85">
+                        <p className="text-sm leading-relaxed text-warm-gold/85">
                             {body}
                         </p>
                     </div>
