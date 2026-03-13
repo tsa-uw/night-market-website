@@ -9,40 +9,42 @@
 }
 
 @theme {
-    --color-crimson-900: #fde8ec;
-    --color-crimson-800: #fbc8d0;
-    --color-crimson-700: #f29090;
-    --color-crimson-600: #c45050;
-    --color-crimson-500: #7a2828;
+    --color-red-900: #fde8ec;
+    --color-red-800: #fbc8d0;
+    --color-red-700: #f29090;
+    --color-red-600: #c45050;
+    --color-red-500: #7a2828;
 
-    --color-blossom-100: #fce4ec;
-    --color-blossom-200: #f8bbd0;
-    --color-blossom-300: #f48fb1;
-    --color-blossom-400: #ec407a;
-    --color-blossom-500: #d81b60;
+    --color-pink-100: #fce4ec;
+    --color-pink-200: #f8bbd0;
+    --color-pink-300: #f48fb1;
+    --color-pink-400: #ec407a;
+    --color-pink-500: #d81b60;
 
-    --color-lantern-100: #fff8e1;
-    --color-lantern-200: #ffecb3;
-    --color-lantern-300: #ffd54f;
-    --color-lantern-400: #ffb300;
-    --color-lantern-500: #ff8f00;
+    --color-amber-100: #fff8e1;
+    --color-amber-200: #ffecb3;
+    --color-amber-300: #ffd54f;
+    --color-amber-400: #ffb300;
+    --color-amber-500: #ff8f00;
 
     --color-gold: #d4a574;
-    --color-warm-gold: #f5d16a;
+    --color-yellow: #f5d16a;
 
     --font-display: "TenPounds", "Georgia", serif;
     --font-body: "Figtree", sans-serif;
+
+    --gradient-red: linear-gradient(135deg, #6a0e1a 0%, #a02030 40%, #c0392b 70%, #8b1a1a 100%);
 }
 
 html {
     scroll-behavior: smooth;
-    background-color: #6a0e1a;
+    background-color: white;
+    overscroll-behavior: none;
 }
 
 body {
     font-family: var(--font-body);
-    color: var(--color-warm-gold);
-    background: linear-gradient(135deg, #6a0e1a 0%, #a02030 40%, #c0392b 70%, #8b1a1a 100%);
-    background-attachment: fixed;
+    color: black;
+    background: white;
     min-height: 100vh;
 }

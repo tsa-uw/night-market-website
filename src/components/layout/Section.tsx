@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { section } from "../../styles/tokens";
 
 interface SectionProps {
     id: string;
@@ -14,10 +15,10 @@ export default function Section({
     children,
 }: SectionProps) {
     return (
-        <section id={id} className={`px-4 py-16 md:py-24 ${className}`}>
-            <div className="mx-auto max-w-6xl">
+        <section id={id} className={`px-8 py-16 md:py-24 ${className}`}>
+            <div>
                 {title && (
-                    <h2 className="mb-10 text-center font-display text-3xl font-bold tracking-wide text-warm-gold md:text-4xl">
+                    <h2 className={section.title}>
                         {title}
                     </h2>
                 )}
