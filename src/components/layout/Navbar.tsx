@@ -31,15 +31,24 @@ export default function Navbar() {
     const [logoPos, setLogoPos] = useState<LogoPos>({ x: 0 });
     const [visible, setVisible] = useState(true);
     const lastScrollY = useRef(0);
+    const isHovered = useRef(false);
 
     useEffect(() => {
         const onScroll = () => {
+            if (isHovered.current) return;
             const current = window.scrollY;
             setVisible(current < lastScrollY.current || current < 10);
             lastScrollY.current = current;
         };
+        const onMouseMove = (e: MouseEvent) => {
+            if (e.clientY < 72) setVisible(true);
+        };
         window.addEventListener("scroll", onScroll, { passive: true });
-        return () => window.removeEventListener("scroll", onScroll);
+        window.addEventListener("mousemove", onMouseMove, { passive: true });
+        return () => {
+            window.removeEventListener("scroll", onScroll);
+            window.removeEventListener("mousemove", onMouseMove);
+        };
     }, []);
 
     const recalc = useCallback(() => {
@@ -73,14 +82,16 @@ export default function Navbar() {
 
     return (
         <motion.nav
-            className="fixed top-4 left-0 right-0 z-50 flex justify-center"
+            className="fixed top-0 left-0 right-0 z-50 flex justify-center"
             animate={{ y: visible ? 0 : -100 }}
             transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+            onMouseEnter={() => { isHovered.current = true; setVisible(true); }}
+            onMouseLeave={() => { isHovered.current = false; }}
         >
             {/* Desktop glassmorphism pill */}
             <div
                 ref={pillRef}
-                className="relative hidden items-center gap-2 bg-warm-gold px-4 py-1.5 shadow-lg md:flex"
+                className="relative hidden items-center gap-2 rounded-b-3xl bg-warm-gold px-8 py-3 md:flex"
             >
                 {/* Logo that slides to the left of the active link */}
                 <motion.div
@@ -91,7 +102,7 @@ export default function Navbar() {
                     <img
                         src="/tsa_logo.png"
                         alt="TSA Logo"
-                        className="drop-shadow-lg"
+                        className="[filter:drop-shadow(0_0_1px_rgba(245,209,106,0.25))]"
                         width={LOGO_SIZE}
                         height={LOGO_SIZE}
                     />
@@ -111,7 +122,7 @@ export default function Navbar() {
                                 className={`relative z-10 ${
                                     activeSection === id
                                         ? "text-crimson-500"
-                                        : "text-crimson-500/60 hover:text-crimson-500"
+                                        : "text-crimson-500/50 hover:text-crimson-500"
                                 }`}
                             >
                                 {label}
