@@ -11,7 +11,7 @@ const FAQ_ITEMS: FAQItem[] = [
     {
         question: "When and where is the Night Market?",
         answer:
-            "May 3, 2026 — 4:30 PM to 10:00 PM at Red Square, University of Washington (Seattle, WA 98195).",
+            "May 23, 2026 — 4:30 PM to 10:00 PM at Red Square, University of Washington (Seattle, WA 98195).",
     },
     {
         question: "Is there an entry fee?",

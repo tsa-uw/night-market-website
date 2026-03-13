@@ -15,7 +15,7 @@ export default function Hero() {
             </h1>
 
             <p className="mt-4 text-xl font-medium text-blossom-500 md:text-2xl">
-                May 3, 2026 — 4:30 PM &ndash; 10:00 PM
+                May 23, 2026 — 4:30 PM &ndash; 10:00 PM
             </p>
 
             <p className="mt-2 max-w-xl text-lg text-warm-white/85">

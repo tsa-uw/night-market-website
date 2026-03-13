@@ -8,7 +8,6 @@ const FOOD_VENDORS = [
     {
         name: "The Moo Bar",
         description: "Bubble tea and specialty drinks.",
-        image: "/assets/archive/the-moo-bar-logo.jpeg",
         page: "/74256206069953c1a1d97d/the-moo-bar.html",
     },
     {
@@ -25,7 +24,6 @@ const FOOD_VENDORS = [
     {
         name: "Sunright",
         description: "Taiwanese shaved ice and drinks.",
-        image: "/assets/archive/sunkis_orig.jpeg",
         page: "/74256206069953c1a1d97d/sunright.html",
     },
     {
@@ -39,25 +37,21 @@ const ARTS_VENDORS = [
     {
         name: "Biscuitfloof Studios",
         description: "Handmade plush and art prints.",
-        image: "/assets/archive/biscuitfloof-logo.png",
         page: "/74256206069953c1a1d97d/biscuitfloof-studios.html",
     },
     {
         name: "Clara Jane Studio",
         description: "Illustration and stationery.",
-        image: "/assets/archive/clara-jane.jpg",
         page: "/74256206069953c1a1d97d/clara-jane-studio.html",
     },
     {
         name: "Misha Charms",
         description: "Custom charms and accessories.",
-        image: "/assets/archive/misha-charms.png",
         page: "/74256206069953c1a1d97d/mishacharms.html",
     },
     {
         name: "Shooley Art",
         description: "Original prints and enamel pins.",
-        image: "/assets/archive/shooleylogo.jpg",
         page: "/74256206069953c1a1d97d/shooley-art.html",
     },
     {
