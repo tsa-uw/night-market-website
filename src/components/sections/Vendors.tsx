@@ -13,58 +13,17 @@ type Vendor = {
 // Vendor names sourced from the archived site pages (representative subset)
 const FOOD_VENDORS: Vendor[] = [
     {
-        name: "The Moo Bar",
-        description: "Bubble tea and specialty drinks.",
-        page: "/74256206069953c1a1d97d/the-moo-bar.html",
-    },
-    {
-        name: "Pho Ha",
-        description: "Vietnamese pho and noodle bowls.",
-        page: "/74256206069953c1a1d97d/pho-ha.html",
-    },
-    { name: "Phe", description: "Thai-inspired specialties.", page: "/74256206069953c1a1d97d/phe.html" },
-    {
-        name: "Peachy X Noodle",
-        description: "Noodle bowls and snacks.",
-        page: "/74256206069953c1a1d97d/peachyxnoodle.html",
-    },
-    {
-        name: "Sunright",
-        description: "Taiwanese shaved ice and drinks.",
-        page: "/74256206069953c1a1d97d/sunright.html",
-    },
-    {
-        name: "Tapioca Express",
-        description: "Bubble tea and refreshments.",
-        page: "/74256206069953c1a1d97d/tapioca-express.html",
+        name: "To be determined!",
+        description: "Applications welcome.",
+        page: "/#",
     },
 ];
 
 const ARTS_VENDORS: Vendor[] = [
     {
-        name: "Biscuitfloof Studios",
-        description: "Handmade plush and art prints.",
-        page: "/74256206069953c1a1d97d/biscuitfloof-studios.html",
-    },
-    {
-        name: "Clara Jane Studio",
-        description: "Illustration and stationery.",
-        page: "/74256206069953c1a1d97d/clara-jane-studio.html",
-    },
-    {
-        name: "Misha Charms",
-        description: "Custom charms and accessories.",
-        page: "/74256206069953c1a1d97d/mishacharms.html",
-    },
-    {
-        name: "Shooley Art",
-        description: "Original prints and enamel pins.",
-        page: "/74256206069953c1a1d97d/shooley-art.html",
-    },
-    {
-        name: "Stephanie Mai Designs",
-        description: "Jewelry and accessories.",
-        page: "/74256206069953c1a1d97d/stephanie-mai-designs.html",
+        name: "To be determined!",
+        description: "Applications welcome.",
+        page: "/#",
     },
 ];
 
