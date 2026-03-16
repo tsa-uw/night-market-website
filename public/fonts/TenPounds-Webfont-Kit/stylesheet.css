@@ -1,0 +1,7 @@
+
+@font-face {
+  font-family: 'tenpounds-regular-webfont';
+  src: url('tenpounds-regular-webfont.woff2') format('woff2'), url('tenpounds-regular-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}

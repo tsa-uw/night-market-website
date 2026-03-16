@@ -33,13 +33,13 @@ function Accordion({ question, answer }: FAQItem) {
     const [open, setOpen] = useState(false);
 
     return (
-        <div className="border-b border-night-600">
+        <div className="border-b border-crimson-600">
             <button
                 className="flex w-full items-center justify-between py-4 text-left"
                 onClick={() => setOpen((prev) => !prev)}
                 aria-expanded={open}
             >
-                <span className="pr-4 font-medium text-warm-white/90">
+                <span className="pr-4 font-medium text-warm-gold/90">
                     {question}
                 </span>
                 <svg
@@ -57,7 +57,7 @@ function Accordion({ question, answer }: FAQItem) {
                 </svg>
             </button>
             {open && (
-                <div className="pb-4 text-sm leading-relaxed text-warm-white/80">
+                <div className="pb-4 text-sm leading-relaxed text-warm-gold/80">
                     {answer}
                 </div>
             )}
