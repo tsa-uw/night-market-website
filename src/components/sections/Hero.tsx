@@ -15,7 +15,8 @@ declare global {
 
 export default function Hero() {
     const sectionRef = useRef<HTMLElement>(null);
-    const playerRef = useRef<YT.Player | null>(null);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const playerRef = useRef<any>(null);
     const [videoReady, setVideoReady] = useState(false);
 
     useEffect(() => {
@@ -33,12 +34,14 @@ export default function Hero() {
                     start: LOOP_START,
                 },
                 events: {
-                    onReady: (e) => {
+                    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                    onReady: (e: any) => {
                         e.target.seekTo(LOOP_START, true);
                         e.target.playVideo();
                         setTimeout(() => setVideoReady(true), 500);
                     },
-                    onStateChange: (e) => {
+                    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                    onStateChange: (e: any) => {
                         if (e.data === window.YT.PlayerState.ENDED) {
                             e.target.seekTo(LOOP_START, true);
                             e.target.playVideo();
