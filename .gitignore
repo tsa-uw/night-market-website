@@ -24,3 +24,4 @@ dist-ssr
 *.sw?
 public/hero-original.mp4
 public/hero-compressed.mp4
+.claude/
