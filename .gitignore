@@ -22,3 +22,5 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+public/hero-original.mp4
+public/hero-compressed.mp4
