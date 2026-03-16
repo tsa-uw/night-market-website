@@ -1,9 +1,69 @@
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 import { motion, useScroll, useTransform } from "motion/react";
 
+const LOOP_START = 99;
+const VIDEO_ID = "nieWaGD-Rtc";
+
+declare global {
+    interface Window {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        YT: any;
+        onYouTubeIframeAPIReady: () => void;
+    }
+}
+
+
 export default function Hero() {
-    const videoRef = useRef<HTMLVideoElement>(null);
     const sectionRef = useRef<HTMLElement>(null);
+    const playerRef = useRef<YT.Player | null>(null);
+    const [videoReady, setVideoReady] = useState(false);
+
+    useEffect(() => {
+        const initPlayer = () => {
+            playerRef.current = new window.YT.Player("yt-bg-player", {
+                videoId: VIDEO_ID,
+                playerVars: {
+                    autoplay: 1,
+                    mute: 1,
+                    controls: 0,
+                    showinfo: 0,
+                    rel: 0,
+                    modestbranding: 1,
+                    playsinline: 1,
+                    start: LOOP_START,
+                },
+                events: {
+                    onReady: (e) => {
+                        e.target.seekTo(LOOP_START, true);
+                        e.target.playVideo();
+                        setTimeout(() => setVideoReady(true), 500);
+                    },
+                    onStateChange: (e) => {
+                        if (e.data === window.YT.PlayerState.ENDED) {
+                            e.target.seekTo(LOOP_START, true);
+                            e.target.playVideo();
+                        }
+                    },
+                },
+            });
+        };
+
+        if (window.YT && window.YT.Player) {
+            initPlayer();
+        } else {
+            window.onYouTubeIframeAPIReady = initPlayer;
+            if (!document.getElementById("yt-api-script")) {
+                const script = document.createElement("script");
+                script.id = "yt-api-script";
+                script.src = "https://www.youtube.com/iframe_api";
+                document.head.appendChild(script);
+            }
+        }
+
+        return () => {
+            playerRef.current?.destroy();
+        };
+    }, []);
 
     const { scrollYProgress } = useScroll({
         target: sectionRef,
@@ -20,28 +80,16 @@ export default function Hero() {
         >
             {/* Background video with parallax */}
             <motion.div className="absolute inset-0 h-[125%]" style={{ y: videoY }}>
-                <video
-                    ref={videoRef}
-                    className="h-full w-full object-cover"
-                    src="/TSA NM 2025 NM Cut.mp4"
-                    autoPlay
-                    muted
-                    playsInline
-                    onLoadedMetadata={() => {
-                        if (videoRef.current) {
-                            videoRef.current.currentTime = 99;
-                        }
-                    }}
-                    onEnded={() => {
-                        if (videoRef.current) {
-                            videoRef.current.currentTime = 99;
-                            videoRef.current.play();
-                        }
-                    }}
+                <div
+                    id="yt-bg-player"
+                    className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 scale-125"
+                    style={{ width: "177.78vh", height: "56.25vw", minWidth: "100%", minHeight: "100%" }}
                 />
             </motion.div>
             {/* Overlay */}
             <div className="absolute inset-0 bg-black/40" />
+            {/* Buffering cover — fades out once video is ready */}
+            <div className={`absolute inset-0 bg-black transition-opacity duration-1000 ${videoReady ? "opacity-0 pointer-events-none" : "opacity-100"}`} />
 
             {/* Bottom content */}
             <div className="relative z-10 mt-auto">
