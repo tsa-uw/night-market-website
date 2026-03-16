@@ -1,5 +1,6 @@
 import { useRef, useState, useEffect } from "react";
 import { motion, useScroll, useTransform } from "motion/react";
+import { hero } from "../../styles/tokens";
 
 const LOOP_START = 99;
 const VIDEO_ID = "nieWaGD-Rtc";
@@ -79,7 +80,7 @@ export default function Hero() {
         <section
             ref={sectionRef}
             id="home"
-            className="relative flex min-h-screen flex-col overflow-hidden px-8 pb-12 pt-16"
+            className={hero.section}
         >
             {/* Background video with parallax */}
             <motion.div className="absolute inset-0 h-[125%]" style={{ y: videoY }}>
@@ -92,25 +93,25 @@ export default function Hero() {
             {/* Overlay */}
             <div className="absolute inset-0 bg-black/40" />
             {/* Buffering cover — fades out once video is ready */}
-            <div className={`absolute inset-0 bg-black transition-opacity duration-1000 ${videoReady ? "opacity-0 pointer-events-none" : "opacity-100"}`} />
+            <div className={`${hero.cover} ${videoReady ? "opacity-0 pointer-events-none" : "opacity-100"}`} />
 
             {/* Bottom content */}
             <div className="relative z-10 mt-auto">
-                <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-white/60">
+                <p className={hero.eyebrow}>
                     The UW Taiwanese Student Association presents
                 </p>
-                <h1 className="font-display text-6xl font-bold leading-tight text-white md:text-8xl">
+                <h1 className={hero.heading}>
                     UW Night Market
                 </h1>
-                <div className="mt-4 flex items-center justify-between gap-6 text-white">
-                    <div className="flex flex-col gap-1 sm:flex-row sm:gap-6">
-                        <span className="text-base font-medium">May 23, 2026 &nbsp;·&nbsp; 4:30 – 10:00 PM</span>
-                        <span className="hidden sm:block opacity-40">|</span>
-                        <span className="text-base">Red Square, University of Washington</span>
+                <div className={hero.metaRow}>
+                    <div className={hero.metaGroup}>
+                        <span className={hero.metaItem}>May 23, 2026 &nbsp;·&nbsp; 4:30 – 10:00 PM</span>
+                        <span className={hero.metaDivider}>|</span>
+                        <span>Red Square, University of Washington</span>
                     </div>
-                    <div className="animate-bounce">
+                    <div className={hero.scrollIndicator}>
                         <svg
-                            className="h-6 w-6 text-white/70"
+                            className={hero.scrollIcon}
                             fill="none"
                             viewBox="0 0 24 24"
                             stroke="currentColor"

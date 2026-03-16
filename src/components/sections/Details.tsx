@@ -1,68 +1,104 @@
+import { useRef } from "react";
+import { motion, useScroll, useTransform } from "motion/react";
+import { about, details } from "../../styles/tokens";
+
 export default function Details() {
+    const sectionRef = useRef<HTMLDivElement>(null);
+    const card1Ref = useRef<HTMLDivElement>(null);
+    const card2Ref = useRef<HTMLDivElement>(null);
+    const card3Ref = useRef<HTMLDivElement>(null);
+
+    const { scrollYProgress } = useScroll({ target: sectionRef, offset: ["start end", "end start"] });
+    const { scrollYProgress: card1Progress } = useScroll({ target: card1Ref, offset: ["start end", "end start"] });
+    const { scrollYProgress: card2Progress } = useScroll({ target: card2Ref, offset: ["start end", "end start"] });
+    const { scrollYProgress: card3Progress } = useScroll({ target: card3Ref, offset: ["start end", "end start"] });
+
+    // About: -15% to 15% (distinct from hero's 0% to 25%)
+    const bgY    = useTransform(scrollYProgress,  [0, 1], ["-15%", "15%"]);
+    // Cards: each with a unique range
+    const card1Y = useTransform(card1Progress, [0, 1], ["-20%", "10%"]);
+    const card2Y = useTransform(card2Progress, [0, 1], ["-8%",  "18%"]);
+    const card3Y = useTransform(card3Progress, [0, 1], ["-25%", "5%"]);
+
     return (
-        <section id="details" className="px-8 py-16">
+        <div id="details" ref={sectionRef} className={details.outerWrapper}>
 
-            <h2 className="mb-12 text-center font-display text-3xl font-bold tracking-wide text-black md:text-4xl">
-                Event Details
-            </h2>
-
-            {/* About — full width */}
-            <div className="mb-12">
-                <p className="mb-4 text-sm font-semibold uppercase tracking-widest text-black/40">About</p>
-                <p className="text-base leading-relaxed text-black">
-                    The UW Night Market is one of the largest student-run events at the University of Washington.
-                </p>
-                <p className="text-base leading-relaxed text-black">
-                    Come celebrate its 26th year with cultural performances, fun games, delicious food, and raffle prizes.
-                    It's free and open to all!
-                </p>
-
+            {/* About */}
+            <div className={about.wrapper}>
+                <div className={about.bgWrap}>
+                    <motion.img
+                        src="/assets/nm 2025 puffle up.jpg"
+                        alt=""
+                        className={about.bg}
+                        style={{ y: bgY }}
+                    />
+                </div>
+                <div className={about.overlay} />
+                <div className={about.content}>
+                    <h2 className={about.heading}>About</h2>
+                    <p className={about.body}>
+                        The UW Night Market is one of the <strong>largest student-run events</strong> at the University of Washington.
+                        Come celebrate its <strong>26th year</strong> with cultural performances, fun games, delicious food, and raffle prizes.
+                        It's <strong>free and open to all!</strong>
+                    </p>
+                </div>
             </div>
 
-            <div className="grid gap-12 md:grid-cols-3">
+            {/* Detail cards */}
+            <div className={details.wrapper}>
+                <div className={details.grid}>
 
-                {/* When & Where */}
-                <div>
-                    <p className="mb-4 text-sm font-semibold uppercase tracking-widest text-black/40">When &amp; Where</p>
-                    <p className="text-base leading-relaxed text-black">Saturday, May 23, 2026</p>
-                    <p className="text-base leading-relaxed text-black">4:30 – 10:00 PM</p>
-                    <p className="mt-3 text-base leading-relaxed text-black">Red Square @ UW</p>
-                    <p className="text-base leading-relaxed text-black/60">4063 Spokane Ln, Seattle, WA 98105</p>
-                    {/* <iframe
-                        title="Red Square, University of Washington"
-                        src="https://maps.google.com/maps?q=Red+Square,+University+of+Washington,+Seattle,+WA+98105&output=embed&z=16"
-                        width="100%"
-                        className="mt-4 rounded"
-                        style={{ border: 0, display: "block", height: "160px" }}
-                        loading="lazy"
-                        referrerPolicy="no-referrer-when-downgrade"
-                    /> */}
-                </div>
-
-                {/* Getting There */}
-                <div>
-                    <p className="mb-4 text-sm font-semibold uppercase tracking-widest text-black/40">Getting There</p>
-                    <div className="space-y-2">
-                        <p className="text-base leading-relaxed text-black">🚇 Light Rail Lines 1 &amp; 2 to U District Station</p>
-                        <p className="text-base leading-relaxed text-black">🚌 Bus stops near campus</p>
-                        <p className="text-base leading-relaxed text-black">🅿️ Free parking at East Campus Lots E1, E12, E18, E19</p>
-                        <p className="text-base leading-relaxed text-black">🅿️ Limited paid parking at Central Plaza Garage</p>
+                    {/* When & Where (exempt) */}
+                    <div ref={card1Ref} className={details.card}>
+                        <div className={details.cardBgWrap}>
+                            <motion.img src="/assets/nm phe.jpg" alt="" className={details.cardBg} style={{ y: card1Y }} />
+                        </div>
+                        <div className={details.cardOverlay} />
+                        <div className={details.cardContent}>
+                            <p className={details.cardLabel}>When &amp; Where</p>
+                            <p className={details.cardValue}>Saturday, May 23, 2026</p>
+                            <p className={details.cardValue}>4:30 – 10:00 PM</p>
+                            <p className={`mt-3 ${details.cardValue}`}>Red Square @ UW</p>
+                            <a href="https://maps.google.com/?q=4063+Spokane+Ln,+Seattle,+WA+98105" target="_blank" rel="noopener noreferrer" className={`${details.cardValueMuted} underline`}>4063 Spokane Ln, Seattle, WA 98105</a>
+                        </div>
                     </div>
-                </div>
 
-                {/* Accommodations */}
-                <div>
-                    <p className="mb-4 text-sm font-semibold uppercase tracking-widest text-black/40">Accommodations</p>
-                    <div className="space-y-2">
-                        <p className="text-base leading-relaxed text-black">🚻 12 portable restrooms, 2 ADA-accessible</p>
-                        <p className="text-base leading-relaxed text-black">ℹ️ Info booth next to Odegaard Library</p>
-                        <p className="text-base leading-relaxed text-black">🐾 Animals must be leashed</p>
-                        <p className="text-base leading-relaxed text-black">💳 Card &amp; Apple Pay only</p>
+                    {/* Getting There */}
+                    <div ref={card2Ref} className={details.card}>
+                        <div className={details.cardBgWrap}>
+                            <motion.img src="/assets/nm parking.png" alt="" className={details.cardBg} style={{ y: card2Y }} />
+                        </div>
+                        <div className={details.cardOverlay} />
+                        <div className={details.cardContent}>
+                            <p className={details.cardLabel}>Getting There</p>
+                            <div className={details.cardValueGroup}>
+                                <p className={details.cardValue}><strong>Free parking</strong> at East Campus Lots E1, E12, E18, E19</p>
+                                <p className={details.cardValue}>Limited paid parking at <strong>Central Plaza Garage</strong></p>
+                                <p className={details.cardValue}><strong>Light Rail Lines 1 &amp; 2</strong> to U District Station</p>
+                                <p className={details.cardValue}>Bus stops near campus</p>
+                            </div>
+                        </div>
                     </div>
-                </div>
 
+                    {/* Accommodations */}
+                    <div ref={card3Ref} className={details.card}>
+                        <div className={details.cardBgWrap}>
+                            <motion.img src="/assets/nm pay.jpg" alt="" className={details.cardBg} style={{ y: card3Y }} />
+                        </div>
+                        <div className={details.cardOverlay} />
+                        <div className={details.cardContent}>
+                            <p className={details.cardLabel}>Accommodations</p>
+                            <div className={details.cardValueGroup}>
+                                <p className={details.cardValue}><strong>12 portable restrooms</strong>, 2 ADA-accessible</p>
+                                <p className={details.cardValue}>Info booth next to <strong>Odegaard Library</strong></p>
+                                <p className={details.cardValue}>Animals must be leashed</p>
+                                <p className={details.cardValue}><strong>Card &amp; Apple Pay only</strong></p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
             </div>
-
-        </section>
+        </div>
     );
 }

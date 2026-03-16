@@ -1,4 +1,5 @@
 import Navbar from "./components/layout/Navbar";
+import { footer } from "./styles/tokens";
 import Hero from "./components/sections/Hero";
 import Details from "./components/sections/Details";
 import RaffleTickets from "./components/sections/RaffleTickets";
@@ -24,7 +25,7 @@ export default function App() {
                 <Volunteer />
                 <FAQ />
             </main>
-            <footer className="border-t border-black px-8 py-8 text-center text-sm text-black/40">
+            <footer className={footer.wrapper}>
                 &copy; 2026 TSA Night Market. All rights reserved.
             </footer>
         </>

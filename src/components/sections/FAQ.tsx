@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Section from "../layout/Section";
+import { faq } from "../../styles/tokens";
 
 interface FAQItem {
     question: string;
@@ -33,17 +34,17 @@ function Accordion({ question, answer }: FAQItem) {
     const [open, setOpen] = useState(false);
 
     return (
-        <div className="border-b border-black">
+        <div className={faq.item}>
             <button
-                className="flex w-full items-center justify-between py-4 text-left"
+                className={faq.button}
                 onClick={() => setOpen((prev) => !prev)}
                 aria-expanded={open}
             >
-                <span className="pr-4 font-medium text-black/90">
+                <span className={faq.question}>
                     {question}
                 </span>
                 <svg
-                    className={`h-5 w-5 shrink-0 text-black/50 transition-transform ${open ? "rotate-180" : ""}`}
+                    className={`${faq.icon} ${open ? "rotate-180" : ""}`}
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"
@@ -57,7 +58,7 @@ function Accordion({ question, answer }: FAQItem) {
                 </svg>
             </button>
             {open && (
-                <div className="pb-4 text-sm leading-relaxed text-black/80">
+                <div className={faq.answer}>
                     {answer}
                 </div>
             )}
@@ -68,7 +69,7 @@ function Accordion({ question, answer }: FAQItem) {
 export default function FAQ() {
     return (
         <Section id="faq" title="FAQ">
-            <div className="mx-auto max-w-2xl">
+            <div className={faq.wrapper}>
                 {FAQ_ITEMS.map((item) => (
                     <Accordion key={item.question} {...item} />
                 ))}
