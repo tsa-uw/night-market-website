@@ -14,8 +14,8 @@ const NAV_ITEMS = [
 ] as const;
 
 const SECTION_IDS = NAV_ITEMS.map((item) => item.id);
-const LOGO_SIZE = 28;
-const LOGO_TEXT_GAP = 2;
+const LOGO_SIZE = 14;
+const LOGO_TEXT_GAP = 8;
 
 interface LogoPos {
     x: number;
