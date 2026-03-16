@@ -14,8 +14,8 @@ const NAV_ITEMS = [
 ] as const;
 
 const SECTION_IDS = NAV_ITEMS.map((item) => item.id);
-const LOGO_SIZE = 28;
-const LOGO_TEXT_GAP = 2;
+const LOGO_SIZE = 18;
+const LOGO_TEXT_GAP = 8;
 
 interface LogoPos {
     x: number;
@@ -29,6 +29,27 @@ export default function Navbar() {
     const pillRef = useRef<HTMLDivElement>(null);
 
     const [logoPos, setLogoPos] = useState<LogoPos>({ x: 0 });
+    const [visible, setVisible] = useState(true);
+    const lastScrollY = useRef(0);
+    const isHovered = useRef(false);
+
+    useEffect(() => {
+        const onScroll = () => {
+            if (isHovered.current) return;
+            const current = window.scrollY;
+            setVisible(current < lastScrollY.current || current < 10);
+            lastScrollY.current = current;
+        };
+        const onMouseMove = (e: MouseEvent) => {
+            if (e.clientY < 72) setVisible(true);
+        };
+        window.addEventListener("scroll", onScroll, { passive: true });
+        window.addEventListener("mousemove", onMouseMove, { passive: true });
+        return () => {
+            window.removeEventListener("scroll", onScroll);
+            window.removeEventListener("mousemove", onMouseMove);
+        };
+    }, []);
 
     const recalc = useCallback(() => {
         const pillEl = pillRef.current;
@@ -60,11 +81,17 @@ export default function Navbar() {
     }, [recalc]);
 
     return (
-        <nav className="fixed top-4 left-4 z-50 md:left-8">
+        <motion.nav
+            className="fixed top-0 left-0 right-0 z-50 flex justify-center"
+            animate={{ y: visible ? 0 : -100 }}
+            transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+            onMouseEnter={() => { isHovered.current = true; setVisible(true); }}
+            onMouseLeave={() => { isHovered.current = false; }}
+        >
             {/* Desktop glassmorphism pill */}
             <div
                 ref={pillRef}
-                className="relative hidden items-center gap-2 rounded-full border border-night-500/20 bg-white/55 px-12 py-3 shadow-lg shadow-night-500/10 backdrop-blur-xl md:flex"
+                className="relative hidden items-center gap-2 rounded-b-3xl bg-warm-gold px-8 py-3 md:flex"
             >
                 {/* Logo that slides to the left of the active link */}
                 <motion.div
@@ -75,7 +102,7 @@ export default function Navbar() {
                     <img
                         src="/tsa_logo.png"
                         alt="TSA Logo"
-                        className="drop-shadow-lg"
+                        className="[filter:drop-shadow(0_0_1px_rgba(245,209,106,0.25))]"
                         width={LOGO_SIZE}
                         height={LOGO_SIZE}
                     />
@@ -89,13 +116,13 @@ export default function Navbar() {
                             ref={(el) => {
                                 if (el) itemRefs.current.set(id, el);
                             }}
-                            className="relative rounded-full px-4 py-2 text-base font-semibold transition-colors"
+                            className="relative inline-flex items-center rounded-full px-4 py-2 text-base font-semibold transition-colors"
                         >
                             <span
                                 className={`relative z-10 ${
                                     activeSection === id
-                                        ? "text-warm-white"
-                                        : "text-warm-white/65 hover:text-warm-white"
+                                        ? "text-crimson-500"
+                                        : "text-crimson-500/50 hover:text-crimson-500"
                                 }`}
                             >
                                 {label}
@@ -106,13 +133,13 @@ export default function Navbar() {
             </div>
 
             {/* Mobile hamburger */}
-            <div className="flex items-center gap-3 rounded-full border border-night-500/20 bg-white/60 px-4 py-2 shadow-lg shadow-night-500/10 backdrop-blur-xl md:hidden">
+            <div className="flex items-center gap-3 bg-warm-gold px-4 py-2 shadow-lg md:hidden">
                 <img src="/tsa_logo.png" alt="TSA Logo" className="h-6 w-6" />
-                <span className="text-sm font-semibold text-warm-white">
+                <span className="text-sm font-semibold text-crimson-500">
                     Night Market
                 </span>
                 <button
-                    className="ml-2 text-warm-white/80"
+                    className="ml-2 text-crimson-500/80"
                     onClick={() => setMobileOpen((prev) => !prev)}
                     aria-label="Toggle navigation menu"
                     aria-expanded={mobileOpen}
@@ -149,7 +176,7 @@ export default function Navbar() {
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -8 }}
                         transition={{ duration: 0.2 }}
-                        className="mt-2 rounded-2xl border border-night-500/20 bg-white/70 px-4 py-3 shadow-lg shadow-night-500/10 backdrop-blur-xl md:hidden"
+                        className="mt-2 bg-warm-gold px-4 py-3 shadow-lg md:hidden"
                     >
                         {NAV_ITEMS.map(({ label, href, id }) => (
                             <li key={id}>
@@ -157,8 +184,8 @@ export default function Navbar() {
                                     href={href}
                                     className={`block rounded-lg px-3 py-2 text-sm transition-colors ${
                                         activeSection === id
-                                            ? "bg-night-700/60 text-warm-white"
-                                            : "text-warm-white/70 hover:text-warm-white"
+                                            ? "text-crimson-500"
+                                            : "text-crimson-500/60 hover:text-crimson-500"
                                     }`}
                                     onClick={() => setMobileOpen(false)}
                                 >
@@ -169,6 +196,6 @@ export default function Navbar() {
                     </motion.ul>
                 )}
             </AnimatePresence>
-        </nav>
+        </motion.nav>
     );
 }

@@ -1,5 +1,6 @@
 import Navbar from "./components/layout/Navbar";
 import Hero from "./components/sections/Hero";
+import About from "./components/sections/About";
 import Logistics from "./components/sections/Logistics";
 import RaffleTickets from "./components/sections/RaffleTickets";
 import EventTrailer from "./components/sections/EventTrailer";
@@ -14,6 +15,7 @@ export default function App() {
             <Navbar />
             <main>
                 <Hero />
+                <About />
                 <Logistics />
                 <RaffleTickets />
                 <EventTrailer />
@@ -22,7 +24,7 @@ export default function App() {
                 <Sponsors />
                 <FAQ />
             </main>
-            <footer className="border-t border-night-600 px-4 py-8 text-center text-sm text-warm-white/40">
+            <footer className="border-t border-crimson-600 px-4 py-8 text-center text-sm text-warm-gold/40">
                 &copy; 2026 TSA Night Market. All rights reserved.
             </footer>
         </>
