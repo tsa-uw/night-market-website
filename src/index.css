@@ -47,4 +47,5 @@ body {
     color: black;
     background: white;
     min-height: 100vh;
+    margin: 0;
 }

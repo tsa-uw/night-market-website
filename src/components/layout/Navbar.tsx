@@ -1,4 +1,4 @@
-import { useMemo, useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { useActiveSection } from "../../hooks/useActiveSection";
 
@@ -19,7 +19,7 @@ const SLIDE_TRANSITION = { duration: 1, ease: [0.16, 1, 0.3, 1] } as const;
 
 export default function Navbar() {
     const [mobileOpen, setMobileOpen] = useState(false);
-    const activeSection = useActiveSection(useMemo(() => SECTION_IDS, []));
+    const activeSection = useActiveSection(SECTION_IDS);
     const [visible, setVisible] = useState(true);
     const lastScrollY = useRef(0);
     const isHovered = useRef(false);
@@ -61,7 +61,7 @@ export default function Navbar() {
 
             {/* Nav links — blend mode on the nav itself so it composites against the page backdrop */}
             <motion.nav
-                className="fixed right-0 z-50 flex items-start justify-end px-8 pt-6 [mix-blend-mode:difference]"
+                className="fixed right-0 top-0 z-50 flex w-full items-start justify-end px-2 pt-2 [mix-blend-mode:difference] md:px-4 md:pt-4"
                 animate={{ top: visible ? 0 : -120 }}
                 transition={SLIDE_TRANSITION}
                 {...hoverHandlers}
@@ -72,8 +72,8 @@ export default function Navbar() {
                         <a
                             key={id}
                             href={href}
-                            className={`px-3 py-2 text-sm font-semibold text-white transition-opacity ${
-                                activeSection === id ? "opacity-100" : "opacity-50 hover:opacity-100"
+                            className={`px-3 py-2 text-sm font-semibold transition-colors ${
+                                activeSection === id ? "text-white" : "text-[#888] hover:text-white"
                             }`}
                         >
                             {label}
@@ -111,8 +111,8 @@ export default function Navbar() {
                                     <li key={id}>
                                         <a
                                             href={href}
-                                            className={`block px-3 py-1.5 text-sm font-semibold text-white transition-opacity ${
-                                                activeSection === id ? "opacity-100" : "opacity-50 hover:opacity-100"
+                                            className={`block px-3 py-1.5 text-sm font-semibold transition-colors ${
+                                                activeSection === id ? "text-white" : "text-[#888] hover:text-white"
                                             }`}
                                             onClick={() => setMobileOpen(false)}
                                         >

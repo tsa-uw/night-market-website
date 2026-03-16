@@ -1,4 +1,5 @@
 import Section from "../layout/Section";
+import { schedule } from "../../styles/tokens";
 
 interface Performer {
     name: string;
@@ -63,11 +64,11 @@ const PERFORMERS: Performer[] = [
 export default function Schedule() {
     return (
         <Section id="schedule" title="Entertainment Schedule">
-            <div className="grid border-l border-t border-black sm:grid-cols-2 lg:grid-cols-3">
+            <div className={schedule.grid}>
                 {PERFORMERS.map(({ name, duration, time, tentative, note, description, image, imagePosition, logo }) => (
-                    <div key={name} className="overflow-hidden border-r border-b border-black">
+                    <div key={name} className={schedule.card}>
                         {image && (
-                            <div className="relative h-64 w-full overflow-hidden">
+                            <div className={schedule.cardImage}>
                                 <img
                                     src={image}
                                     alt={name}
@@ -77,29 +78,29 @@ export default function Schedule() {
                                     <img
                                         src={logo}
                                         alt={`${name} logo`}
-                                        className="absolute bottom-3 left-3 h-12 w-12 rounded-full object-cover shadow-lg"
+                                        className={schedule.artistLogo}
                                     />
                                 )}
                             </div>
                         )}
-                        <div className="p-6">
-                            <div className="flex flex-wrap items-start justify-between gap-2">
-                                <h3 className="text-lg font-semibold text-black">{name}</h3>
-                                <div className="flex flex-wrap gap-2">
+                        <div className={schedule.cardBody}>
+                            <div className={schedule.cardHeader}>
+                                <h3 className={schedule.cardTitle}>{name}</h3>
+                                <div className={schedule.badgeGroup}>
                                     {time && (
-                                        <span className="border border-black px-3 py-1 text-xs font-medium text-black/80">
+                                        <span className={schedule.badgeTime}>
                                             {time}{tentative && " (tentative)"}
                                         </span>
                                     )}
-                                    <span className="border border-black px-3 py-1 text-xs font-medium text-black/60">
+                                    <span className={schedule.badgeDuration}>
                                         {duration}
                                     </span>
                                 </div>
                             </div>
                             {note && (
-                                <p className="mt-1 text-xs font-medium uppercase tracking-wide text-black/50">{note}</p>
+                                <p className={schedule.cardNote}>{note}</p>
                             )}
-                            <p className="mt-3 text-sm leading-relaxed text-black/70">{description}</p>
+                            <p className={schedule.cardDesc}>{description}</p>
                         </div>
                     </div>
                 ))}
