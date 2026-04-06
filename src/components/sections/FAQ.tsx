@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Section from "../layout/Section";
+import { faq } from "../../styles/tokens";
 
 interface FAQItem {
     question: string;
@@ -10,19 +11,22 @@ interface FAQItem {
 const FAQ_ITEMS: FAQItem[] = [
     {
         question: "When and where is the Night Market?",
-        answer: "May 23, 2026 at Red Square. Specific hours TBA.",
+        answer:
+            "May 23, 2026 — 4:30 PM to 10:00 PM at Red Square, University of Washington (Seattle, WA 98195).",
     },
     {
         question: "Is there an entry fee?",
-        answer: "Entry details coming soon.",
+        answer: "No — the Night Market is free to attend. Food and activities are paid by vendors.",
     },
     {
         question: "What forms of payment are accepted?",
-        answer: "Payment information coming soon.",
+        answer:
+            "Most vendors accept card or Apple Pay. Cash acceptance varies by vendor; bring card or mobile pay when possible.",
     },
     {
         question: "Is parking available?",
-        answer: "Parking and directions information coming soon.",
+        answer:
+            "We recommend the Central Plaza Parking Garage (free starting at noon on a first-come, first-served basis). For transit, take Link Light Rail to University of Washington Station and walk across the pedestrian bridge to campus (~0.4 miles).",
     },
 ];
 
@@ -30,17 +34,17 @@ function Accordion({ question, answer }: FAQItem) {
     const [open, setOpen] = useState(false);
 
     return (
-        <div className="border-b border-night-600">
+        <div className={faq.item}>
             <button
-                className="flex w-full items-center justify-between py-4 text-left"
+                className={faq.button}
                 onClick={() => setOpen((prev) => !prev)}
                 aria-expanded={open}
             >
-                <span className="pr-4 font-medium text-warm-white/90">
+                <span className={faq.question}>
                     {question}
                 </span>
                 <svg
-                    className={`h-5 w-5 shrink-0 text-blossom-500 transition-transform ${open ? "rotate-180" : ""}`}
+                    className={`${faq.icon} ${open ? "rotate-180" : ""}`}
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"
@@ -54,7 +58,7 @@ function Accordion({ question, answer }: FAQItem) {
                 </svg>
             </button>
             {open && (
-                <div className="pb-4 text-sm leading-relaxed text-warm-white/80">
+                <div className={faq.answer}>
                     {answer}
                 </div>
             )}
@@ -65,7 +69,7 @@ function Accordion({ question, answer }: FAQItem) {
 export default function FAQ() {
     return (
         <Section id="faq" title="FAQ">
-            <div className="mx-auto max-w-2xl">
+            <div className={faq.wrapper}>
                 {FAQ_ITEMS.map((item) => (
                     <Accordion key={item.question} {...item} />
                 ))}

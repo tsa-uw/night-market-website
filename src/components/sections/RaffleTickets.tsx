@@ -1,10 +1,12 @@
 import Section from "../layout/Section";
+import { raffle, section } from "../../styles/tokens";
 
 export default function RaffleTickets() {
     return (
-        <Section id="raffle" title="Raffle Tickets">
-            <div className="mx-auto max-w-2xl rounded-xl border border-lantern-400/30 bg-night-800/60 p-8 text-center">
-                <p className="text-lg leading-relaxed text-warm-white/90">
+        <Section id="raffle" className={raffle.section} paddingY="py-[200px]">
+            <h2 className={section.titleWhite}>Raffle Tickets</h2>
+            <div className={raffle.wrapper}>
+                <p className={raffle.body}>
                     {/* TODO: Add raffle details, pricing, and prizes */}
                     Raffle ticket details, pricing, and prize information coming
                     soon!
