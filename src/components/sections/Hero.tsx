@@ -12,11 +12,11 @@ export default function Hero() {
                 aria-hidden="true"
                 className="pointer-events-none absolute inset-0 -z-30 h-full w-full object-cover object-center"
             />
-            <div className="pointer-events-none absolute inset-0 -z-20 bg-night-900/45" />
-            <div className="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-b from-night-900/20 via-night-900/65 to-night-900" />
-            <div className="pointer-events-none absolute -top-28 left-1/2 -z-10 h-80 w-80 -translate-x-1/2 rounded-full bg-blossom-300/20 blur-3xl" />
+            <div className="animate-hero-darken pointer-events-none absolute inset-0 -z-20 bg-night-900/45" />
+            <div className="animate-hero-darken pointer-events-none absolute inset-0 -z-10 bg-gradient-to-b from-night-900/20 via-night-900/65 to-night-900" />
+            <div className="animate-hero-darken pointer-events-none absolute -top-28 left-1/2 -z-10 h-80 w-80 -translate-x-1/2 rounded-full bg-blossom-300/20 blur-3xl" />
 
-            <div className="mx-auto w-full max-w-4xl">
+            <div className="animate-hero-fade-in mx-auto w-full max-w-4xl">
                 <p className="inline-flex rounded-full border border-lantern-100/30 bg-night-900/30 px-4 py-1 text-xs font-semibold tracking-[0.25em] text-lantern-100/85 uppercase backdrop-blur-md md:text-sm">
                     Taiwanese Student Association at UW
                 </p>
@@ -62,7 +62,8 @@ export default function Hero() {
             </div>
 
             {/* Scroll indicator */}
-            <div className="absolute bottom-8 animate-bounce">
+            <div className="animate-hero-fade-in-late absolute bottom-8">
+            <div className="animate-bounce">
                 <svg
                     className="h-6 w-6 text-lantern-100/75"
                     fill="none"
@@ -76,6 +77,7 @@ export default function Hero() {
                         d="M19 9l-7 7-7-7"
                     />
                 </svg>
+            </div>
             </div>
         </section>
     );

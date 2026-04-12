@@ -9,7 +9,20 @@
     font-display: swap;
 }
 
+@keyframes hero-darken {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes hero-fade-in {
+    from { opacity: 0; transform: translateY(14px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
 @theme {
+    --animate-hero-darken: hero-darken 1.8s ease-in 0.2s both;
+    --animate-hero-fade-in: hero-fade-in 0.9s ease-out 0.8s both;
+    --animate-hero-fade-in-late: hero-fade-in 0.9s ease-out 1.4s both;
     --color-night-900: #060910;
     --color-night-800: #0e1424;
     --color-night-700: #19233a;
