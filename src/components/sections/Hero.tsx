@@ -12,8 +12,8 @@ export default function Hero() {
                 aria-hidden="true"
                 className="pointer-events-none absolute inset-0 -z-30 h-full w-full object-cover object-center"
             />
-            <div className="animate-hero-darken pointer-events-none absolute inset-0 -z-20 bg-night-900/45" />
-            <div className="animate-hero-darken pointer-events-none absolute inset-0 -z-10 bg-gradient-to-b from-night-900/20 via-night-900/65 to-night-900" />
+            <div className="animate-hero-darken pointer-events-none absolute inset-0 -z-20 bg-night-900/25" />
+            <div className="animate-hero-darken pointer-events-none absolute inset-0 -z-10 bg-gradient-to-b from-night-900/10 via-night-900/40 to-night-900" />
             <div className="animate-hero-darken pointer-events-none absolute -top-28 left-1/2 -z-10 h-80 w-80 -translate-x-1/2 rounded-full bg-blossom-300/20 blur-3xl" />
 
             <div className="animate-hero-fade-in mx-auto w-full max-w-4xl">
@@ -34,15 +34,6 @@ export default function Hero() {
 
                 <p className="mt-6 text-xl font-medium text-lantern-100 md:text-2xl">
                     May 23, 2026 | 4:30 PM - 10:00 PM
-                </p>
-
-                <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-lantern-100/90 md:text-lg">
-                    An annual celebration of Taiwan&apos;s rich culture through
-                    incredible food, live entertainment, and community spirit.
-                </p>
-
-                <p className="mx-auto mt-2 max-w-2xl text-sm text-lantern-100/80 md:text-base">
-                    Red Square, University of Washington, Seattle, WA 98195
                 </p>
 
                 <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
