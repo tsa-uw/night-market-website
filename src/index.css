@@ -1,26 +1,35 @@
 @import "tailwindcss";
 
+@font-face {
+    font-family: "TenPounds";
+    src: url("./assets/fonts/TenPounds/TenPounds-Regular.otf")
+        format("opentype");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
 @theme {
-    --color-night-900: #dcefff;
-    --color-night-800: #ecf6ff;
-    --color-night-700: #d5e8f8;
-    --color-night-600: #b9d2e8;
-    --color-night-500: #8ca9c2;
+    --color-night-900: #060910;
+    --color-night-800: #0e1424;
+    --color-night-700: #19233a;
+    --color-night-600: #29344f;
+    --color-night-500: #3f4f73;
 
-    --color-blossom-100: #fce4ec;
-    --color-blossom-200: #f8bbd0;
-    --color-blossom-300: #f48fb1;
-    --color-blossom-400: #ec407a;
-    --color-blossom-500: #d81b60;
+    --color-blossom-100: #ffe2ea;
+    --color-blossom-200: #ffb8cc;
+    --color-blossom-300: #ff89ad;
+    --color-blossom-400: #f45c8d;
+    --color-blossom-500: #d53c6f;
 
-    --color-lantern-100: #fff8e1;
-    --color-lantern-200: #ffecb3;
-    --color-lantern-300: #ffd54f;
-    --color-lantern-400: #ffb300;
-    --color-lantern-500: #ff8f00;
+    --color-lantern-100: #fff5db;
+    --color-lantern-200: #ffe6ab;
+    --color-lantern-300: #ffd06a;
+    --color-lantern-400: #fbb848;
+    --color-lantern-500: #e4961d;
 
-    --color-gold: #d4a574;
-    --color-warm-white: #1f2d5a;
+    --color-gold: #c68a46;
+    --color-warm-white: #f6efdf;
 
     --font-display: "Georgia", serif;
     --font-body: "Inter", system-ui, sans-serif;
@@ -34,4 +43,16 @@ body {
     font-family: var(--font-body);
     color: var(--color-warm-white);
     background-color: var(--color-night-900);
+    background-image:
+        radial-gradient(
+            circle at 18% 0%,
+            rgb(244 92 141 / 12%),
+            transparent 44%
+        ),
+        radial-gradient(
+            circle at 80% 15%,
+            rgb(251 184 72 / 9%),
+            transparent 42%
+        ),
+        linear-gradient(180deg, var(--color-night-900) 0%, #04070d 100%);
 }

@@ -14,10 +14,17 @@ export default function Section({
     children,
 }: SectionProps) {
     return (
-        <section id={id} className={`px-4 py-16 md:py-24 ${className}`}>
+        <section
+            id={id}
+            className={`relative overflow-hidden border-t border-night-700/75 px-4 py-16 md:py-24 ${className}`}
+        >
+            <div className="pointer-events-none absolute inset-0 -z-20 bg-gradient-to-b from-night-900/70 via-night-900/95 to-night-800/95" />
+            <div className="pointer-events-none absolute top-10 -left-20 -z-10 h-52 w-52 rounded-full bg-blossom-400/10 blur-3xl" />
+            <div className="pointer-events-none absolute right-0 bottom-0 -z-10 h-64 w-64 rounded-full bg-lantern-400/10 blur-3xl" />
+
             <div className="mx-auto max-w-6xl">
                 {title && (
-                    <h2 className="mb-10 text-center font-display text-3xl font-bold tracking-wide text-warm-white md:text-4xl">
+                    <h2 className="mb-10 text-center font-display text-3xl font-bold tracking-wide text-lantern-100 md:text-4xl">
                         {title}
                     </h2>
                 )}

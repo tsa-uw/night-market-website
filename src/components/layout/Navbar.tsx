@@ -64,7 +64,7 @@ export default function Navbar() {
             {/* Desktop glassmorphism pill */}
             <div
                 ref={pillRef}
-                className="relative hidden items-center gap-2 rounded-full border border-night-500/20 bg-white/55 px-12 py-3 shadow-lg shadow-night-500/10 backdrop-blur-xl md:flex"
+                className="relative hidden items-center gap-2 rounded-full border border-lantern-100/20 bg-night-900/62 px-12 py-3 shadow-2xl shadow-black/35 backdrop-blur-xl md:flex"
             >
                 {/* Logo that slides to the left of the active link */}
                 <motion.div
@@ -82,6 +82,8 @@ export default function Navbar() {
                 </motion.div>
 
                 {NAV_ITEMS.map(({ label, href, id }) => {
+                    const isActive = activeSection === id;
+
                     return (
                         <a
                             key={id}
@@ -89,30 +91,26 @@ export default function Navbar() {
                             ref={(el) => {
                                 if (el) itemRefs.current.set(id, el);
                             }}
-                            className="relative rounded-full px-4 py-2 text-base font-semibold transition-colors"
+                            className={`relative rounded-full px-4 py-2 text-base font-semibold transition-colors ${
+                                isActive
+                                    ? "bg-lantern-300/15 text-lantern-100"
+                                    : "text-lantern-100/65 hover:bg-night-800/75 hover:text-lantern-100"
+                            }`}
                         >
-                            <span
-                                className={`relative z-10 ${
-                                    activeSection === id
-                                        ? "text-warm-white"
-                                        : "text-warm-white/65 hover:text-warm-white"
-                                }`}
-                            >
-                                {label}
-                            </span>
+                            <span className="relative z-10">{label}</span>
                         </a>
                     );
                 })}
             </div>
 
             {/* Mobile hamburger */}
-            <div className="flex items-center gap-3 rounded-full border border-night-500/20 bg-white/60 px-4 py-2 shadow-lg shadow-night-500/10 backdrop-blur-xl md:hidden">
+            <div className="flex items-center gap-3 rounded-full border border-lantern-100/20 bg-night-900/75 px-4 py-2 shadow-2xl shadow-black/35 backdrop-blur-xl md:hidden">
                 <img src="/tsa_logo.png" alt="TSA Logo" className="h-6 w-6" />
-                <span className="text-sm font-semibold text-warm-white">
+                <span className="text-sm font-semibold text-lantern-100">
                     Night Market
                 </span>
                 <button
-                    className="ml-2 text-warm-white/80"
+                    className="ml-2 text-lantern-100/80"
                     onClick={() => setMobileOpen((prev) => !prev)}
                     aria-label="Toggle navigation menu"
                     aria-expanded={mobileOpen}
@@ -149,7 +147,7 @@ export default function Navbar() {
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -8 }}
                         transition={{ duration: 0.2 }}
-                        className="mt-2 rounded-2xl border border-night-500/20 bg-white/70 px-4 py-3 shadow-lg shadow-night-500/10 backdrop-blur-xl md:hidden"
+                        className="mt-2 rounded-2xl border border-lantern-100/15 bg-night-900/85 px-4 py-3 shadow-2xl shadow-black/35 backdrop-blur-xl md:hidden"
                     >
                         {NAV_ITEMS.map(({ label, href, id }) => (
                             <li key={id}>
@@ -157,8 +155,8 @@ export default function Navbar() {
                                     href={href}
                                     className={`block rounded-lg px-3 py-2 text-sm transition-colors ${
                                         activeSection === id
-                                            ? "bg-night-700/60 text-warm-white"
-                                            : "text-warm-white/70 hover:text-warm-white"
+                                            ? "bg-lantern-300/15 text-lantern-100"
+                                            : "text-lantern-100/70 hover:bg-night-800/70 hover:text-lantern-100"
                                     }`}
                                     onClick={() => setMobileOpen(false)}
                                 >
