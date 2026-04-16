@@ -205,22 +205,31 @@ export default function Schedule() {
                                             transition: `opacity 0.5s ease ${delay}, transform 0.5s ease ${delay}`,
                                         }}
                                     >
-                                        {/* Hover background sweep — gradient from left edge */}
-                                        <div className="pointer-events-none absolute inset-y-0.5 -left-28 right-0 rounded-r-md opacity-0 transition-opacity duration-250 group-hover:opacity-100 bg-linear-to-r from-blossom-400/10 via-blossom-400/5 to-transparent" />
+                                        {/*
+                                         * Sweep: overflow-hidden wrapper clips the inner div
+                                         * which slides from translateX(-100%) → 0 on hover,
+                                         * creating a true left-to-right wipe rather than a fade.
+                                         */}
+                                        <div className="pointer-events-none absolute inset-y-0.5 -left-28 right-0 overflow-hidden rounded-r-md">
+                                            <div className="h-full w-full -translate-x-full bg-linear-to-r from-blossom-400/12 via-blossom-400/5 to-transparent transition-transform duration-500 ease-out group-hover:translate-x-0" />
+                                        </div>
 
-                                        {/* Left accent bar */}
-                                        <div className="pointer-events-none absolute -left-28 top-0.5 bottom-0.5 w-px rounded-full bg-blossom-400 opacity-0 transition-opacity duration-200 group-hover:opacity-100" />
+                                        {/* Left accent bar — scales from center outward */}
+                                        <div className="pointer-events-none absolute -left-28 top-1 bottom-1 w-px origin-center scale-y-0 rounded-full bg-blossom-400/80 transition-transform duration-300 ease-out group-hover:scale-y-100" />
 
-                                        {/* Time */}
-                                        <time className="absolute right-full mr-4 w-24 text-right text-sm tabular-nums font-medium text-lantern-300/65 transition-colors duration-200 group-hover:text-lantern-200">
+                                        {/* Time — slides 4 px right into prominence */}
+                                        <time className="absolute right-full mr-4 w-24 -translate-x-1 text-right text-sm tabular-nums font-medium text-lantern-300/65 transition-all duration-300 ease-out group-hover:translate-x-0 group-hover:text-lantern-200">
                                             {time}
                                         </time>
 
-                                        {/* Node */}
-                                        <div className="absolute left-0 z-10 h-[0.625rem] w-[0.625rem] -translate-x-1/2 rounded-full bg-blossom-400/55 shadow-[0_0_6px_rgba(244,92,141,0.4)] transition-all duration-250 group-hover:bg-blossom-300 group-hover:shadow-[0_0_10px_rgba(244,92,141,0.75)]" />
+                                        {/*
+                                         * Node — expands and blooms with a two-layer shadow:
+                                         * inner ring (0 0 0 2px) + outer glow (0 0 14px).
+                                         */}
+                                        <div className="absolute left-0 z-10 h-2.5 w-2.5 -translate-x-1/2 rounded-full bg-blossom-400/60 shadow-[0_0_6px_rgba(244,92,141,0.4)] transition-all duration-300 ease-out group-hover:scale-[1.5] group-hover:bg-blossom-300 group-hover:shadow-[0_0_0_2px_rgba(244,92,141,0.25),0_0_14px_rgba(244,92,141,0.85)]" />
 
-                                        {/* Title */}
-                                        <span className="text-[0.9375rem] leading-relaxed text-warm-white/70 transition-colors duration-200 group-hover:text-warm-white">
+                                        {/* Title — 2 px nudge to match the left-side energy */}
+                                        <span className="text-[0.9375rem] leading-relaxed text-warm-white/70 transition-all duration-200 ease-out group-hover:translate-x-0.5 group-hover:text-warm-white">
                                             {title}
                                         </span>
                                     </li>
