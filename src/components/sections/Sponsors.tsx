@@ -17,7 +17,7 @@ export default function Sponsors() {
                 {SPONSORS.map(({ name, image }) => (
                     <div
                         key={name}
-                        className="flex h-28 items-center justify-center rounded-xl border border-night-600 bg-night-800/60 overflow-hidden"
+                        className="flex h-28 items-center justify-center overflow-hidden rounded-xl border border-night-600/50 bg-night-800/50 backdrop-blur-sm transition-all duration-300 hover:border-lantern-400/35 hover:shadow-[0_0_24px_rgba(251,184,72,0.1)]"
                     >
                         {image ? (
                             <img

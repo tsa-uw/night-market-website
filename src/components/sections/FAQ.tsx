@@ -15,7 +15,8 @@ const FAQ_ITEMS: FAQItem[] = [
     },
     {
         question: "Is there an entry fee?",
-        answer: "No — the Night Market is free to attend. Food and activities are paid by vendors.",
+        answer:
+            "No — the Night Market is free to attend. Food and activities are paid by vendors.",
     },
     {
         question: "What forms of payment are accepted?",
@@ -33,17 +34,17 @@ function Accordion({ question, answer }: FAQItem) {
     const [open, setOpen] = useState(false);
 
     return (
-        <div className="border-b border-night-600">
+        <div className="border-b border-night-700/75">
             <button
-                className="flex w-full items-center justify-between py-4 text-left"
+                className="group flex w-full items-center justify-between py-4 text-left transition-colors duration-200 hover:text-lantern-100"
                 onClick={() => setOpen((prev) => !prev)}
                 aria-expanded={open}
             >
-                <span className="pr-4 font-medium text-warm-white/90">
+                <span className="pr-4 font-medium text-warm-white/85 transition-colors duration-200 group-hover:text-warm-white">
                     {question}
                 </span>
                 <svg
-                    className={`h-5 w-5 shrink-0 text-blossom-500 transition-transform ${open ? "rotate-180" : ""}`}
+                    className={`h-5 w-5 shrink-0 text-blossom-400 transition-transform duration-300 ${open ? "rotate-180" : ""}`}
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"
@@ -56,11 +57,16 @@ function Accordion({ question, answer }: FAQItem) {
                     />
                 </svg>
             </button>
-            {open && (
-                <div className="pb-4 text-sm leading-relaxed text-warm-white/80">
-                    {answer}
+            {/* CSS grid rows trick for smooth height animation */}
+            <div
+                className={`grid transition-all duration-300 ease-in-out ${open ? "grid-rows-[1fr]" : "grid-rows-[0fr]"}`}
+            >
+                <div className="overflow-hidden">
+                    <p className="pb-4 text-sm leading-relaxed text-warm-white/65">
+                        {answer}
+                    </p>
                 </div>
-            )}
+            </div>
         </div>
     );
 }
