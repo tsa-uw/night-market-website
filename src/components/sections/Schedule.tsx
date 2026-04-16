@@ -159,7 +159,7 @@ export default function Schedule() {
                     <div className="relative ml-28">
                         {/* Gradient line */}
                         <div
-                            className="pointer-events-none absolute -left-px top-3 bottom-3 w-px bg-linear-to-b from-blossom-400/60 via-lantern-400/40 to-transparent"
+                            className="pointer-events-none absolute -left-px top-3 bottom-3 w-0.5 bg-linear-to-b from-blossom-400 via-lantern-400/60 to-transparent"
                             aria-hidden="true"
                         />
 
@@ -174,11 +174,11 @@ export default function Schedule() {
                             aria-hidden="true"
                         >
                             <div
-                                className="absolute -translate-x-1/2 h-14 w-1 rounded-full"
+                                className="absolute -translate-x-1/2 h-14 w-1.5 rounded-full"
                                 style={{
                                     background:
-                                        "radial-gradient(ellipse at center, rgba(244,92,141,0.95) 0%, rgba(244,92,141,0.35) 45%, transparent 70%)",
-                                    filter: "blur(1.5px)",
+                                        "radial-gradient(ellipse at center, rgba(244,92,141,1) 0%, rgba(244,92,141,0.5) 50%, transparent 75%)",
+                                    filter: "blur(2px)",
                                     animation:
                                         "timeline-scan 5s ease-in-out 2s infinite",
                                 }}
@@ -211,11 +211,11 @@ export default function Schedule() {
                                          * creating a true left-to-right wipe rather than a fade.
                                          */}
                                         <div className="pointer-events-none absolute inset-y-0.5 -left-28 right-0 overflow-hidden rounded-r-md">
-                                            <div className="h-full w-full -translate-x-full bg-linear-to-r from-blossom-400/12 via-blossom-400/5 to-transparent transition-transform duration-500 ease-out group-hover:translate-x-0" />
+                                            <div className="h-full w-full -translate-x-full bg-linear-to-r from-blossom-400/20 via-blossom-400/8 to-transparent transition-transform duration-500 ease-out group-hover:translate-x-0" />
                                         </div>
 
                                         {/* Left accent bar — scales from center outward */}
-                                        <div className="pointer-events-none absolute -left-28 top-1 bottom-1 w-px origin-center scale-y-0 rounded-full bg-blossom-400/80 transition-transform duration-300 ease-out group-hover:scale-y-100" />
+                                        <div className="pointer-events-none absolute -left-28 top-1 bottom-1 w-0.5 origin-center scale-y-0 rounded-full bg-blossom-400 shadow-[0_0_6px_rgba(244,92,141,0.8)] transition-transform duration-300 ease-out group-hover:scale-y-100" />
 
                                         {/* Time — slides 4 px right into prominence */}
                                         <time className="absolute right-full mr-4 w-24 -translate-x-1 text-right text-sm tabular-nums font-medium text-lantern-300/65 transition-all duration-300 ease-out group-hover:translate-x-0 group-hover:text-lantern-200">
@@ -226,7 +226,7 @@ export default function Schedule() {
                                          * Node — expands and blooms with a two-layer shadow:
                                          * inner ring (0 0 0 2px) + outer glow (0 0 14px).
                                          */}
-                                        <div className="absolute left-0 z-10 h-2.5 w-2.5 -translate-x-1/2 rounded-full bg-blossom-400/60 shadow-[0_0_6px_rgba(244,92,141,0.4)] transition-all duration-300 ease-out group-hover:scale-[1.5] group-hover:bg-blossom-300 group-hover:shadow-[0_0_0_2px_rgba(244,92,141,0.25),0_0_14px_rgba(244,92,141,0.85)]" />
+                                        <div className="absolute left-0 z-10 h-2.5 w-2.5 -translate-x-1/2 rounded-full bg-blossom-400 shadow-[0_0_8px_rgba(244,92,141,0.7)] transition-all duration-300 ease-out group-hover:scale-[1.5] group-hover:bg-blossom-300 group-hover:shadow-[0_0_0_2px_rgba(244,92,141,0.35),0_0_16px_rgba(244,92,141,1)]" />
 
                                         {/* Title — 2 px nudge to match the left-side energy */}
                                         <span className="text-[0.9375rem] leading-relaxed text-warm-white/70 transition-all duration-200 ease-out group-hover:translate-x-0.5 group-hover:text-warm-white">

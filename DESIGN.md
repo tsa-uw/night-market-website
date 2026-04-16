@@ -127,8 +127,8 @@ bg-linear-to-b from-night-900/70 via-night-900/95 to-night-800/95
 
 | Element                    | Shadow / glow value                                              |
 |----------------------------|------------------------------------------------------------------|
-| Blossom node (idle)        | `shadow-[0_0_6px_rgba(244,92,141,0.4)]`                          |
-| Blossom node (hover)       | `shadow-[0_0_0_2px_rgba(244,92,141,0.25),0_0_14px_rgba(244,92,141,0.85)]` |
+| Blossom node (idle)        | `bg-blossom-400` (full opacity) + `shadow-[0_0_8px_rgba(244,92,141,0.7)]`  |
+| Blossom node (hover)       | `bg-blossom-300` + `shadow-[0_0_0_2px_rgba(244,92,141,0.35),0_0_16px_rgba(244,92,141,1)]` |
 | Gold orb (idle)            | `shadow-[0_0_14px_rgba(255,208,106,0.7)]`                        |
 | Headliner card hover       | `shadow-[0_0_40px_rgba(255,208,106,0.1)]`                        |
 | Sponsor card hover         | `shadow-[0_0_24px_rgba(251,184,72,0.1)]`                         |
@@ -136,7 +136,11 @@ bg-linear-to-b from-night-900/70 via-night-900/95 to-night-800/95
 | Section H2 text            | `drop-shadow-[0_4px_24px_rgba(0,0,0,0.65)]`                      |
 
 The hover node shadow uses a two-value composite: a tight ring (`0 0 0 2px`) plus
-an outer bloom (`0 0 14px`). Always prefer this over a single-value glow for nodes.
+an outer bloom (`0 0 16px`). Always prefer this over a single-value glow for nodes.
+
+Timeline line: `w-0.5` (2px), full-opacity `from-blossom-400` at top. A 1px semi-transparent line is nearly invisible — use at least 2px.
+
+Timeline scan beam: `w-1.5 h-14`, `radial-gradient` with full-opacity pink core fading to transparent, `blur(2px)`. No white hot-core — too intense against the dark background.
 
 ---
 
