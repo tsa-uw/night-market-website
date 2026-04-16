@@ -19,10 +19,40 @@
     to { opacity: 1; transform: translateY(0); }
 }
 
+/* Particle drifts from bottom to top, fading in/out */
+@keyframes float-particle {
+    0%   { transform: translateY(0) scale(1);    opacity: 0; }
+    8%   { opacity: 0.75; }
+    88%  { opacity: 0.4; }
+    100% { transform: translateY(-88vh) scale(0.7); opacity: 0; }
+}
+
+/* Glowing orb travels down the timeline line */
+@keyframes timeline-scan {
+    0%   { top: 0%;   opacity: 0; }
+    6%   { opacity: 1; }
+    88%  { opacity: 0.9; }
+    100% { top: 100%; opacity: 0; }
+}
+
+/* Gold pulse for headliner orb */
+@keyframes node-pulse-gold {
+    0%, 100% { opacity: 0.5; transform: scale(1); }
+    50%       { opacity: 1;   transform: scale(1.2); }
+}
+
+/* Shine sweep for headliner card hover */
+@keyframes shimmer-sweep {
+    0%   { transform: translateX(-100%) skewX(-12deg); }
+    100% { transform: translateX(350%)  skewX(-12deg); }
+}
+
 @theme {
     --animate-hero-darken: hero-darken 1.8s ease-in 0.2s both;
     --animate-hero-fade-in: hero-fade-in 0.9s ease-out 0.8s both;
     --animate-hero-fade-in-late: hero-fade-in 0.9s ease-out 1.4s both;
+    --animate-node-pulse-gold: node-pulse-gold 2s ease-in-out infinite;
+    --animate-shimmer-sweep: shimmer-sweep 0.65s ease forwards;
     --color-night-900: #060910;
     --color-night-800: #0e1424;
     --color-night-700: #19233a;
