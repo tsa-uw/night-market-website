@@ -47,6 +47,24 @@
     100% { transform: translateX(350%)  skewX(-12deg); }
 }
 
+/* Preview card entrance */
+@keyframes card-in {
+    from { opacity: 0; transform: translateX(-8px) scale(0.97); }
+    to   { opacity: 1; transform: translateX(0)    scale(1); }
+}
+
+/* Preview card media area entrance */
+@keyframes card-media-in {
+    from { opacity: 0; transform: scale(1.04); }
+    to   { opacity: 1; transform: scale(1); }
+}
+
+/* Staggered text fade-up inside preview card */
+@keyframes fade-up {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
 @theme {
     --animate-hero-darken: hero-darken 1.8s ease-in 0.2s both;
     --animate-hero-fade-in: hero-fade-in 0.9s ease-out 0.8s both;
