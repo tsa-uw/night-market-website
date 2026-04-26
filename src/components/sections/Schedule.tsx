@@ -526,8 +526,10 @@ export default function Schedule() {
                         </div>
                     </div>
 
-                    {/* Preview card — sticky within the flex row, hidden on mobile */}
-                    <div className="hidden w-70 shrink-0 self-start pt-3 md:sticky md:top-8 md:block">
+                    {/* Preview card — sticky within the flex row, hidden on mobile.
+                        top: calc(50vh - 10rem) keeps the card vertically centered in
+                        the viewport when stuck without shifting it in normal flow. */}
+                    <div className="hidden w-70 shrink-0 self-start pt-10 md:sticky md:top-[calc(40vh-10rem)] md:block">
                         <PreviewCard
                             event={
                                 activeIdx !== null
@@ -541,7 +543,7 @@ export default function Schedule() {
 
                         {/* Idle hint */}
                         <div
-                            className="pointer-events-none pt-10 text-center transition-opacity duration-300"
+                            className="pointer-events-none text-center transition-opacity duration-300"
                             style={{ opacity: activeIdx !== null ? 0 : 1 }}
                         >
                             <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-full border border-dashed border-warm-white/12">
