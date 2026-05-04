@@ -65,6 +65,14 @@
     to   { opacity: 1; transform: translateY(0); }
 }
 
+/* Glow tracer travels around the raffle ticket border */
+@keyframes ticket-trace {
+    0%   { opacity: 0; }
+    6%   { opacity: 1; }
+    88%  { opacity: 0.85; }
+    100% { stroke-dashoffset: 0; opacity: 0; }
+}
+
 @theme {
     --animate-hero-darken: hero-darken 1.8s ease-in 0.2s both;
     --animate-hero-fade-in: hero-fade-in 0.9s ease-out 0.8s both;
