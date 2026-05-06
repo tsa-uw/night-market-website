@@ -16,6 +16,8 @@ const NAV_ITEMS = [
 const SECTION_IDS = NAV_ITEMS.map((item) => item.id);
 const LOGO_SIZE = 28;
 const LOGO_TEXT_GAP = 2;
+const SCROLL_HIDE_THRESHOLD = 8;
+const TOP_VISIBILITY_OFFSET = 32;
 
 interface LogoPos {
     x: number;
@@ -23,10 +25,12 @@ interface LogoPos {
 
 export default function Navbar() {
     const [mobileOpen, setMobileOpen] = useState(false);
+    const [hidden, setHidden] = useState(false);
     const activeSection = useActiveSection(useMemo(() => SECTION_IDS, []));
 
     const itemRefs = useRef<Map<string, HTMLAnchorElement>>(new Map());
     const pillRef = useRef<HTMLDivElement>(null);
+    const lastScrollYRef = useRef(0);
 
     const [logoPos, setLogoPos] = useState<LogoPos>({ x: 0 });
 
@@ -59,8 +63,39 @@ export default function Navbar() {
         return () => window.removeEventListener("resize", recalc);
     }, [recalc]);
 
+    useEffect(() => {
+        lastScrollYRef.current = window.scrollY;
+
+        const handleScroll = () => {
+            const currentScrollY = window.scrollY;
+            const delta = currentScrollY - lastScrollYRef.current;
+
+            if (currentScrollY <= TOP_VISIBILITY_OFFSET) {
+                setHidden(false);
+                lastScrollYRef.current = currentScrollY;
+                return;
+            }
+
+            if (Math.abs(delta) < SCROLL_HIDE_THRESHOLD) return;
+
+            setHidden(delta > 0);
+            lastScrollYRef.current = currentScrollY;
+        };
+
+        window.addEventListener("scroll", handleScroll, { passive: true });
+        return () => window.removeEventListener("scroll", handleScroll);
+    }, []);
+
     return (
-        <nav className="fixed top-4 left-4 z-50 md:left-8">
+        <motion.nav
+            className="fixed top-4 left-4 z-50 md:left-8"
+            animate={{
+                opacity: hidden && !mobileOpen ? 0 : 1,
+                y: hidden && !mobileOpen ? -28 : 0,
+                pointerEvents: hidden && !mobileOpen ? "none" : "auto",
+            }}
+            transition={{ duration: 0.24, ease: "easeOut" }}
+        >
             {/* Desktop glassmorphism pill */}
             <div
                 ref={pillRef}
@@ -167,6 +202,6 @@ export default function Navbar() {
                     </motion.ul>
                 )}
             </AnimatePresence>
-        </nav>
+        </motion.nav>
     );
 }
