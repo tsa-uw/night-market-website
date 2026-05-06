@@ -63,7 +63,7 @@ export default function EventTrailer() {
                             type="video/mp4"
                             media="(max-width: 767px)"
                         />
-                        <source src="/Promo.mp4" type="video/mp4" />
+                        <source src="/Promo-cloudflare.mp4" type="video/mp4" />
                         Your browser does not support the event trailer video.
                     </video>
                 </div>
