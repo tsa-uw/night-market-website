@@ -1,7 +1,8 @@
+import { RotateCcw, Volume2, VolumeX } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 
 const CONTROL_BUTTON_CLASS =
-    "absolute bottom-4 grid h-11 w-11 place-items-center rounded-full border border-lantern-100/25 bg-night-900/70 text-lantern-100 shadow-xl shadow-black/40 backdrop-blur-md transition hover:bg-night-800/85 focus:ring-2 focus:ring-lantern-300 focus:ring-offset-2 focus:ring-offset-black focus:outline-none md:bottom-6";
+    "absolute bottom-4 grid h-11 w-11 place-items-center rounded-full border border-lantern-100/25 bg-night-900/70 text-lantern-100 shadow-xl shadow-black/40 backdrop-blur-md transition duration-200 ease-out hover:scale-110 hover:border-lantern-300/50 hover:bg-night-800/90 hover:text-lantern-300 hover:shadow-[0_0_16px_2px_theme(colors.lantern.300/20%)] active:scale-95 active:duration-75 focus:outline-none md:bottom-6";
 
 export default function EventTrailer() {
     const sectionRef = useRef<HTMLElement>(null);
@@ -97,25 +98,7 @@ export default function EventTrailer() {
                         aria-label="Restart trailer"
                         onClick={restartVideo}
                     >
-                        <svg
-                            className="h-5 w-5"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                            strokeWidth={2}
-                            aria-hidden="true"
-                        >
-                            <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-5.5 2.5L3 8"
-                            />
-                            <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                d="M3 3v5h5"
-                            />
-                        </svg>
+                        <RotateCcw className="h-5 w-5" aria-hidden="true" />
                     </button>
                     <button
                         type="button"
@@ -125,45 +108,9 @@ export default function EventTrailer() {
                         onClick={() => setMuted((current) => !current)}
                     >
                         {muted ? (
-                            <svg
-                                className="h-5 w-5"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                stroke="currentColor"
-                                strokeWidth={2}
-                                aria-hidden="true"
-                            >
-                                <path
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    d="M11 5 6 9H3v6h3l5 4V5Z"
-                                />
-                                <path
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    d="m19 9-4 4m0-4 4 4"
-                                />
-                            </svg>
+                            <VolumeX className="h-5 w-5" aria-hidden="true" />
                         ) : (
-                            <svg
-                                className="h-5 w-5"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                stroke="currentColor"
-                                strokeWidth={2}
-                                aria-hidden="true"
-                            >
-                                <path
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    d="M11 5 6 9H3v6h3l5 4V5Z"
-                                />
-                                <path
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    d="M15.5 8.5a5 5 0 0 1 0 7M18.5 5.5a9 9 0 0 1 0 13"
-                                />
-                            </svg>
+                            <Volume2 className="h-5 w-5" aria-hidden="true" />
                         )}
                     </button>
                 </div>
