@@ -1,8 +1,9 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export default function EventTrailer() {
     const sectionRef = useRef<HTMLElement>(null);
     const videoRef = useRef<HTMLVideoElement>(null);
+    const [muted, setMuted] = useState(true);
 
     useEffect(() => {
         const section = sectionRef.current;
@@ -36,6 +37,17 @@ export default function EventTrailer() {
         return () => observer.disconnect();
     }, []);
 
+    useEffect(() => {
+        if (!videoRef.current) return;
+
+        videoRef.current.muted = muted;
+        if (!muted) {
+            void videoRef.current.play().catch(() => {
+                setMuted(true);
+            });
+        }
+    }, [muted]);
+
     return (
         <section
             ref={sectionRef}
@@ -48,12 +60,12 @@ export default function EventTrailer() {
             <div className="pointer-events-none absolute inset-0 -z-10 bg-radial from-blossom-400/16 via-night-900/70 to-black" />
 
             <div className="w-full max-w-[min(calc(133.333svh-4rem),calc(100vw-2rem))]">
-                <div className="aspect-4/3 w-full overflow-hidden bg-night-900 shadow-2xl shadow-black/60">
+                <div className="relative aspect-4/3 w-full overflow-hidden bg-night-900 shadow-2xl shadow-black/60">
                     <video
                         ref={videoRef}
                         className="h-full w-full object-contain"
                         loop
-                        muted
+                        muted={muted}
                         playsInline
                         preload="metadata"
                         poster="/Promo-poster.jpg"
@@ -66,6 +78,55 @@ export default function EventTrailer() {
                         <source src="/Promo-cloudflare.mp4" type="video/mp4" />
                         Your browser does not support the event trailer video.
                     </video>
+                    <button
+                        type="button"
+                        className="absolute right-4 bottom-4 grid h-11 w-11 place-items-center rounded-full border border-lantern-100/25 bg-night-900/70 text-lantern-100 shadow-xl shadow-black/40 backdrop-blur-md transition hover:bg-night-800/85 focus:ring-2 focus:ring-lantern-300 focus:ring-offset-2 focus:ring-offset-black focus:outline-none md:right-6 md:bottom-6"
+                        aria-label={muted ? "Unmute trailer" : "Mute trailer"}
+                        aria-pressed={!muted}
+                        onClick={() => setMuted((current) => !current)}
+                    >
+                        {muted ? (
+                            <svg
+                                className="h-5 w-5"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
+                                strokeWidth={2}
+                                aria-hidden="true"
+                            >
+                                <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    d="M11 5 6 9H3v6h3l5 4V5Z"
+                                />
+                                <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    d="m19 9-4 4m0-4 4 4"
+                                />
+                            </svg>
+                        ) : (
+                            <svg
+                                className="h-5 w-5"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
+                                strokeWidth={2}
+                                aria-hidden="true"
+                            >
+                                <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    d="M11 5 6 9H3v6h3l5 4V5Z"
+                                />
+                                <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    d="M15.5 8.5a5 5 0 0 1 0 7M18.5 5.5a9 9 0 0 1 0 13"
+                                />
+                            </svg>
+                        )}
+                    </button>
                 </div>
             </div>
         </section>
