@@ -4,9 +4,9 @@ import { useActiveSection } from "../../hooks/useActiveSection";
 
 const NAV_ITEMS = [
     { label: "Home", href: "#home", id: "home" },
+    { label: "Trailer", href: "#trailer", id: "trailer" },
     { label: "Logistics", href: "#logistics", id: "logistics" },
     { label: "Raffle", href: "#raffle", id: "raffle" },
-    { label: "Trailer", href: "#trailer", id: "trailer" },
     { label: "Schedule", href: "#schedule", id: "schedule" },
     { label: "Vendors", href: "#vendors", id: "vendors" },
     { label: "Sponsors", href: "#sponsors", id: "sponsors" },

@@ -1,10 +1,93 @@
+import { useEffect } from "react";
 import landingPageBackground from "../../assets/images/LandingPageBackground.jpg";
 
 export default function Hero() {
+    useEffect(() => {
+        const prefersReducedMotion = window.matchMedia(
+            "(prefers-reduced-motion: reduce)",
+        ).matches;
+        let touchStartY = 0;
+        let isTransitioning = false;
+
+        const isHeroActive = () => {
+            const hero = document.getElementById("home");
+            if (!hero || isTransitioning) return false;
+
+            const { top, bottom } = hero.getBoundingClientRect();
+            return top >= -2 && bottom > window.innerHeight * 0.5;
+        };
+
+        const scrollToTrailer = () => {
+            const trailer = document.getElementById("trailer");
+            if (!trailer) return;
+
+            isTransitioning = true;
+            trailer.scrollIntoView({
+                behavior: prefersReducedMotion ? "auto" : "smooth",
+                block: "start",
+            });
+
+            window.setTimeout(() => {
+                isTransitioning = false;
+            }, prefersReducedMotion ? 0 : 800);
+        };
+
+        const handleWheel = (event: WheelEvent) => {
+            if (event.deltaY <= 0 || !isHeroActive()) return;
+
+            event.preventDefault();
+            scrollToTrailer();
+        };
+
+        const handleTouchStart = (event: TouchEvent) => {
+            touchStartY = event.touches[0]?.clientY ?? 0;
+        };
+
+        const handleTouchMove = (event: TouchEvent) => {
+            const touchY = event.touches[0]?.clientY ?? touchStartY;
+            const isScrollingDown = touchStartY - touchY > 8;
+
+            if (!isScrollingDown || !isHeroActive()) return;
+
+            event.preventDefault();
+            scrollToTrailer();
+        };
+
+        const handleKeyDown = (event: KeyboardEvent) => {
+            const scrollDownKeys = new Set([
+                "ArrowDown",
+                "PageDown",
+                " ",
+                "Spacebar",
+            ]);
+
+            if (!scrollDownKeys.has(event.key) || !isHeroActive()) return;
+
+            event.preventDefault();
+            scrollToTrailer();
+        };
+
+        window.addEventListener("wheel", handleWheel, { passive: false });
+        window.addEventListener("touchstart", handleTouchStart, {
+            passive: true,
+        });
+        window.addEventListener("touchmove", handleTouchMove, {
+            passive: false,
+        });
+        window.addEventListener("keydown", handleKeyDown);
+
+        return () => {
+            window.removeEventListener("wheel", handleWheel);
+            window.removeEventListener("touchstart", handleTouchStart);
+            window.removeEventListener("touchmove", handleTouchMove);
+            window.removeEventListener("keydown", handleKeyDown);
+        };
+    }, []);
+
     return (
         <section
             id="home"
-            className="relative isolate flex min-h-screen items-center overflow-hidden px-4 pb-16 pt-24 text-center md:px-8"
+            className="relative isolate flex min-h-screen snap-start items-center overflow-hidden px-4 pb-16 pt-24 text-center md:px-8"
         >
             <img
                 src={landingPageBackground}

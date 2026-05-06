@@ -14,9 +14,9 @@ export default function App() {
             <Navbar />
             <main className="relative">
                 <Hero />
+                <EventTrailer />
                 <Logistics />
                 <RaffleTickets />
-                <EventTrailer />
                 <Schedule />
                 <Vendors />
                 <Sponsors />
