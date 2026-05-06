@@ -1,5 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 
+const CONTROL_BUTTON_CLASS =
+    "absolute bottom-4 grid h-11 w-11 place-items-center rounded-full border border-lantern-100/25 bg-night-900/70 text-lantern-100 shadow-xl shadow-black/40 backdrop-blur-md transition hover:bg-night-800/85 focus:ring-2 focus:ring-lantern-300 focus:ring-offset-2 focus:ring-offset-black focus:outline-none md:bottom-6";
+
 export default function EventTrailer() {
     const sectionRef = useRef<HTMLElement>(null);
     const videoRef = useRef<HTMLVideoElement>(null);
@@ -48,6 +51,16 @@ export default function EventTrailer() {
         }
     }, [muted]);
 
+    const restartVideo = () => {
+        const video = videoRef.current;
+        if (!video) return;
+
+        video.currentTime = 0;
+        void video.play().catch(() => {
+            // Autoplay can still be blocked by browser policy.
+        });
+    };
+
     return (
         <section
             ref={sectionRef}
@@ -80,7 +93,33 @@ export default function EventTrailer() {
                     </video>
                     <button
                         type="button"
-                        className="absolute right-4 bottom-4 grid h-11 w-11 place-items-center rounded-full border border-lantern-100/25 bg-night-900/70 text-lantern-100 shadow-xl shadow-black/40 backdrop-blur-md transition hover:bg-night-800/85 focus:ring-2 focus:ring-lantern-300 focus:ring-offset-2 focus:ring-offset-black focus:outline-none md:right-6 md:bottom-6"
+                        className={`${CONTROL_BUTTON_CLASS} left-4 md:left-6`}
+                        aria-label="Restart trailer"
+                        onClick={restartVideo}
+                    >
+                        <svg
+                            className="h-5 w-5"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                            strokeWidth={2}
+                            aria-hidden="true"
+                        >
+                            <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-5.5 2.5L3 8"
+                            />
+                            <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                d="M3 3v5h5"
+                            />
+                        </svg>
+                    </button>
+                    <button
+                        type="button"
+                        className={`${CONTROL_BUTTON_CLASS} right-4 md:right-6`}
                         aria-label={muted ? "Unmute trailer" : "Mute trailer"}
                         aria-pressed={!muted}
                         onClick={() => setMuted((current) => !current)}
