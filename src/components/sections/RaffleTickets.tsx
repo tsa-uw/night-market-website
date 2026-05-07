@@ -1,59 +1,15 @@
+import {
+    Clock,
+    Info,
+    MapPin,
+    Plane,
+    Ticket,
+    Trophy,
+} from "lucide-react";
+import type { LucideIcon } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import type { ReactNode } from "react";
 import Section from "../layout/Section";
-
-function PlaneIcon({ size = 20 }: { size?: number }) {
-    return (
-        <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M17.8 19.2L16 11l3.5-3.5C21 6 21 4 19.5 2.5c-1.5-1.5-3.5-1.5-5 0L11 6 2.8 6.2a1 1 0 0 0-.7 1.7l5.5 5.5-2 4.5a1 1 0 0 0 1.3 1.3l4.5-2 5.5 5.5a1 1 0 0 0 1.7-.7z" />
-        </svg>
-    );
-}
-
-function TicketIcon({ size = 16 }: { size?: number }) {
-    return (
-        <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M3 9a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v1a1 1 0 0 0 0 2v1a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-1a1 1 0 0 0 0-2V9z" />
-        </svg>
-    );
-}
-
-function ClockIcon({ size = 16 }: { size?: number }) {
-    return (
-        <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-            <circle cx="12" cy="12" r="10" />
-            <path d="M12 6v6l4 2" />
-        </svg>
-    );
-}
-
-function TrophyIcon({ size = 16 }: { size?: number }) {
-    return (
-        <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6" />
-            <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18" />
-            <path d="M4 22h16M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22M18 2H6v7a6 6 0 0 0 12 0V2z" />
-        </svg>
-    );
-}
-
-function MapPinIcon({ size = 16 }: { size?: number }) {
-    return (
-        <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
-            <circle cx="12" cy="10" r="3" />
-        </svg>
-    );
-}
-
-function InfoIcon({ size = 16 }: { size?: number }) {
-    return (
-        <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-            <circle cx="12" cy="12" r="10" />
-            <path d="M12 16v-4M12 8h.01" />
-        </svg>
-    );
-}
 
 function AirlineLogo() {
     return (
@@ -161,14 +117,14 @@ function TicketGlowTrace({
 }
 
 interface InfoCardData {
-    Icon: (props: { size?: number }) => ReactNode;
+    Icon: LucideIcon;
     title: string;
     body: ReactNode;
 }
 
 const INFO_CARDS: InfoCardData[] = [
     {
-        Icon: TrophyIcon,
+        Icon: Trophy,
         title: "Drawing & Winners",
         body: (
             <>
@@ -178,7 +134,7 @@ const INFO_CARDS: InfoCardData[] = [
         ),
     },
     {
-        Icon: MapPinIcon,
+        Icon: MapPin,
         title: "Where to Buy",
         body: (
             <>
@@ -189,7 +145,7 @@ const INFO_CARDS: InfoCardData[] = [
         ),
     },
     {
-        Icon: TicketIcon,
+        Icon: Ticket,
         title: "Multiple Entries",
         body: (
             <>
@@ -199,7 +155,7 @@ const INFO_CARDS: InfoCardData[] = [
         ),
     },
     {
-        Icon: InfoIcon,
+        Icon: Info,
         title: "Event Details",
         body: (
             <>
@@ -297,11 +253,11 @@ export default function RaffleTickets() {
                             </div>
                             <div className="flex flex-wrap gap-2">
                                 <span className="flex items-center gap-1.5 rounded-full border border-[rgba(251,184,72,0.15)] bg-night-800/80 px-3 py-1.5 text-sm text-warm-white/60">
-                                    <TicketIcon size={13} />
+                                    <Ticket size={13} aria-hidden="true" />
                                     TSA Info Booth
                                 </span>
                                 <span className="flex items-center gap-1.5 rounded-full border border-[rgba(251,184,72,0.15)] bg-night-800/80 px-3 py-1.5 text-sm text-warm-white/60">
-                                    <ClockIcon size={13} />
+                                    <Clock size={13} aria-hidden="true" />
                                     Sales close 8:00 PM
                                 </span>
                             </div>
@@ -339,7 +295,7 @@ export default function RaffleTickets() {
                             Night Market
                         </span>
                         <div className="flex h-11 w-11 items-center justify-center rounded-lg border border-[rgba(251,184,72,0.15)] bg-[rgba(251,184,72,0.06)] text-[rgba(251,184,72,0.5)]">
-                            <PlaneIcon size={20} />
+                            <Plane size={20} aria-hidden="true" />
                         </div>
                         <span
                             className="text-[28px] leading-none text-lantern-400/60"
@@ -375,7 +331,7 @@ export default function RaffleTickets() {
                         className="rounded-[10px] border border-night-600/80 bg-night-800/50 p-5 backdrop-blur-sm transition-all duration-300 hover:border-lantern-400/20 hover:shadow-[0_0_20px_rgba(251,184,72,0.06)]"
                     >
                         <div className="mb-2.5 flex h-8 w-8 items-center justify-center rounded-lg border border-[rgba(251,184,72,0.15)] bg-[rgba(251,184,72,0.07)] text-[rgba(251,184,72,0.7)]">
-                            <Icon size={16} />
+                            <Icon size={16} aria-hidden="true" />
                         </div>
                         <div className="mb-1 text-base font-semibold text-lantern-200">
                             {title}

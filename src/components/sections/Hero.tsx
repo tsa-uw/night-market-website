@@ -1,3 +1,4 @@
+import { ChevronDown } from "lucide-react";
 import landingPageBackground from "../../assets/images/LandingPageBackground.jpg";
 
 export default function Hero() {
@@ -51,19 +52,10 @@ export default function Hero() {
             {/* Scroll indicator */}
             <div className="animate-hero-fade-in-late absolute bottom-8">
                 <div className="animate-bounce">
-                    <svg
+                    <ChevronDown
                         className="h-6 w-6 text-lantern-100/75"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                        strokeWidth={2}
-                    >
-                        <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            d="M19 9l-7 7-7-7"
-                        />
-                    </svg>
+                        aria-hidden="true"
+                    />
                 </div>
             </div>
         </section>

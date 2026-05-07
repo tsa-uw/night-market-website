@@ -1,3 +1,11 @@
+import {
+    Clapperboard,
+    Expand,
+    Music,
+    PersonStanding,
+    Sparkles,
+    Star,
+} from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 
 const PARTICLES = [
@@ -70,34 +78,27 @@ const headlinerEvent = SCHEDULE_EVENTS.find((e) => e.headliner)!;
 
 function MediaIcon({ type, headliner }: { type: string; headliner?: boolean }) {
     const color = headliner ? "#fbb848" : (TYPE_COLORS[type]?.text ?? "#ff89ad");
+    const iconProps = {
+        size: 36,
+        color,
+        opacity: headliner || type === "Music" ? 0.35 : 0.4,
+        "aria-hidden": true,
+    } as const;
 
     if (type === "Martial Arts") return (
-        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="1.5" opacity={0.4} aria-hidden="true">
-            <path d="M12 2L8 7H4l4 3-2 5 6-3 6 3-2-5 4-3h-4z" />
-        </svg>
+        <Star {...iconProps} />
     );
     if (type === "Dance" || type === "Cultural") return (
-        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="1.5" opacity={0.4} aria-hidden="true">
-            <circle cx="12" cy="5" r="2" />
-            <path d="M12 7v6m-4 4l4-4 4 4M9 21l3-4 3 4" />
-        </svg>
+        <PersonStanding {...iconProps} />
     );
     if (type === "Music" || type === "Headliner") return (
-        <svg width="36" height="36" viewBox="0 0 24 24" fill={color} opacity={0.35} aria-hidden="true">
-            <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z" />
-        </svg>
+        <Music {...iconProps} fill="currentColor" />
     );
     if (type === "Acrobatics") return (
-        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="1.5" opacity={0.4} aria-hidden="true">
-            <circle cx="12" cy="4" r="2" />
-            <path d="M6 8l6 4 6-4M8 16l4-4 4 4M10 20h4" />
-        </svg>
+        <Sparkles {...iconProps} />
     );
     return (
-        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="1.5" opacity={0.35} aria-hidden="true">
-            <rect x="3" y="5" width="18" height="14" rx="2" />
-            <polygon points="10,9 16,12 10,15" />
-        </svg>
+        <Clapperboard {...iconProps} opacity={0.35} />
     );
 }
 
@@ -512,14 +513,11 @@ export default function Schedule() {
                                 <div className="relative hidden h-14 w-14 shrink-0 sm:block">
                                     <div className="animate-node-pulse-gold absolute inset-0 rounded-full bg-lantern-300/20 blur-lg" />
                                     <div className="relative z-10 flex h-full w-full items-center justify-center rounded-full border border-lantern-300/35 bg-lantern-400/10">
-                                        <svg
+                                        <Music
                                             className="h-5 w-5 text-lantern-300"
                                             fill="currentColor"
-                                            viewBox="0 0 24 24"
                                             aria-hidden="true"
-                                        >
-                                            <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z" />
-                                        </svg>
+                                        />
                                     </div>
                                 </div>
                             </div>
@@ -547,17 +545,11 @@ export default function Schedule() {
                             style={{ opacity: activeIdx !== null ? 0 : 1 }}
                         >
                             <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-full border border-dashed border-warm-white/12">
-                                <svg
-                                    width="18"
-                                    height="18"
-                                    viewBox="0 0 24 24"
-                                    fill="none"
-                                    stroke="rgba(246,239,223,0.25)"
-                                    strokeWidth="1.5"
+                                <Expand
+                                    size={18}
+                                    color="rgba(246,239,223,0.25)"
                                     aria-hidden="true"
-                                >
-                                    <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
-                                </svg>
+                                />
                             </div>
                             <p className="text-xs leading-relaxed text-warm-white/25">
                                 Hover a performance

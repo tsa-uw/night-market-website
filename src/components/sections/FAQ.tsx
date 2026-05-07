@@ -1,3 +1,4 @@
+import { ChevronDown } from "lucide-react";
 import { useState } from "react";
 import Section from "../layout/Section";
 
@@ -43,19 +44,10 @@ function Accordion({ question, answer }: FAQItem) {
                 <span className="pr-4 font-medium text-warm-white/85 transition-colors duration-200 group-hover:text-warm-white">
                     {question}
                 </span>
-                <svg
+                <ChevronDown
                     className={`h-5 w-5 shrink-0 text-blossom-400 transition-transform duration-300 ${open ? "rotate-180" : ""}`}
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    strokeWidth={2}
-                >
-                    <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M19 9l-7 7-7-7"
-                    />
-                </svg>
+                    aria-hidden="true"
+                />
             </button>
             {/* CSS grid rows trick for smooth height animation */}
             <div
