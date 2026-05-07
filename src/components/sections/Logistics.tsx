@@ -112,7 +112,7 @@ export default function Logistics() {
                         >
                             About
                         </h2>
-                        <p className="mx-auto mt-8 max-w-4xl text-lg leading-8 font-medium text-warm-white/86 md:text-2xl md:leading-10">
+                        <p className="mx-auto mt-7 max-w-4xl text-base leading-7 font-medium text-warm-white/84 md:text-lg md:leading-8">
                             The UW Night Market is one of the{" "}
                             <strong className="text-lantern-100">
                                 largest student-run events
