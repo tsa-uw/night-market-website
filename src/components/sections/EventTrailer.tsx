@@ -66,7 +66,7 @@ export default function EventTrailer() {
         <section
             ref={sectionRef}
             id="trailer"
-            className="relative isolate flex h-[100svh] scroll-mt-0 snap-start snap-always items-center justify-center overflow-hidden bg-black"
+            className="relative isolate flex h-[100svh] scroll-mt-0 items-center justify-center overflow-hidden bg-black"
         >
             <h2 className="sr-only">Event Trailer</h2>
 

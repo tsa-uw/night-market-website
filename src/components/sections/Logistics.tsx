@@ -21,7 +21,7 @@ const INFO_CARDS = [
 
 export default function Logistics() {
     return (
-        <Section id="logistics" title="Logistics" className="snap-start">
+        <Section id="logistics" title="Logistics">
             <div className="grid gap-6 sm:grid-cols-2">
                 {INFO_CARDS.map(({ heading, body }) => (
                     <div

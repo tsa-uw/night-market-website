@@ -4,7 +4,7 @@ export default function Hero() {
     return (
         <section
             id="home"
-            className="relative isolate flex min-h-screen snap-start snap-always items-center overflow-hidden px-4 pb-16 pt-24 text-center md:px-8"
+            className="relative isolate flex min-h-screen items-center overflow-hidden px-4 pb-16 pt-24 text-center md:px-8"
         >
             <img
                 src={landingPageBackground}
