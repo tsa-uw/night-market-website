@@ -108,8 +108,8 @@ export default function Navbar() {
                     transition={{ type: "spring", stiffness: 400, damping: 30 }}
                 >
                     <img
-                        src="/tsa_logo.png"
-                        alt="TSA Logo"
+                        src="/nm_logo.png"
+                        alt="Night Market Logo"
                         className="drop-shadow-lg"
                         width={LOGO_SIZE}
                         height={LOGO_SIZE}
@@ -140,7 +140,7 @@ export default function Navbar() {
 
             {/* Mobile hamburger */}
             <div className="flex items-center gap-3 rounded-full border border-lantern-100/20 bg-night-900/75 px-4 py-2 shadow-2xl shadow-black/35 backdrop-blur-xl md:hidden">
-                <img src="/tsa_logo.png" alt="TSA Logo" className="h-6 w-6" />
+                <img src="/nm_logo.png" alt="Night Market Logo" className="h-6 w-6" />
                 <span className="text-sm font-semibold text-lantern-100">
                     Night Market
                 </span>
