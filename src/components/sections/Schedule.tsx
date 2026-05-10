@@ -5,7 +5,7 @@ import {
     Sparkles,
     Star,
 } from "lucide-react";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { OptimizedPicture } from "../media/OptimizedImage";
 import divineGroupImage from "../../assets/images/schedule/divine-group.jpg?w=336;672&format=avif;webp;jpg&as=picture";
 import divineLogoImage from "../../assets/images/schedule/divine-logo.png?w=96;192&format=avif;webp;png&as=picture";
@@ -43,34 +43,45 @@ interface ScheduleEvent {
 interface ScheduleMedia {
     key: string;
     picture: ImagePicture;
+    prefetchSizes: string;
 }
 
 const SCHEDULE_MEDIA = {
     divineGroup: {
         key: "divine-group",
         picture: divineGroupImage,
+        prefetchSizes: "336px",
     },
     divineLogo: {
         key: "divine-logo",
         picture: divineLogoImage,
+        prefetchSizes: "74px",
     },
     huskyWushu: {
         key: "husky-wushu",
         picture: huskyWushuImage,
+        prefetchSizes: "336px",
     },
     huskyWushuLogo: {
         key: "husky-wushu-logo",
         picture: huskyWushuLogoImage,
+        prefetchSizes: "74px",
     },
     weAreTaiwanBanner: {
         key: "we-are-taiwan-banner",
         picture: weAreTaiwanBannerImage,
+        prefetchSizes: "336px",
     },
     weAreTwLogo: {
         key: "we-are-tw-logo",
         picture: weAreTwLogoImage,
+        prefetchSizes: "74px",
     },
 } satisfies Record<string, ScheduleMedia>;
+
+const SCHEDULE_MEDIA_KEYS = Object.values(SCHEDULE_MEDIA).map(
+    ({ key }) => key,
+);
 
 const SCHEDULE_MEDIA_BY_KEY = new Map(
     Object.values(SCHEDULE_MEDIA).map((media) => [media.key, media]),
@@ -345,14 +356,14 @@ function ScheduleMediaCache({
                 width: 1,
             }}
         >
-            {media.map(({ key, picture }) => (
+            {media.map(({ key, picture, prefetchSizes }) => (
                 <OptimizedPicture
                     key={key}
                     picture={picture}
                     alt=""
                     fetchPriority="low"
                     loading="eager"
-                    sizes="1px"
+                    sizes={prefetchSizes}
                     style={{ height: 1, width: 1 }}
                 />
             ))}
@@ -685,6 +696,7 @@ function PreviewCard({
 }
 
 export default function Schedule() {
+    const sectionRef = useRef<HTMLElement>(null);
     const [activeIdx, setActiveIdx] = useState<number | null>(null);
     const [previewedMedia, setPreviewedMedia] = useState<Set<string>>(
         () => new Set(),
@@ -695,6 +707,16 @@ export default function Schedule() {
     const [headlinerVisible, setHeadlinerVisible] = useState(false);
     const itemRefs = useRef<(HTMLLIElement | null)[]>([]);
     const headlinerRef = useRef<HTMLDivElement>(null);
+
+    const prefetchScheduleMedia = useCallback(() => {
+        setPreviewedMedia((current) => {
+            if (SCHEDULE_MEDIA_KEYS.every((key) => current.has(key))) {
+                return current;
+            }
+
+            return new Set([...current, ...SCHEDULE_MEDIA_KEYS]);
+        });
+    }, []);
 
     const activatePreview = (idx: number) => {
         const event =
@@ -709,6 +731,25 @@ export default function Schedule() {
             return next.size === current.size ? current : next;
         });
     };
+
+    useEffect(() => {
+        const section = sectionRef.current;
+        if (!section) return;
+
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                if (!entry?.isIntersecting) return;
+
+                prefetchScheduleMedia();
+                observer.disconnect();
+            },
+            { rootMargin: "220px 0px", threshold: 0.05 },
+        );
+
+        observer.observe(section);
+
+        return () => observer.disconnect();
+    }, [prefetchScheduleMedia]);
 
     useEffect(() => {
         const observer = new IntersectionObserver(
@@ -755,6 +796,7 @@ export default function Schedule() {
          * break position:sticky on the preview card.
          */
         <section
+            ref={sectionRef}
             id="schedule"
             className="relative overflow-x-clip border-t border-night-700/75 px-4 py-20 md:py-32"
         >
