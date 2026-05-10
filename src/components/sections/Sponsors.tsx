@@ -61,6 +61,23 @@ const LOGO_TREATMENTS: Record<string, string> = {
     "timeless-tea-logo": "scale-110",
 };
 
+const WIDE_MOBILE_LOGOS = new Set([
+    "ocac-logo",
+    "seattle-best-tea-logo",
+    "teco-sf",
+    "tta-logo",
+]);
+
+function getMobileLogoSpan(slug: string) {
+    return WIDE_MOBILE_LOGOS.has(slug) ? "col-span-2" : "col-span-1";
+}
+
+function getSponsorTileShape(slug: string) {
+    return WIDE_MOBILE_LOGOS.has(slug)
+        ? "min-h-24"
+        : "aspect-[1.08/1] min-h-26";
+};
+
 export default function Sponsors() {
     return (
         <section
@@ -91,32 +108,35 @@ export default function Sponsors() {
                 <div className="relative">
                     <div className="pointer-events-none absolute -inset-x-4 top-1/2 h-px bg-linear-to-r from-transparent via-lantern-300/28 to-transparent" />
 
-                    <div className="relative grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
+                    <div className="relative grid grid-flow-row-dense grid-cols-2 gap-3 sm:grid-cols-2 lg:grid-cols-5">
                         {SPONSORS.map(({ name, image, slug }, index) => (
                             <ScrollReveal
                                 key={name}
+                                className={`${getMobileLogoSpan(slug)} sm:col-span-1`}
                                 delay={index * 0.035}
                                 y={30}
                                 scale={0.97}
                             >
-                                <article className="group relative isolate grid min-h-36 grid-rows-[1fr_auto] overflow-hidden rounded-lg border border-lantern-100/10 bg-night-800/58 p-4 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-lantern-300/35 hover:bg-night-700/60 hover:shadow-[0_0_24px_rgba(251,184,72,0.1)]">
+                                <article
+                                    className={`group relative isolate grid grid-rows-[1fr_auto] overflow-hidden rounded-lg border border-lantern-100/10 bg-night-800/46 p-3 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-lantern-300/35 hover:bg-night-700/60 hover:shadow-[0_0_24px_rgba(251,184,72,0.1)] sm:aspect-auto sm:min-h-36 sm:bg-night-800/58 sm:p-4 ${getSponsorTileShape(slug)}`}
+                                >
                                     <div className="pointer-events-none absolute inset-0 -z-10 bg-linear-to-br from-lantern-400/6 via-transparent to-blossom-400/6 opacity-65 transition-opacity duration-300 group-hover:opacity-100" />
                                     <div className="pointer-events-none absolute inset-x-5 top-0 h-px bg-linear-to-r from-transparent via-lantern-300/35 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
 
-                                    <div className="grid h-22 w-full place-items-center self-center">
+                                    <div className="grid h-full min-h-16 w-full place-items-center self-center sm:h-22 sm:min-h-0">
                                         <div
                                             className={`grid h-full w-full place-items-center ${LOGO_TREATMENTS[slug] ?? ""}`}
                                         >
                                             <OptimizedPicture
                                                 picture={image}
                                                 alt={name}
-                                                className="mx-auto block max-h-18 max-w-[82%] object-contain object-center opacity-88 brightness-110 drop-shadow-[0_8px_18px_rgba(0,0,0,0.28)] transition duration-300 group-hover:scale-105 group-hover:opacity-100"
-                                                sizes="(min-width: 1024px) 180px, (min-width: 640px) 240px, 70vw"
+                                                className="mx-auto block max-h-15 max-w-[82%] object-contain object-center opacity-92 brightness-110 drop-shadow-[0_8px_18px_rgba(0,0,0,0.28)] transition duration-300 group-hover:scale-105 group-hover:opacity-100 sm:max-h-18 sm:max-w-[82%]"
+                                                sizes="(min-width: 1024px) 180px, (min-width: 640px) 240px, 50vw"
                                             />
                                         </div>
                                     </div>
 
-                                    <h3 className="min-h-5 text-center text-sm font-semibold tracking-wide text-lantern-100/82 transition-colors duration-200 group-hover:text-lantern-100">
+                                    <h3 className="hidden min-h-5 text-center text-sm font-semibold tracking-wide text-lantern-100/82 transition-colors duration-200 group-hover:text-lantern-100 sm:block">
                                         {name}
                                     </h3>
                                 </article>
