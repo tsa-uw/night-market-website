@@ -1,7 +1,6 @@
 import { ChevronDown } from "lucide-react";
 import { useState } from "react";
 import Section from "../layout/Section";
-import { faq } from "../../styles/tokens";
 
 interface FAQItem {
     question: string;
@@ -67,7 +66,7 @@ function Accordion({ question, answer }: FAQItem) {
 export default function FAQ() {
     return (
         <Section id="faq" title="FAQ">
-            <div className={faq.wrapper}>
+            <div className="mx-auto max-w-2xl">
                 {FAQ_ITEMS.map((item) => (
                     <Accordion key={item.question} {...item} />
                 ))}

@@ -1,11 +1,9 @@
 import type { ReactNode } from "react";
-import { section, layout } from "../../styles/tokens";
 
 interface SectionProps {
     id: string;
     title?: string;
     className?: string;
-    paddingY?: string;
     children: ReactNode;
 }
 
@@ -13,7 +11,6 @@ export default function Section({
     id,
     title,
     className = "",
-    paddingY = "py-16 md:py-24",
     children,
 }: SectionProps) {
     return (

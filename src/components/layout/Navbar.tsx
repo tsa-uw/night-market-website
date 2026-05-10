@@ -11,7 +11,6 @@ const NAV_ITEMS = [
     { label: "Schedule", href: "#schedule", id: "schedule" },
     { label: "Vendors", href: "#vendors", id: "vendors" },
     { label: "Sponsors", href: "#sponsors", id: "sponsors" },
-    { label: "Volunteer", href: "#volunteer", id: "volunteer" },
     { label: "FAQ", href: "#faq", id: "faq" },
 ] as const;
 
@@ -136,8 +135,9 @@ export default function Navbar() {
                         >
                             <span className="relative z-10">{label}</span>
                         </a>
-                    ))}
-                </div>
+                    );
+                })}
+            </div>
 
             {/* Mobile hamburger */}
             <div className="flex items-center gap-3 rounded-full border border-lantern-100/20 bg-night-900/75 px-4 py-2 shadow-2xl shadow-black/35 backdrop-blur-xl md:hidden">

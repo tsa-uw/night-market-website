@@ -2,70 +2,8 @@ import { ChevronDown } from "lucide-react";
 import landingPageBackground from "../../assets/images/LandingPageBackground.jpg";
 
 export default function Hero() {
-    const sectionRef = useRef<HTMLElement>(null);
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const playerRef = useRef<any>(null);
-    const [videoReady, setVideoReady] = useState(false);
-
-    useEffect(() => {
-        const initPlayer = () => {
-            playerRef.current = new window.YT.Player("yt-bg-player", {
-                videoId: VIDEO_ID,
-                playerVars: {
-                    autoplay: 1,
-                    mute: 1,
-                    controls: 0,
-                    showinfo: 0,
-                    rel: 0,
-                    modestbranding: 1,
-                    playsinline: 1,
-                    start: LOOP_START,
-                },
-                events: {
-                    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                    onReady: (e: any) => {
-                        e.target.seekTo(LOOP_START, true);
-                        e.target.playVideo();
-                        setTimeout(() => setVideoReady(true), 500);
-                    },
-                    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                    onStateChange: (e: any) => {
-                        if (e.data === window.YT.PlayerState.ENDED) {
-                            e.target.seekTo(LOOP_START, true);
-                            e.target.playVideo();
-                        }
-                    },
-                },
-            });
-        };
-
-        if (window.YT && window.YT.Player) {
-            initPlayer();
-        } else {
-            window.onYouTubeIframeAPIReady = initPlayer;
-            if (!document.getElementById("yt-api-script")) {
-                const script = document.createElement("script");
-                script.id = "yt-api-script";
-                script.src = "https://www.youtube.com/iframe_api";
-                document.head.appendChild(script);
-            }
-        }
-
-        return () => {
-            playerRef.current?.destroy();
-        };
-    }, []);
-
-    const { scrollYProgress } = useScroll({
-        target: sectionRef,
-        offset: ["start start", "end start"],
-    });
-
-    const videoY = useTransform(scrollYProgress, [0, 1], ["0%", "25%"]);
-
     return (
         <section
-            ref={sectionRef}
             id="home"
             className="relative isolate flex min-h-screen items-center overflow-hidden px-4 pb-16 pt-24 text-center md:px-8"
         >

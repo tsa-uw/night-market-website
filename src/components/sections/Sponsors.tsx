@@ -1,5 +1,4 @@
 import Section from "../layout/Section";
-import { sponsors } from "../../styles/tokens";
 
 // Representative sponsor list pulled from archived site assets
 const SPONSORS = [
@@ -10,11 +9,11 @@ const SPONSORS = [
 export default function Sponsors() {
     return (
         <Section id="sponsors" title="Sponsors">
-            <p className={sponsors.description}>
+            <p className="mb-8 text-center text-warm-white/85">
                 Thank you to our sponsors for making this event possible!
             </p>
 
-            <div className={sponsors.grid}>
+            <div className="grid grid-cols-2 gap-6 sm:grid-cols-4">
                 {SPONSORS.map(({ name, image }) => (
                     <div
                         key={name}
@@ -24,10 +23,10 @@ export default function Sponsors() {
                             <img
                                 src={image}
                                 alt={name}
-                                className={sponsors.logo}
+                                className="h-full max-h-20 w-auto object-contain"
                             />
                         ) : (
-                            <span className={sponsors.fallback}>{name}</span>
+                            <span className="text-sm text-warm-white/75">{name}</span>
                         )}
                     </div>
                 ))}

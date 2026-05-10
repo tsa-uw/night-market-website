@@ -1,6 +1,5 @@
 import { useState } from "react";
 import Section from "../layout/Section";
-import { vendors } from "../../styles/tokens";
 
 type VendorTab = "food" | "arts";
 
@@ -31,12 +30,12 @@ const ARTS_VENDORS: Vendor[] = [
 export default function Vendors() {
     const [activeTab, setActiveTab] = useState<VendorTab>("food");
 
-    const vendorList = activeTab === "food" ? FOOD_VENDORS : ARTS_VENDORS;
+    const vendors = activeTab === "food" ? FOOD_VENDORS : ARTS_VENDORS;
 
     return (
         <Section id="vendors" title="Vendors">
             {/* Tabs */}
-            <div className={vendors.tabs}>
+            <div className="mb-8 flex justify-center gap-4">
                 <button
                     className={`rounded-full px-6 py-2 text-sm font-semibold transition-all duration-200 ${
                         activeTab === "food"
@@ -60,19 +59,21 @@ export default function Vendors() {
             </div>
 
             {/* Vendor grid */}
-            <div className={vendors.grid}>
-                {vendorList.map(({ name, description, image, page }) => (
+            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                {vendors.map(({ name, description, image, page }) => (
                     <a key={name} href={page ?? "#"} className="group">
                         <div className="rounded-xl border border-night-600/50 bg-night-800/50 p-6 backdrop-blur-sm transition-all duration-300 hover:border-lantern-400/40 hover:bg-night-700/55 hover:shadow-[0_0_32px_rgba(251,184,72,0.1)]">
                             <div className="mb-4 h-32 w-full overflow-hidden rounded-lg bg-night-700/80">
                                 {image ? (
+                                    // Use archived asset path so user doesn't need to upload
+                                    // assets into the React app.
                                     <img
                                         src={image}
                                         alt={name}
-                                        className={vendors.cardImg}
+                                        className="h-full w-full object-cover transition-transform group-hover:scale-105"
                                     />
                                 ) : (
-                                    <div className={vendors.cardImageFallback}>No image</div>
+                                    <div className="flex h-full items-center justify-center text-sm text-warm-white/60">No image</div>
                                 )}
                             </div>
 
