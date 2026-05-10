@@ -27,6 +27,9 @@ interface ScheduleEvent {
     title: string;
     type: string;
     desc: string;
+    image?: string;
+    imagePosition?: string;
+    logo?: string;
     headliner?: boolean;
 }
 
@@ -104,7 +107,9 @@ const SCHEDULE_EVENTS: ScheduleEvent[] = [
         time: "4:33 PM",
         title: "Husky Wushu",
         type: "Martial Arts",
-        desc: "UW's own wushu team blends precision, power, and artistry in a dynamic showcase of traditional and contemporary Chinese martial arts.",
+        desc: "Wushu is a Chinese martial art and international sport derived from hundreds of years of traditional Chinese Kung Fu. Husky Wushu has been an active club at UW since 2009, with a mission to foster an inclusive community around the practice of Chinese martial arts. They will perform a medley of individual forms, group forms, and fight sets - including hand forms and weapon forms such as sword, staff, and fan.",
+        image: "/entertainment group images/Husky Wushu.JPEG",
+        logo: "/entertainment group images/Husky Wushu Logo.png",
     },
     {
         time: "4:50 PM",
@@ -116,7 +121,10 @@ const SCHEDULE_EVENTS: ScheduleEvent[] = [
         time: "5:08 PM",
         title: "We Are Taiwan I",
         type: "Dance",
-        desc: "A vibrant cultural performance celebrating Taiwanese heritage through traditional and modern dance. Part one of two.",
+        desc: "We are honored to welcome a special performance from the National Taiwan University of Sport. As part of their U.S. tour titled '2026 We Are Taiwan,' these talented students bring together athletic excellence, artistry, and cultural pride. Through dynamic movement and powerful storytelling, they showcase the energy, creativity, and spirit of Taiwan.",
+        image: "/entertainment group images/we are taiwan banner.jpg",
+        imagePosition: "object-right",
+        logo: "/entertainment group images/we are tw logo.jpg",
     },
     {
         time: "5:21 PM",
@@ -128,7 +136,10 @@ const SCHEDULE_EVENTS: ScheduleEvent[] = [
         time: "5:39 PM",
         title: "We Are Taiwan II",
         type: "Dance",
-        desc: "The continuation of We Are Taiwan, building energy and telling a deeper story through movement and music.",
+        desc: "We are honored to welcome a special performance from the National Taiwan University of Sport. As part of their U.S. tour titled '2026 We Are Taiwan,' these talented students bring together athletic excellence, artistry, and cultural pride. Through dynamic movement and powerful storytelling, they showcase the energy, creativity, and spirit of Taiwan.",
+        image: "/entertainment group images/we are taiwan banner.jpg",
+        imagePosition: "object-right",
+        logo: "/entertainment group images/we are tw logo.jpg",
     },
     {
         time: "5:52 PM",
@@ -158,7 +169,9 @@ const SCHEDULE_EVENTS: ScheduleEvent[] = [
         time: "6:49 PM",
         title: "Divine Dance Crew",
         type: "Dance",
-        desc: "Divine brings fierce energy and impeccable technique to the stage in a high-impact dance showcase.",
+        desc: "DIVINE DANCE CREW is a dance crew established in 2024 that does a variety of dance covers including K-Pop. Our members come from different places around the world but are united through a shared love and passion for dance and K-Pop. We aim to bring the excitement and enjoyment of performance to everyone!",
+        image: "/entertainment group images/Divine Group pic.JPG",
+        logo: "/entertainment group images/DIVINE LOGO.png",
     },
     {
         time: "7:02 PM",
@@ -189,6 +202,25 @@ const SCHEDULE_EVENTS: ScheduleEvent[] = [
 
 const regularEvents = SCHEDULE_EVENTS.filter((e) => !e.headliner);
 const headlinerEvent = SCHEDULE_EVENTS.find((e) => e.headliner)!;
+const SCHEDULE_MEDIA_URLS = [
+    ...new Set(
+        SCHEDULE_EVENTS.flatMap(({ image, logo }) =>
+            [image, logo].filter((src): src is string => Boolean(src)),
+        ),
+    ),
+];
+const preloadedMedia = new Set<string>();
+
+function preloadScheduleMedia() {
+    SCHEDULE_MEDIA_URLS.forEach((src) => {
+        if (preloadedMedia.has(src)) return;
+
+        const image = new Image();
+        image.decoding = "async";
+        image.src = src;
+        preloadedMedia.add(src);
+    });
+}
 
 function MediaIcon({ type, headliner }: { type: string; headliner?: boolean }) {
     const color = headliner
@@ -278,70 +310,126 @@ function PreviewCard({
                             animation: "card-media-in 0.28s ease both",
                         }}
                     >
-                        <div
-                            style={{
-                                position: "absolute",
-                                inset: 0,
-                                backgroundImage:
-                                    "repeating-linear-gradient(0deg, transparent, transparent 28px, rgba(246,239,223,0.02) 29px)",
-                            }}
-                        />
-                        <div
-                            style={{
-                                position: "absolute",
-                                top: "50%",
-                                left: "50%",
-                                transform: "translate(-50%,-50%)",
-                                width: 120,
-                                height: 120,
-                                borderRadius: "50%",
-                                background: isHeadliner
-                                    ? "radial-gradient(circle, rgba(251,184,72,0.12) 0%, transparent 70%)"
-                                    : "radial-gradient(circle, rgba(244,92,141,0.10) 0%, transparent 70%)",
-                                filter: "blur(12px)",
-                            }}
-                        />
-                        <div
-                            style={{
-                                position: "relative",
-                                zIndex: 1,
-                                display: "flex",
-                                flexDirection: "column",
-                                alignItems: "center",
-                                gap: 10,
-                            }}
-                        >
-                            <MediaIcon
-                                type={event.type}
-                                headliner={isHeadliner}
-                            />
-                            <span
-                                style={{
-                                    fontSize: 10.5,
-                                    fontWeight: 500,
-                                    letterSpacing: "0.18em",
-                                    textTransform: "uppercase",
-                                    color: isHeadliner
-                                        ? "rgba(251,184,72,0.4)"
-                                        : "rgba(246,239,223,0.25)",
-                                }}
-                            >
-                                {isHeadliner ? "headliner" : "preview"}
-                            </span>
-                        </div>
-                        <div
-                            style={{
-                                position: "absolute",
-                                bottom: 8,
-                                right: 10,
-                                fontSize: 10,
-                                color: "rgba(246,239,223,0.18)",
-                                letterSpacing: "0.1em",
-                                fontStyle: "italic",
-                            }}
-                        >
-                            img · video
-                        </div>
+                        {event.image ? (
+                            <>
+                                <img
+                                    src={event.image}
+                                    alt={event.title}
+                                    className={`h-full w-full object-cover ${event.imagePosition ?? ""}`}
+                                />
+                                <div
+                                    style={{
+                                        position: "absolute",
+                                        inset: 0,
+                                        background:
+                                            "linear-gradient(180deg, rgba(14,20,36,0.05) 0%, rgba(14,20,36,0.35) 100%)",
+                                    }}
+                                />
+                                <span
+                                    style={{
+                                        position: "absolute",
+                                        left: 12,
+                                        bottom: 12,
+                                        fontSize: 10.5,
+                                        fontWeight: 500,
+                                        letterSpacing: "0.18em",
+                                        textTransform: "uppercase",
+                                        color: "rgba(246,239,223,0.82)",
+                                        textShadow:
+                                            "0 2px 8px rgba(0,0,0,0.65)",
+                                    }}
+                                >
+                                    preview
+                                </span>
+                                {event.logo && (
+                                    <img
+                                        src={event.logo}
+                                        alt={`${event.title} logo`}
+                                        style={{
+                                            position: "absolute",
+                                            right: 12,
+                                            bottom: 12,
+                                            maxWidth: 74,
+                                            maxHeight: 46,
+                                            objectFit: "contain",
+                                            borderRadius: 8,
+                                            background:
+                                                "rgba(246,239,223,0.86)",
+                                            padding: 6,
+                                            boxShadow:
+                                                "0 8px 24px rgba(0,0,0,0.35)",
+                                        }}
+                                    />
+                                )}
+                            </>
+                        ) : (
+                            <>
+                                <div
+                                    style={{
+                                        position: "absolute",
+                                        inset: 0,
+                                        backgroundImage:
+                                            "repeating-linear-gradient(0deg, transparent, transparent 28px, rgba(246,239,223,0.02) 29px)",
+                                    }}
+                                />
+                                <div
+                                    style={{
+                                        position: "absolute",
+                                        top: "50%",
+                                        left: "50%",
+                                        transform: "translate(-50%,-50%)",
+                                        width: 120,
+                                        height: 120,
+                                        borderRadius: "50%",
+                                        background: isHeadliner
+                                            ? "radial-gradient(circle, rgba(251,184,72,0.12) 0%, transparent 70%)"
+                                            : "radial-gradient(circle, rgba(244,92,141,0.10) 0%, transparent 70%)",
+                                        filter: "blur(12px)",
+                                    }}
+                                />
+                                <div
+                                    style={{
+                                        position: "relative",
+                                        zIndex: 1,
+                                        display: "flex",
+                                        flexDirection: "column",
+                                        alignItems: "center",
+                                        gap: 10,
+                                    }}
+                                >
+                                    <MediaIcon
+                                        type={event.type}
+                                        headliner={isHeadliner}
+                                    />
+                                    <span
+                                        style={{
+                                            fontSize: 10.5,
+                                            fontWeight: 500,
+                                            letterSpacing: "0.18em",
+                                            textTransform: "uppercase",
+                                            color: isHeadliner
+                                                ? "rgba(251,184,72,0.4)"
+                                                : "rgba(246,239,223,0.25)",
+                                        }}
+                                    >
+                                        {isHeadliner ? "headliner" : "preview"}
+                                    </span>
+                                </div>
+                                <div
+                                    style={{
+                                        position: "absolute",
+                                        bottom: 8,
+                                        right: 10,
+                                        fontSize: 10,
+                                        color: "rgba(246,239,223,0.18)",
+                                        letterSpacing: "0.1em",
+                                        fontStyle: "italic",
+                                    }}
+                                >
+                                    img · video
+                                </div>
+                            </>
+                        )}
                         {isHeadliner && (
                             <div
                                 style={{
@@ -457,6 +545,10 @@ export default function Schedule() {
     const [headlinerVisible, setHeadlinerVisible] = useState(false);
     const itemRefs = useRef<(HTMLLIElement | null)[]>([]);
     const headlinerRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        preloadScheduleMedia();
+    }, []);
 
     useEffect(() => {
         const observer = new IntersectionObserver(
