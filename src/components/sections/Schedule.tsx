@@ -300,7 +300,7 @@ function PreviewCard({
                     <div
                         style={{
                             width: "100%",
-                            height: 158,
+                            height: 188,
                             background: `linear-gradient(135deg, ${g1} 0%, ${g2} 100%)`,
                             display: "flex",
                             alignItems: "center",
@@ -445,7 +445,7 @@ function PreviewCard({
                     </div>
 
                     {/* Card body */}
-                    <div style={{ padding: "14px 16px 16px" }}>
+                    <div style={{ padding: "16px 18px 18px" }}>
                         <div
                             style={{
                                 display: "flex",
@@ -488,7 +488,7 @@ function PreviewCard({
                         <h3
                             style={{
                                 fontFamily: '"TenPounds", "Georgia", serif',
-                                fontSize: isHeadliner ? 28 : 22,
+                                fontSize: isHeadliner ? 30 : 24,
                                 lineHeight: 1.1,
                                 color: isHeadliner
                                     ? "var(--color-lantern-100)"
@@ -505,8 +505,8 @@ function PreviewCard({
                         </h3>
                         <p
                             style={{
-                                fontSize: 12.5,
-                                lineHeight: 1.6,
+                                fontSize: 13.5,
+                                lineHeight: 1.65,
                                 color: "rgba(246,239,223,0.58)",
                                 animation: "fade-up 0.25s ease 0.1s both",
                             }}
@@ -807,7 +807,7 @@ export default function Schedule() {
                     {/* Preview card — sticky within the flex row, hidden on mobile.
                         top: calc(50vh - 10rem) keeps the card vertically centered in
                         the viewport when stuck without shifting it in normal flow. */}
-                    <div className="hidden w-70 shrink-0 self-start pt-10 md:sticky md:top-[calc(40vh-10rem)] md:block">
+                    <div className="hidden w-84 shrink-0 self-start pt-10 md:sticky md:top-[calc(40vh-11rem)] md:block">
                         <PreviewCard
                             event={
                                 activeIdx !== null
