@@ -1,11 +1,4 @@
-import {
-    Clock,
-    Info,
-    MapPin,
-    Plane,
-    Ticket,
-    Trophy,
-} from "lucide-react";
+import { Clock, MapPin, Plane, Ticket, Trophy } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import type { ReactNode } from "react";
@@ -117,52 +110,77 @@ function TicketGlowTrace({
     );
 }
 
+type Accent = "lantern" | "blossom";
+
 interface InfoCardData {
     Icon: LucideIcon;
     title: string;
+    accent: Accent;
     body: ReactNode;
 }
+
+const em = "font-semibold text-warm-white/95";
+
+const ACCENT: Record<
+    Accent,
+    {
+        card: string;
+        notch: string;
+        label: string;
+        iconBox: string;
+        title: string;
+        tear: string;
+    }
+> = {
+    lantern: {
+        card: "border-lantern-400/15 hover:border-lantern-400/30 hover:shadow-[0_0_24px_rgba(251,184,72,0.07)]",
+        notch: "border-lantern-400/15",
+        label: "text-[rgba(251,184,72,0.5)]",
+        iconBox: "border-lantern-400/15 bg-[rgba(251,184,72,0.07)] text-[rgba(251,184,72,0.7)]",
+        title: "text-lantern-100",
+        tear: "rgba(251,184,72,0.25)",
+    },
+    blossom: {
+        card: "border-blossom-400/20 hover:border-blossom-400/35 hover:shadow-[0_0_24px_rgba(244,92,141,0.09)]",
+        notch: "border-blossom-400/20",
+        label: "text-[rgba(244,92,141,0.55)]",
+        iconBox: "border-blossom-400/20 bg-[rgba(244,92,141,0.09)] text-blossom-300",
+        title: "text-blossom-100",
+        tear: "rgba(244,92,141,0.3)",
+    },
+};
 
 const INFO_CARDS: InfoCardData[] = [
     {
         Icon: Trophy,
         title: "Drawing & Winners",
+        accent: "blossom",
         body: (
             <>
-                Winning tickets drawn <strong className="font-semibold text-warm-white/85">on the main stage</strong> at{" "}
-                <strong className="font-semibold text-warm-white/85">8:35 PM</strong> in Red Square. Winners must be present and show matching ticket to claim prize.
+                Winning tickets drawn <strong className={em}>on the main stage</strong> at{" "}
+                <strong className={em}>8:35 PM</strong> in Red Square. Winners must be present and show matching ticket to claim prize.
             </>
         ),
     },
     {
         Icon: MapPin,
         title: "Where to Buy",
+        accent: "lantern",
         body: (
             <>
-                Purchase at the <strong className="font-semibold text-warm-white/85">TSA Information Booth</strong> on the day of the event. Sales open at{" "}
-                <strong className="font-semibold text-warm-white/85">4:30 PM</strong> and close at{" "}
-                <strong className="font-semibold text-warm-white/85">8:00 PM</strong>.
+                Purchase at the <strong className={em}>TSA Information Booth</strong> on the day of the event. Sales open at{" "}
+                <strong className={em}>4:30 PM</strong> and close at <strong className={em}>8:00 PM</strong>.
             </>
         ),
     },
     {
         Icon: Ticket,
         title: "Multiple Entries",
+        accent: "lantern",
         body: (
             <>
                 Buy as many tickets as you like —{" "}
-                <strong className="font-semibold text-warm-white/85">each ticket is one entry</strong> for one plane ticket. More tickets = more chances to win!
-            </>
-        ),
-    },
-    {
-        Icon: Info,
-        title: "Event Details",
-        body: (
-            <>
-                <strong className="font-semibold text-warm-white/85">May 23rd, 4:30 PM – 10:00 PM</strong>
-                <br />
-                Red Square · 4063 Spokane Ln, Seattle WA
+                <strong className={em}>each ticket is one entry</strong> for one plane ticket. More tickets = more chances to win!
             </>
         ),
     },
@@ -180,7 +198,7 @@ export default function RaffleTickets() {
     return (
         <Section id="raffle" title="Raffle Tickets">
             {/* Ticket */}
-            <div ref={ticketRef} className="relative mx-auto mb-8 max-w-195 rounded-xl shadow-[0_8px_48px_rgba(0,0,0,0.55),0_0_32px_rgba(251,184,72,0.08)] transition-shadow duration-350 ease-in-out hover:shadow-[0_12px_56px_rgba(0,0,0,0.65),0_0_48px_rgba(251,184,72,0.18)]">
+            <div ref={ticketRef} className="relative mx-auto mb-8 max-w-195 rounded-xl shadow-[0_8px_48px_rgba(0,0,0,0.55),0_0_32px_rgba(251,184,72,0.08),0_0_64px_rgba(244,92,141,0.06)] transition-shadow duration-350 ease-in-out hover:shadow-[0_12px_56px_rgba(0,0,0,0.65),0_0_48px_rgba(251,184,72,0.18),0_0_80px_rgba(244,92,141,0.12)]">
                     <TicketGlowTrace wrapperRef={ticketRef} />
                 <div className="relative flex overflow-hidden rounded-xl border border-[rgba(251,184,72,0.18)] bg-night-800">
                     <ScallopEdge />
@@ -197,18 +215,20 @@ export default function RaffleTickets() {
                                 backgroundSize: "32px 32px",
                             }}
                         />
+                        {/* Blossom warmth */}
+                        <div className="pointer-events-none absolute -top-16 -right-16 h-44 w-44 rounded-full bg-blossom-400/10 blur-3xl" />
 
                         {/* Header */}
                         <div className="relative mb-6 flex items-start justify-between gap-4">
                             <div className="flex items-center gap-3">
                                 <AirlineLogo />
                                 <div>
-                                    <div className="mb-1 text-xs font-semibold uppercase tracking-[0.15em] text-[rgba(251,184,72,0.6)]">
-                                        Grand Prize — Sponsored by
+                                    <div className="mb-1 font-mono text-[10px] uppercase tracking-[0.2em] text-[rgba(251,184,72,0.6)]">
+                                        Grand Prize · Sponsored by
                                     </div>
                                     <div
-                                        className="text-2xl leading-snug text-lantern-100"
-                                        style={{ fontFamily: "Georgia, serif" }}
+                                        className="text-[26px] leading-snug tracking-wide text-lantern-100"
+                                        style={{ fontFamily: '"TenPounds", "Georgia", serif' }}
                                     >
                                         Alaska Airlines Round-Trip
                                     </div>
@@ -219,14 +239,14 @@ export default function RaffleTickets() {
                             </span>
                         </div>
 
-                        {/* Detail cells */}
-                        <div className="relative mb-6 grid grid-cols-3 divide-x divide-[rgba(251,184,72,0.1)] overflow-hidden rounded-lg border border-[rgba(251,184,72,0.1)]">
+                        {/* Detail cells — stamped boarding-pass fields */}
+                        <div className="relative mb-6 grid grid-cols-3 divide-x divide-dashed divide-[rgba(251,184,72,0.18)] overflow-hidden rounded-lg border border-dashed border-[rgba(251,184,72,0.18)] bg-[rgba(251,184,72,0.025)]">
                             {DETAIL_CELLS.map(({ label, value }) => (
                                 <div key={label} className="p-3 sm:p-4">
-                                    <div className="mb-1 text-[10px] font-semibold uppercase tracking-[0.12em] text-warm-white/40">
+                                    <div className="mb-2 font-mono text-[9px] uppercase tracking-[0.22em] text-[rgba(251,184,72,0.55)]">
                                         {label}
                                     </div>
-                                    <div className="text-sm font-semibold text-lantern-100 sm:text-base">
+                                    <div className="inline-block border-b border-dotted border-[rgba(251,184,72,0.25)] pb-0.5 font-mono text-xs uppercase tracking-wide text-lantern-100 sm:text-sm">
                                         {value}
                                     </div>
                                 </div>
@@ -243,22 +263,22 @@ export default function RaffleTickets() {
 
                         {/* Bottom row */}
                         <div className="relative flex flex-wrap items-center justify-between gap-4">
-                            <div className="flex items-baseline gap-1.5">
+                            <div className="flex items-baseline gap-2">
                                 <span
-                                    className="text-[32px] leading-none text-lantern-300"
-                                    style={{ fontFamily: "Georgia, serif" }}
+                                    className="text-4xl leading-none text-lantern-300"
+                                    style={{ fontFamily: '"TenPounds", "Georgia", serif' }}
                                 >
                                     $3
                                 </span>
-                                <span className="text-base text-warm-white/50">per ticket</span>
+                                <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-warm-white/55">per ticket</span>
                             </div>
                             <div className="flex flex-wrap gap-2">
-                                <span className="flex items-center gap-1.5 rounded-full border border-[rgba(251,184,72,0.15)] bg-night-800/80 px-3 py-1.5 text-sm text-warm-white/60">
-                                    <Ticket size={13} aria-hidden="true" />
+                                <span className="flex items-center gap-1.5 rounded-md border border-dashed border-[rgba(251,184,72,0.2)] bg-[rgba(251,184,72,0.04)] px-3 py-1.5 font-mono text-[10px] uppercase tracking-[0.16em] text-warm-white/65">
+                                    <Ticket size={12} aria-hidden="true" />
                                     TSA Info Booth
                                 </span>
-                                <span className="flex items-center gap-1.5 rounded-full border border-[rgba(251,184,72,0.15)] bg-night-800/80 px-3 py-1.5 text-sm text-warm-white/60">
-                                    <Clock size={13} aria-hidden="true" />
+                                <span className="flex items-center gap-1.5 rounded-md border border-dashed border-[rgba(251,184,72,0.2)] bg-[rgba(251,184,72,0.04)] px-3 py-1.5 font-mono text-[10px] uppercase tracking-[0.16em] text-warm-white/65">
+                                    <Clock size={12} aria-hidden="true" />
                                     Sales close 8:00 PM
                                 </span>
                             </div>
@@ -286,7 +306,7 @@ export default function RaffleTickets() {
                             }}
                         />
                         <span
-                            className="text-[8px] font-semibold uppercase tracking-[0.18em] text-warm-white/30"
+                            className="font-mono text-[8px] uppercase tracking-[0.3em] text-warm-white/35"
                             style={{
                                 writingMode: "vertical-lr",
                                 textOrientation: "mixed",
@@ -299,19 +319,19 @@ export default function RaffleTickets() {
                             <Plane size={20} aria-hidden="true" />
                         </div>
                         <span
-                            className="text-[28px] leading-none text-lantern-400/60"
+                            className="text-3xl leading-none text-lantern-400/65"
                             style={{
-                                fontFamily: "Georgia, serif",
+                                fontFamily: '"TenPounds", "Georgia", serif',
                                 writingMode: "vertical-lr",
                                 textOrientation: "mixed",
                                 transform: "rotate(180deg)",
-                                letterSpacing: "0.05em",
+                                letterSpacing: "0.08em",
                             }}
                         >
                             #
                         </span>
                         <span
-                            className="text-[8px] font-semibold uppercase tracking-[0.18em] text-warm-white/30"
+                            className="font-mono text-[8px] uppercase tracking-[0.3em] text-warm-white/35"
                             style={{
                                 writingMode: "vertical-lr",
                                 textOrientation: "mixed",
@@ -324,22 +344,43 @@ export default function RaffleTickets() {
                 </div>
             </div>
 
-            {/* Info cards */}
-            <div className="mx-auto grid max-w-[780px] grid-cols-1 gap-4 sm:grid-cols-2">
-                {INFO_CARDS.map(({ Icon, title, body }) => (
-                    <div
-                        key={title}
-                        className="rounded-[10px] border border-night-600/80 bg-night-800/50 p-5 backdrop-blur-sm transition-all duration-300 hover:border-lantern-400/20 hover:shadow-[0_0_20px_rgba(251,184,72,0.06)]"
-                    >
-                        <div className="mb-2.5 flex h-8 w-8 items-center justify-center rounded-lg border border-[rgba(251,184,72,0.15)] bg-[rgba(251,184,72,0.07)] text-[rgba(251,184,72,0.7)]">
-                            <Icon size={16} aria-hidden="true" />
+            {/* Info stubs */}
+            <div className="mx-auto grid max-w-195 grid-cols-1 gap-4 sm:grid-cols-3">
+                {INFO_CARDS.map(({ Icon, title, body, accent }, i) => {
+                    const a = ACCENT[accent];
+                    return (
+                        <div
+                            key={title}
+                            className={`group relative overflow-hidden rounded-[10px] border bg-night-800/50 backdrop-blur-sm transition-all duration-300 ${a.card}`}
+                        >
+                            {/* Stub header */}
+                            <div className="flex h-11 items-center justify-between px-5">
+                                <span className={`font-mono text-[9px] uppercase tracking-[0.22em] ${a.label}`}>
+                                    Stub No. 0{i + 1}
+                                </span>
+                                <span className={`flex h-6 w-6 items-center justify-center rounded-md border ${a.iconBox}`}>
+                                    <Icon size={13} aria-hidden="true" />
+                                </span>
+                            </div>
+
+                            {/* Perforated tear line */}
+                            <div
+                                className="pointer-events-none absolute inset-x-0 top-11 h-px"
+                                style={{
+                                    background: `repeating-linear-gradient(to right, transparent 0 4px, ${a.tear} 4px 8px)`,
+                                }}
+                            />
+                            <div className={`absolute -left-1.5 top-11 h-3 w-3 -translate-y-1/2 rounded-full border bg-night-900 ${a.notch}`} />
+                            <div className={`absolute -right-1.5 top-11 h-3 w-3 -translate-y-1/2 rounded-full border bg-night-900 ${a.notch}`} />
+
+                            {/* Stub body */}
+                            <div className="px-5 pb-5 pt-4">
+                                <div className={`mb-1.5 text-base font-semibold ${a.title}`}>{title}</div>
+                                <p className="text-sm leading-relaxed text-warm-white/75">{body}</p>
+                            </div>
                         </div>
-                        <div className="mb-1 text-base font-semibold text-lantern-200">
-                            {title}
-                        </div>
-                        <p className="text-sm leading-relaxed text-warm-white/55">{body}</p>
-                    </div>
-                ))}
+                    );
+                })}
             </div>
         </Section>
     );
