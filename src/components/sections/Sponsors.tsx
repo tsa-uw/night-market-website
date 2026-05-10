@@ -1,4 +1,5 @@
 import Section from "../layout/Section";
+import OptimizedImage from "../media/OptimizedImage";
 
 // Representative sponsor list pulled from archived site assets
 const SPONSORS = [
@@ -20,7 +21,7 @@ export default function Sponsors() {
                         className="flex h-28 items-center justify-center overflow-hidden rounded-xl border border-night-600/50 bg-night-800/50 backdrop-blur-sm transition-all duration-300 hover:border-lantern-400/35 hover:shadow-[0_0_24px_rgba(251,184,72,0.1)]"
                     >
                         {image ? (
-                            <img
+                            <OptimizedImage
                                 src={image}
                                 alt={name}
                                 className="h-full max-h-20 w-auto object-contain"

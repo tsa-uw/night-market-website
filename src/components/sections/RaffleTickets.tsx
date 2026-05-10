@@ -10,11 +10,12 @@ import type { LucideIcon } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import type { ReactNode } from "react";
 import Section from "../layout/Section";
+import OptimizedImage from "../media/OptimizedImage";
 
 function AirlineLogo() {
     return (
         <div className="flex h-[52px] w-[52px] shrink-0 items-center justify-center rounded-[10px] border border-[rgba(251,184,72,0.2)] bg-[rgba(251,184,72,0.07)]">
-            <img
+            <OptimizedImage
                 src="/alaska_airlines_eskimo-logo.png"
                 alt="Alaska Airlines"
                 className="h-11 w-11 object-contain"

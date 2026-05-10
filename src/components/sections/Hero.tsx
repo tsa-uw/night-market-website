@@ -1,4 +1,5 @@
 import { ChevronDown } from "lucide-react";
+import OptimizedImage from "../media/OptimizedImage";
 import landingPageBackground from "../../assets/images/LandingPageBackground.png";
 
 export default function Hero() {
@@ -7,10 +8,11 @@ export default function Hero() {
             id="home"
             className="relative isolate flex min-h-screen items-center overflow-hidden px-4 pb-16 pt-24 text-center md:px-8"
         >
-            <img
+            <OptimizedImage
                 src={landingPageBackground}
                 alt=""
                 aria-hidden="true"
+                priority
                 className="pointer-events-none absolute inset-0 -z-30 h-full w-full object-cover object-center"
             />
             <div className="animate-hero-darken pointer-events-none absolute inset-0 -z-20 bg-night-900/10" />

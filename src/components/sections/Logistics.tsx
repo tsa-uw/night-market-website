@@ -8,6 +8,7 @@ import {
     PawPrint,
     Train,
 } from "lucide-react";
+import OptimizedImage from "../media/OptimizedImage";
 import landingPageBackground from "../../assets/images/LandingPageBackground.png";
 
 const DETAIL_CARDS = [
@@ -91,7 +92,7 @@ export default function Logistics() {
 
             <div className="relative">
                 <div className="relative isolate flex min-h-[72svh] items-center justify-center overflow-hidden px-4 py-24 text-center md:px-8">
-                    <img
+                    <OptimizedImage
                         src={landingPageBackground}
                         alt=""
                         aria-hidden="true"
@@ -136,7 +137,7 @@ export default function Logistics() {
                             key={heading}
                             className="group relative isolate min-h-[24rem] overflow-hidden border border-lantern-100/10 bg-night-800 shadow-2xl shadow-black/25"
                         >
-                            <img
+                            <OptimizedImage
                                 src={image}
                                 alt=""
                                 aria-hidden="true"

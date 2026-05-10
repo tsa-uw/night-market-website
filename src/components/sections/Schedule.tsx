@@ -6,6 +6,7 @@ import {
     Star,
 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
+import OptimizedImage from "../media/OptimizedImage";
 
 const PARTICLES = [
     { left: 12, dur: 22, delay: 0, size: 2, gold: false },
@@ -108,7 +109,7 @@ const SCHEDULE_EVENTS: ScheduleEvent[] = [
         title: "Husky Wushu",
         type: "Martial Arts",
         desc: "Wushu is a Chinese martial art and international sport derived from hundreds of years of traditional Chinese Kung Fu. Husky Wushu has been an active club at UW since 2009, with a mission to foster an inclusive community around the practice of Chinese martial arts. They will perform a medley of individual forms, group forms, and fight sets - including hand forms and weapon forms such as sword, staff, and fan.",
-        image: "/entertainment group images/Husky Wushu.JPEG",
+        image: "/entertainment group images/Husky Wushu.jpg",
         logo: "/entertainment group images/Husky Wushu Logo.png",
     },
     {
@@ -202,26 +203,6 @@ const SCHEDULE_EVENTS: ScheduleEvent[] = [
 
 const regularEvents = SCHEDULE_EVENTS.filter((e) => !e.headliner);
 const headlinerEvent = SCHEDULE_EVENTS.find((e) => e.headliner)!;
-const SCHEDULE_MEDIA_URLS = [
-    ...new Set(
-        SCHEDULE_EVENTS.flatMap(({ image, logo }) =>
-            [image, logo].filter((src): src is string => Boolean(src)),
-        ),
-    ),
-];
-const preloadedMedia = new Set<string>();
-
-function preloadScheduleMedia() {
-    SCHEDULE_MEDIA_URLS.forEach((src) => {
-        if (preloadedMedia.has(src)) return;
-
-        const image = new Image();
-        image.decoding = "async";
-        image.src = src;
-        preloadedMedia.add(src);
-    });
-}
-
 function MediaIcon({ type, headliner }: { type: string; headliner?: boolean }) {
     const color = headliner
         ? "#fbb848"
@@ -253,15 +234,94 @@ function MediaIcon({ type, headliner }: { type: string; headliner?: boolean }) {
     return <Clapperboard {...iconProps} opacity={0.35} />;
 }
 
+type PreviewImageItem = {
+    src: string;
+    alt: string;
+    imagePosition?: string;
+};
+
+type PreviewLogoItem = {
+    src: string;
+    alt: string;
+};
+
+function getPreviewImages(previewedMedia: ReadonlySet<string>) {
+    const seen = new Set<string>();
+
+    return SCHEDULE_EVENTS.reduce<PreviewImageItem[]>((items, event) => {
+        if (!event.image || !previewedMedia.has(event.image)) return items;
+        if (seen.has(event.image)) return items;
+
+        seen.add(event.image);
+        items.push({
+            src: event.image,
+            alt: event.title,
+            imagePosition: event.imagePosition,
+        });
+        return items;
+    }, []);
+}
+
+function getPreviewLogos(previewedMedia: ReadonlySet<string>) {
+    const seen = new Set<string>();
+
+    return SCHEDULE_EVENTS.reduce<PreviewLogoItem[]>((items, event) => {
+        if (!event.logo || !previewedMedia.has(event.logo)) return items;
+        if (seen.has(event.logo)) return items;
+
+        seen.add(event.logo);
+        items.push({
+            src: event.logo,
+            alt: `${event.title} logo`,
+        });
+        return items;
+    }, []);
+}
+
+function ScheduleMediaCache({
+    previewedMedia,
+}: {
+    previewedMedia: ReadonlySet<string>;
+}) {
+    return (
+        <div
+            aria-hidden="true"
+            style={{
+                height: 1,
+                opacity: 0,
+                overflow: "hidden",
+                pointerEvents: "none",
+                position: "absolute",
+                width: 1,
+            }}
+        >
+            {[...previewedMedia].map((src) => (
+                <OptimizedImage
+                    key={src}
+                    src={src}
+                    alt=""
+                    fetchPriority="low"
+                    loading="eager"
+                    style={{ height: 1, width: 1 }}
+                />
+            ))}
+        </div>
+    );
+}
+
 function PreviewCard({
     event,
+    previewedMedia,
     visible,
 }: {
     event: ScheduleEvent | null;
+    previewedMedia: ReadonlySet<string>;
     visible: boolean;
 }) {
     const isHeadliner = event?.headliner;
     const typeColor = event ? TYPE_COLORS[event.type] : null;
+    const previewImages = getPreviewImages(previewedMedia);
+    const previewLogos = getPreviewLogos(previewedMedia);
     const [g1, g2] = event
         ? (TYPE_MEDIA_GRAD[event.type] ?? ["#0e1424", "#19233a"])
         : ["#0e1424", "#19233a"];
@@ -279,7 +339,6 @@ function PreviewCard({
         >
             {event && (
                 <div
-                    key={event.title + event.time}
                     style={{
                         background: isHeadliner
                             ? "linear-gradient(135deg, rgba(14,20,36,0.97) 0%, rgba(25,14,4,0.97) 100%)"
@@ -312,11 +371,24 @@ function PreviewCard({
                     >
                         {event.image ? (
                             <>
-                                <img
-                                    src={event.image}
-                                    alt={event.title}
-                                    className={`h-full w-full object-cover ${event.imagePosition ?? ""}`}
-                                />
+                                {previewImages.map(
+                                    ({ src, alt, imagePosition }) => {
+                                        const isActive = src === event.image;
+
+                                        return (
+                                            <OptimizedImage
+                                                key={src}
+                                                src={src}
+                                                alt={isActive ? alt : ""}
+                                                aria-hidden={!isActive}
+                                                className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-150 ${imagePosition ?? ""}`}
+                                                style={{
+                                                    opacity: isActive ? 1 : 0,
+                                                }}
+                                            />
+                                        );
+                                    },
+                                )}
                                 <div
                                     style={{
                                         position: "absolute",
@@ -342,24 +414,40 @@ function PreviewCard({
                                     preview
                                 </span>
                                 {event.logo && (
-                                    <img
-                                        src={event.logo}
-                                        alt={`${event.title} logo`}
-                                        style={{
-                                            position: "absolute",
-                                            right: 12,
-                                            bottom: 12,
-                                            maxWidth: 74,
-                                            maxHeight: 46,
-                                            objectFit: "contain",
-                                            borderRadius: 8,
-                                            background:
-                                                "rgba(246,239,223,0.86)",
-                                            padding: 6,
-                                            boxShadow:
-                                                "0 8px 24px rgba(0,0,0,0.35)",
-                                        }}
-                                    />
+                                    <>
+                                        {previewLogos.map(({ src, alt }) => {
+                                            const isActive =
+                                                src === event.logo;
+
+                                            return (
+                                                <OptimizedImage
+                                                    key={src}
+                                                    src={src}
+                                                    alt={isActive ? alt : ""}
+                                                    aria-hidden={!isActive}
+                                                    style={{
+                                                        position: "absolute",
+                                                        right: 12,
+                                                        bottom: 12,
+                                                        maxWidth: 74,
+                                                        maxHeight: 46,
+                                                        objectFit: "contain",
+                                                        borderRadius: 8,
+                                                        background:
+                                                            "rgba(246,239,223,0.86)",
+                                                        padding: 6,
+                                                        boxShadow:
+                                                            "0 8px 24px rgba(0,0,0,0.35)",
+                                                        opacity: isActive
+                                                            ? 1
+                                                            : 0,
+                                                        transition:
+                                                            "opacity 0.15s ease",
+                                                    }}
+                                                />
+                                            );
+                                        })}
+                                    </>
                                 )}
                             </>
                         ) : (
@@ -539,6 +627,9 @@ function PreviewCard({
 
 export default function Schedule() {
     const [activeIdx, setActiveIdx] = useState<number | null>(null);
+    const [previewedMedia, setPreviewedMedia] = useState<Set<string>>(
+        () => new Set(),
+    );
     const [visible, setVisible] = useState<boolean[]>(() =>
         new Array(regularEvents.length).fill(false),
     );
@@ -546,9 +637,19 @@ export default function Schedule() {
     const itemRefs = useRef<(HTMLLIElement | null)[]>([]);
     const headlinerRef = useRef<HTMLDivElement>(null);
 
-    useEffect(() => {
-        preloadScheduleMedia();
-    }, []);
+    const activatePreview = (idx: number) => {
+        const event =
+            idx < regularEvents.length ? regularEvents[idx] : headlinerEvent;
+
+        setActiveIdx(idx);
+        setPreviewedMedia((current) => {
+            const next = new Set(current);
+            if (event.image) next.add(event.image);
+            if (event.logo) next.add(event.logo);
+
+            return next.size === current.size ? current : next;
+        });
+    };
 
     useEffect(() => {
         const observer = new IntersectionObserver(
@@ -577,12 +678,14 @@ export default function Schedule() {
         );
 
         const refs = [...itemRefs.current];
+        const headlinerEl = headlinerRef.current;
+
         refs.forEach((ref) => ref && observer.observe(ref));
-        if (headlinerRef.current) observer.observe(headlinerRef.current);
+        if (headlinerEl) observer.observe(headlinerEl);
 
         return () => {
             refs.forEach((ref) => ref && observer.unobserve(ref));
-            if (headlinerRef.current) observer.unobserve(headlinerRef.current);
+            if (headlinerEl) observer.unobserve(headlinerEl);
         };
     }, []);
 
@@ -701,7 +804,9 @@ export default function Schedule() {
                                                     : "translateX(10px)",
                                                 transition: `opacity 0.5s ease ${delay}, transform 0.5s ease ${delay}`,
                                             }}
-                                            onMouseEnter={() => setActiveIdx(i)}
+                                            onMouseEnter={() =>
+                                                activatePreview(i)
+                                            }
                                         >
                                             {/* Sweep background */}
                                             <div className="pointer-events-none absolute inset-y-0.5 -left-28 right-0 overflow-hidden rounded-r-md">
@@ -742,7 +847,7 @@ export default function Schedule() {
                             ref={headlinerRef}
                             className="group relative overflow-hidden rounded-2xl border border-lantern-300/20 bg-night-800/60 p-5 backdrop-blur-sm transition-all duration-500 hover:border-lantern-300/40 hover:shadow-[0_0_40px_rgba(255,208,106,0.1)]"
                             onMouseEnter={() =>
-                                setActiveIdx(regularEvents.length)
+                                activatePreview(regularEvents.length)
                             }
                             style={{
                                 opacity: headlinerVisible ? 1 : 0,
@@ -807,7 +912,8 @@ export default function Schedule() {
                     {/* Preview card — sticky within the flex row, hidden on mobile.
                         top: calc(50vh - 10rem) keeps the card vertically centered in
                         the viewport when stuck without shifting it in normal flow. */}
-                    <div className="hidden w-84 shrink-0 self-start pt-10 md:sticky md:top-[calc(40vh-11rem)] md:block">
+                    <div className="relative hidden w-84 shrink-0 self-start pt-10 md:sticky md:top-[calc(40vh-11rem)] md:block">
+                        <ScheduleMediaCache previewedMedia={previewedMedia} />
                         <PreviewCard
                             event={
                                 activeIdx !== null
@@ -816,6 +922,7 @@ export default function Schedule() {
                                         : headlinerEvent
                                     : null
                             }
+                            previewedMedia={previewedMedia}
                             visible={activeIdx !== null}
                         />
 

@@ -2,6 +2,7 @@ import { Menu, X } from "lucide-react";
 import { useMemo, useRef, useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { useActiveSection } from "../../hooks/useActiveSection";
+import OptimizedImage from "../media/OptimizedImage";
 
 const NAV_ITEMS = [
     { label: "Home", href: "#home", id: "home" },
@@ -108,9 +109,10 @@ export default function Navbar() {
                     animate={{ x: logoPos.x }}
                     transition={{ type: "spring", stiffness: 400, damping: 30 }}
                 >
-                    <img
+                    <OptimizedImage
                         src="/nm_logo.png"
                         alt="Night Market Logo"
+                        priority
                         className="drop-shadow-lg"
                         width={LOGO_SIZE}
                         height={LOGO_SIZE}
@@ -141,7 +143,14 @@ export default function Navbar() {
 
             {/* Mobile hamburger */}
             <div className="flex items-center gap-3 rounded-full border border-lantern-100/20 bg-night-900/75 px-4 py-2 shadow-2xl shadow-black/35 backdrop-blur-xl md:hidden">
-                <img src="/nm_logo.png" alt="Night Market Logo" className="h-6 w-6" />
+                <OptimizedImage
+                    src="/nm_logo.png"
+                    alt="Night Market Logo"
+                    priority
+                    className="h-6 w-6"
+                    width={24}
+                    height={24}
+                />
                 <span className="text-sm font-semibold text-lantern-100">
                     Night Market
                 </span>

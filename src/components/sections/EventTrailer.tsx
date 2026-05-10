@@ -7,6 +7,7 @@ const CONTROL_BUTTON_CLASS =
 export default function EventTrailer() {
     const sectionRef = useRef<HTMLElement>(null);
     const videoRef = useRef<HTMLVideoElement>(null);
+    const videoWarmedRef = useRef(false);
     const [muted, setMuted] = useState(true);
 
     useEffect(() => {
@@ -20,6 +21,10 @@ export default function EventTrailer() {
 
                 if (entry.intersectionRatio >= 0.35) {
                     video.preload = "auto";
+                    if (!videoWarmedRef.current) {
+                        video.load();
+                        videoWarmedRef.current = true;
+                    }
                 }
 
                 if (entry.intersectionRatio >= 0.65) {
@@ -81,7 +86,7 @@ export default function EventTrailer() {
                         loop
                         muted={muted}
                         playsInline
-                        preload="metadata"
+                        preload="none"
                         poster="/Promo-poster.jpg"
                     >
                         <source

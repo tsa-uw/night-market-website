@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Section from "../layout/Section";
+import OptimizedImage from "../media/OptimizedImage";
 
 type VendorTab = "food" | "arts";
 
@@ -67,7 +68,7 @@ export default function Vendors() {
                                 {image ? (
                                     // Use archived asset path so user doesn't need to upload
                                     // assets into the React app.
-                                    <img
+                                    <OptimizedImage
                                         src={image}
                                         alt={name}
                                         className="h-full w-full object-cover transition-transform group-hover:scale-105"
