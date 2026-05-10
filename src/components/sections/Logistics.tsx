@@ -99,8 +99,8 @@ export default function Logistics() {
                         aria-hidden="true"
                         className="absolute inset-0 -z-30 h-full w-full object-cover"
                     />
-                    <div className="absolute inset-0 -z-20 bg-night-900/45" />
-                    <div className="absolute inset-0 -z-10 bg-gradient-to-b from-night-900/20 via-night-900/35 to-night-900/60" />
+                    <div className="absolute inset-0 -z-20 bg-night-900/72" />
+                    <div className="absolute inset-0 -z-10 bg-gradient-to-b from-night-900/45 via-night-900/62 to-night-900" />
 
                     <div className="mx-auto max-w-5xl">
                         <p className="mb-4 text-xs font-bold tracking-[0.28em] text-lantern-300/90 uppercase">
