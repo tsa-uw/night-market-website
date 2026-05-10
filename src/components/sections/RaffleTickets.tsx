@@ -223,7 +223,7 @@ export default function RaffleTickets() {
                             <div className="flex items-center gap-3">
                                 <AirlineLogo />
                                 <div>
-                                    <div className="mb-1 font-mono text-[10px] uppercase tracking-[0.2em] text-[rgba(251,184,72,0.6)]">
+                                    <div className="mb-1 text-[11px] font-semibold uppercase tracking-[0.2em] text-[rgba(251,184,72,0.65)]">
                                         Grand Prize · Sponsored by
                                     </div>
                                     <div
@@ -239,14 +239,14 @@ export default function RaffleTickets() {
                             </span>
                         </div>
 
-                        {/* Detail cells — stamped boarding-pass fields */}
+                        {/* Detail cells — boarding-pass fields */}
                         <div className="relative mb-6 grid grid-cols-3 divide-x divide-dashed divide-[rgba(251,184,72,0.18)] overflow-hidden rounded-lg border border-dashed border-[rgba(251,184,72,0.18)] bg-[rgba(251,184,72,0.025)]">
                             {DETAIL_CELLS.map(({ label, value }) => (
                                 <div key={label} className="p-3 sm:p-4">
-                                    <div className="mb-2 font-mono text-[9px] uppercase tracking-[0.22em] text-[rgba(251,184,72,0.55)]">
+                                    <div className="mb-1.5 text-[10px] font-semibold uppercase tracking-[0.2em] text-[rgba(251,184,72,0.6)]">
                                         {label}
                                     </div>
-                                    <div className="inline-block border-b border-dotted border-[rgba(251,184,72,0.25)] pb-0.5 font-mono text-xs uppercase tracking-wide text-lantern-100 sm:text-sm">
+                                    <div className="inline-block border-b border-dotted border-[rgba(251,184,72,0.3)] pb-0.5 text-sm font-semibold text-lantern-100 sm:text-base">
                                         {value}
                                     </div>
                                 </div>
@@ -270,15 +270,15 @@ export default function RaffleTickets() {
                                 >
                                     $3
                                 </span>
-                                <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-warm-white/55">per ticket</span>
+                                <span className="text-sm text-warm-white/55">per ticket</span>
                             </div>
                             <div className="flex flex-wrap gap-2">
-                                <span className="flex items-center gap-1.5 rounded-md border border-dashed border-[rgba(251,184,72,0.2)] bg-[rgba(251,184,72,0.04)] px-3 py-1.5 font-mono text-[10px] uppercase tracking-[0.16em] text-warm-white/65">
-                                    <Ticket size={12} aria-hidden="true" />
+                                <span className="flex items-center gap-1.5 rounded-md border border-dashed border-[rgba(251,184,72,0.2)] bg-[rgba(251,184,72,0.04)] px-3 py-1.5 text-xs text-warm-white/70">
+                                    <Ticket size={13} aria-hidden="true" />
                                     TSA Info Booth
                                 </span>
-                                <span className="flex items-center gap-1.5 rounded-md border border-dashed border-[rgba(251,184,72,0.2)] bg-[rgba(251,184,72,0.04)] px-3 py-1.5 font-mono text-[10px] uppercase tracking-[0.16em] text-warm-white/65">
-                                    <Clock size={12} aria-hidden="true" />
+                                <span className="flex items-center gap-1.5 rounded-md border border-dashed border-[rgba(251,184,72,0.2)] bg-[rgba(251,184,72,0.04)] px-3 py-1.5 text-xs text-warm-white/70">
+                                    <Clock size={13} aria-hidden="true" />
                                     Sales close 8:00 PM
                                 </span>
                             </div>
@@ -306,7 +306,7 @@ export default function RaffleTickets() {
                             }}
                         />
                         <span
-                            className="font-mono text-[8px] uppercase tracking-[0.3em] text-warm-white/35"
+                            className="text-[8px] font-semibold uppercase tracking-[0.3em] text-warm-white/35"
                             style={{
                                 writingMode: "vertical-lr",
                                 textOrientation: "mixed",
@@ -331,7 +331,7 @@ export default function RaffleTickets() {
                             #
                         </span>
                         <span
-                            className="font-mono text-[8px] uppercase tracking-[0.3em] text-warm-white/35"
+                            className="text-[8px] font-semibold uppercase tracking-[0.3em] text-warm-white/35"
                             style={{
                                 writingMode: "vertical-lr",
                                 textOrientation: "mixed",
@@ -355,7 +355,7 @@ export default function RaffleTickets() {
                         >
                             {/* Stub header */}
                             <div className="flex h-11 items-center justify-between px-5">
-                                <span className={`font-mono text-[9px] uppercase tracking-[0.22em] ${a.label}`}>
+                                <span className={`text-[10px] font-semibold uppercase tracking-[0.2em] ${a.label}`}>
                                     Stub No. 0{i + 1}
                                 </span>
                                 <span className={`flex h-6 w-6 items-center justify-center rounded-md border ${a.iconBox}`}>
