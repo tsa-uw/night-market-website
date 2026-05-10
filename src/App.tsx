@@ -14,18 +14,18 @@ export default function App() {
     return (
         <>
             <Navbar />
-            <main>
+            <main className="relative">
                 <Hero />
-                <Details />
-                <RaffleTickets />
                 <EventTrailer />
+                <Logistics />
+                <RaffleTickets />
                 <Schedule />
                 <Vendors />
                 <Sponsors />
                 <Volunteer />
                 <FAQ />
             </main>
-            <footer className={footer.wrapper}>
+            <footer className="border-t border-night-700 bg-night-900 px-4 py-8 text-center text-sm text-lantern-100/55">
                 &copy; 2026 TSA Night Market. All rights reserved.
             </footer>
         </>

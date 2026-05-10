@@ -2,36 +2,103 @@
 
 @font-face {
     font-family: "TenPounds";
-    src: url("/fonts/TenPounds-Webfont-Kit/tenpounds-regular-webfont.woff2") format("woff2"),
-         url("/fonts/TenPounds-Webfont-Kit/tenpounds-regular-webfont.woff") format("woff");
-    font-weight: normal;
+    src: url("./assets/fonts/TenPounds/TenPounds-Regular.otf")
+        format("opentype");
+    font-weight: 400;
     font-style: normal;
+    font-display: swap;
+}
+
+@keyframes hero-darken {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes hero-fade-in {
+    from { opacity: 0; transform: translateY(14px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Particle drifts from bottom to top, fading in/out */
+@keyframes float-particle {
+    0%   { transform: translateY(0) scale(1);    opacity: 0; }
+    8%   { opacity: 0.75; }
+    88%  { opacity: 0.4; }
+    100% { transform: translateY(-88vh) scale(0.7); opacity: 0; }
+}
+
+/* Glowing orb travels down the timeline line */
+@keyframes timeline-scan {
+    0%   { top: 0%;   opacity: 0; }
+    6%   { opacity: 1; }
+    88%  { opacity: 0.9; }
+    100% { top: 100%; opacity: 0; }
+}
+
+/* Gold pulse for headliner orb */
+@keyframes node-pulse-gold {
+    0%, 100% { opacity: 0.5; transform: scale(1); }
+    50%       { opacity: 1;   transform: scale(1.2); }
+}
+
+/* Shine sweep for headliner card hover */
+@keyframes shimmer-sweep {
+    0%   { transform: translateX(-100%) skewX(-12deg); }
+    100% { transform: translateX(350%)  skewX(-12deg); }
+}
+
+/* Preview card entrance */
+@keyframes card-in {
+    from { opacity: 0; transform: translateX(-8px) scale(0.97); }
+    to   { opacity: 1; transform: translateX(0)    scale(1); }
+}
+
+/* Preview card media area entrance */
+@keyframes card-media-in {
+    from { opacity: 0; transform: scale(1.04); }
+    to   { opacity: 1; transform: scale(1); }
+}
+
+/* Staggered text fade-up inside preview card */
+@keyframes fade-up {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Glow tracer travels around the raffle ticket border */
+@keyframes ticket-trace {
+    0%   { opacity: 0; }
+    6%   { opacity: 1; }
+    88%  { opacity: 0.85; }
+    100% { stroke-dashoffset: 0; opacity: 0; }
 }
 
 @theme {
-    --color-red-900: #fde8ec;
-    --color-red-800: #fbc8d0;
-    --color-red-700: #f29090;
-    --color-red-600: #c45050;
-    --color-red-500: #7a2828;
+    --animate-hero-darken: hero-darken 1.8s ease-in 0.2s both;
+    --animate-hero-fade-in: hero-fade-in 0.9s ease-out 0.8s both;
+    --animate-hero-fade-in-late: hero-fade-in 0.9s ease-out 1.4s both;
+    --animate-node-pulse-gold: node-pulse-gold 2s ease-in-out infinite;
+    --animate-shimmer-sweep: shimmer-sweep 0.65s ease forwards;
+    --color-night-900: #060910;
+    --color-night-800: #0e1424;
+    --color-night-700: #19233a;
+    --color-night-600: #29344f;
+    --color-night-500: #3f4f73;
 
-    --color-pink-100: #fce4ec;
-    --color-pink-200: #f8bbd0;
-    --color-pink-300: #f48fb1;
-    --color-pink-400: #ec407a;
-    --color-pink-500: #d81b60;
+    --color-blossom-100: #ffe2ea;
+    --color-blossom-200: #ffb8cc;
+    --color-blossom-300: #ff89ad;
+    --color-blossom-400: #f45c8d;
+    --color-blossom-500: #d53c6f;
 
-    --color-amber-100: #fff8e1;
-    --color-amber-200: #ffecb3;
-    --color-amber-300: #ffd54f;
-    --color-amber-400: #ffb300;
-    --color-amber-500: #ff8f00;
+    --color-lantern-100: #fff5db;
+    --color-lantern-200: #ffe6ab;
+    --color-lantern-300: #ffd06a;
+    --color-lantern-400: #fbb848;
+    --color-lantern-500: #e4961d;
 
-    --color-gold: #d4a574;
-    --color-yellow: #f5d16a;
-
-    --font-display: "TenPounds", "Georgia", serif;
-    --font-body: "Figtree", sans-serif;
+    --color-gold: #c68a46;
+    --color-warm-white: #f6efdf;
 
     --gradient-red: linear-gradient(135deg, #6a0e1a 0%, #a02030 40%, #c0392b 70%, #8b1a1a 100%);
 }
@@ -49,8 +116,18 @@ html::-webkit-scrollbar {
 
 body {
     font-family: var(--font-body);
-    color: black;
-    background: white;
-    min-height: 100vh;
-    margin: 0;
+    color: var(--color-warm-white);
+    background-color: var(--color-night-900);
+    background-image:
+        radial-gradient(
+            circle at 18% 0%,
+            rgb(244 92 141 / 12%),
+            transparent 44%
+        ),
+        radial-gradient(
+            circle at 80% 15%,
+            rgb(251 184 72 / 9%),
+            transparent 42%
+        ),
+        linear-gradient(180deg, var(--color-night-900) 0%, #04070d 100%);
 }
