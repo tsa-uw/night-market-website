@@ -1,5 +1,5 @@
 import { ChevronDown } from "lucide-react";
-import landingPageBackground from "../../assets/images/LandingPageBackground.jpg";
+import landingPageBackground from "../../assets/images/LandingPageBackground.png";
 
 export default function Hero() {
     return (

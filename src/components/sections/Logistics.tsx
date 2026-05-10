@@ -8,7 +8,7 @@ import {
     PawPrint,
     Train,
 } from "lucide-react";
-import landingPageBackground from "../../assets/images/LandingPageBackground.jpg";
+import landingPageBackground from "../../assets/images/LandingPageBackground.png";
 
 const DETAIL_CARDS = [
     {
@@ -151,27 +151,29 @@ export default function Logistics() {
                                 </h3>
 
                                 <div className="mt-8 space-y-5">
-                                    {items.map(({ icon: Icon, title, detail }) => (
-                                        <div
-                                            key={`${title}-${detail}`}
-                                            className="mx-auto flex max-w-sm items-start gap-3 text-left"
-                                        >
-                                            <span className="mt-1 grid h-8 w-8 shrink-0 place-items-center rounded-full border border-lantern-300/25 bg-night-900/55 text-lantern-300">
-                                                <Icon
-                                                    className="h-4 w-4"
-                                                    aria-hidden="true"
-                                                />
-                                            </span>
-                                            <p className="text-base leading-6 text-warm-white/82">
-                                                <strong className="font-extrabold text-lantern-100">
-                                                    {title}
-                                                </strong>
-                                                <span className="block text-warm-white/76">
-                                                    {detail}
+                                    {items.map(
+                                        ({ icon: Icon, title, detail }) => (
+                                            <div
+                                                key={`${title}-${detail}`}
+                                                className="mx-auto flex max-w-sm items-start gap-3 text-left"
+                                            >
+                                                <span className="mt-1 grid h-8 w-8 shrink-0 place-items-center rounded-full border border-lantern-300/25 bg-night-900/55 text-lantern-300">
+                                                    <Icon
+                                                        className="h-4 w-4"
+                                                        aria-hidden="true"
+                                                    />
                                                 </span>
-                                            </p>
-                                        </div>
-                                    ))}
+                                                <p className="text-base leading-6 text-warm-white/82">
+                                                    <strong className="font-extrabold text-lantern-100">
+                                                        {title}
+                                                    </strong>
+                                                    <span className="block text-warm-white/76">
+                                                        {detail}
+                                                    </span>
+                                                </p>
+                                            </div>
+                                        ),
+                                    )}
                                 </div>
                             </div>
                         </article>
