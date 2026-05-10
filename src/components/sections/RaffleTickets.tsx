@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import type { ReactNode } from "react";
 import Section from "../layout/Section";
 import OptimizedImage from "../media/OptimizedImage";
+import ScrollReveal from "../motion/ScrollReveal";
 
 function AirlineLogo() {
     return (
@@ -198,6 +199,7 @@ export default function RaffleTickets() {
     return (
         <Section id="raffle" title="Raffle Tickets">
             {/* Ticket */}
+            <ScrollReveal y={42} scale={0.96} duration={0.75}>
             <div ref={ticketRef} className="relative mx-auto mb-8 max-w-195 rounded-xl shadow-[0_8px_48px_rgba(0,0,0,0.55),0_0_32px_rgba(251,184,72,0.08),0_0_64px_rgba(244,92,141,0.06)] transition-shadow duration-350 ease-in-out hover:shadow-[0_12px_56px_rgba(0,0,0,0.65),0_0_48px_rgba(251,184,72,0.18),0_0_80px_rgba(244,92,141,0.12)]">
                     <TicketGlowTrace wrapperRef={ticketRef} />
                 <div className="relative flex overflow-hidden rounded-xl border border-[rgba(251,184,72,0.18)] bg-night-800">
@@ -343,42 +345,49 @@ export default function RaffleTickets() {
                     </div>
                 </div>
             </div>
+            </ScrollReveal>
 
             {/* Info stubs */}
             <div className="mx-auto grid max-w-195 grid-cols-1 gap-4 sm:grid-cols-3">
                 {INFO_CARDS.map(({ Icon, title, body, accent }, i) => {
                     const a = ACCENT[accent];
                     return (
-                        <div
+                        <ScrollReveal
                             key={title}
-                            className={`group relative overflow-hidden rounded-[10px] border bg-night-800/50 backdrop-blur-sm transition-all duration-300 ${a.card}`}
+                            delay={i * 0.08}
+                            y={34}
+                            scale={0.97}
                         >
-                            {/* Stub header */}
-                            <div className="flex h-11 items-center justify-between px-5">
-                                <span className={`text-[10px] font-semibold uppercase tracking-[0.2em] ${a.label}`}>
-                                    Stub No. 0{i + 1}
-                                </span>
-                                <span className={`flex h-6 w-6 items-center justify-center rounded-md border ${a.iconBox}`}>
-                                    <Icon size={13} aria-hidden="true" />
-                                </span>
-                            </div>
-
-                            {/* Perforated tear line */}
                             <div
-                                className="pointer-events-none absolute inset-x-0 top-11 h-px"
-                                style={{
-                                    background: `repeating-linear-gradient(to right, transparent 0 4px, ${a.tear} 4px 8px)`,
-                                }}
-                            />
-                            <div className={`absolute -left-1.5 top-11 h-3 w-3 -translate-y-1/2 rounded-full border bg-night-900 ${a.notch}`} />
-                            <div className={`absolute -right-1.5 top-11 h-3 w-3 -translate-y-1/2 rounded-full border bg-night-900 ${a.notch}`} />
+                                className={`group relative overflow-hidden rounded-[10px] border bg-night-800/50 backdrop-blur-sm transition-all duration-300 ${a.card}`}
+                            >
+                                {/* Stub header */}
+                                <div className="flex h-11 items-center justify-between px-5">
+                                    <span className={`text-[10px] font-semibold uppercase tracking-[0.2em] ${a.label}`}>
+                                        Stub No. 0{i + 1}
+                                    </span>
+                                    <span className={`flex h-6 w-6 items-center justify-center rounded-md border ${a.iconBox}`}>
+                                        <Icon size={13} aria-hidden="true" />
+                                    </span>
+                                </div>
 
-                            {/* Stub body */}
-                            <div className="px-5 pb-5 pt-4">
-                                <div className={`mb-1.5 text-base font-semibold ${a.title}`}>{title}</div>
-                                <p className="text-sm leading-relaxed text-warm-white/75">{body}</p>
+                                {/* Perforated tear line */}
+                                <div
+                                    className="pointer-events-none absolute inset-x-0 top-11 h-px"
+                                    style={{
+                                        background: `repeating-linear-gradient(to right, transparent 0 4px, ${a.tear} 4px 8px)`,
+                                    }}
+                                />
+                                <div className={`absolute -left-1.5 top-11 h-3 w-3 -translate-y-1/2 rounded-full border bg-night-900 ${a.notch}`} />
+                                <div className={`absolute -right-1.5 top-11 h-3 w-3 -translate-y-1/2 rounded-full border bg-night-900 ${a.notch}`} />
+
+                                {/* Stub body */}
+                                <div className="px-5 pb-5 pt-4">
+                                    <div className={`mb-1.5 text-base font-semibold ${a.title}`}>{title}</div>
+                                    <p className="text-sm leading-relaxed text-warm-white/75">{body}</p>
+                                </div>
                             </div>
-                        </div>
+                        </ScrollReveal>
                     );
                 })}
             </div>

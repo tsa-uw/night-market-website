@@ -9,6 +9,7 @@ import {
     Train,
 } from "lucide-react";
 import OptimizedImage from "../media/OptimizedImage";
+import ScrollReveal from "../motion/ScrollReveal";
 import redSquareDrawing from "../../assets/images/RedSquareDrawing.png";
 
 const DETAIL_CARDS = [
@@ -101,7 +102,7 @@ export default function Logistics() {
                     <div className="absolute inset-0 -z-20 bg-night-900/72" />
                     <div className="absolute inset-0 -z-10 bg-gradient-to-b from-night-900/45 via-night-900/62 to-night-900" />
 
-                    <div className="mx-auto max-w-5xl">
+                    <ScrollReveal className="mx-auto max-w-5xl" y={36} duration={0.75}>
                         <p className="mb-4 text-xs font-bold tracking-[0.28em] text-lantern-300/90 uppercase">
                             Details
                         </p>
@@ -128,56 +129,60 @@ export default function Logistics() {
                                 free and open to all!
                             </strong>
                         </p>
-                    </div>
+                    </ScrollReveal>
                 </div>
 
                 <div className="mx-auto grid max-w-7xl gap-4 px-4 py-6 md:grid-cols-3 md:px-6 md:py-8">
-                    {DETAIL_CARDS.map(({ heading, image, items }) => (
-                        <article
+                    {DETAIL_CARDS.map(({ heading, image, items }, index) => (
+                        <ScrollReveal
                             key={heading}
-                            className="group relative isolate min-h-[24rem] overflow-hidden border border-lantern-100/10 bg-night-800 shadow-2xl shadow-black/25"
+                            delay={index * 0.08}
+                            y={44}
+                            scale={0.96}
                         >
-                            <OptimizedImage
-                                src={image}
-                                alt=""
-                                aria-hidden="true"
-                                className="absolute inset-0 -z-30 h-full w-full object-cover transition duration-500 group-hover:scale-105"
-                            />
-                            <div className="absolute inset-0 -z-20 bg-night-900/72 transition duration-500 group-hover:bg-night-900/66" />
-                            <div className="absolute inset-0 -z-10 bg-gradient-to-b from-black/18 via-night-900/48 to-black/82" />
+                            <article className="group relative isolate min-h-[24rem] overflow-hidden border border-lantern-100/10 bg-night-800 shadow-2xl shadow-black/25">
+                                <OptimizedImage
+                                    src={image}
+                                    alt=""
+                                    aria-hidden="true"
+                                    className="absolute inset-0 -z-30 h-full w-full object-cover transition duration-500 group-hover:scale-105"
+                                />
+                                <div className="absolute inset-0 -z-20 bg-night-900/72 transition duration-500 group-hover:bg-night-900/66" />
+                                <div className="absolute inset-0 -z-10 bg-gradient-to-b from-black/18 via-night-900/48 to-black/82" />
 
-                            <div className="flex h-full min-h-[24rem] flex-col justify-center px-6 py-10 text-center md:px-8">
-                                <h3 className="text-sm font-black tracking-[0.22em] text-lantern-200/86 uppercase">
-                                    {heading}
-                                </h3>
+                                <div className="flex h-full min-h-[24rem] flex-col justify-center px-6 py-10 text-center md:px-8">
+                                    <h3 className="text-sm font-black tracking-[0.22em] text-lantern-200/86 uppercase">
+                                        {heading}
+                                    </h3>
 
-                                <div className="mt-8 space-y-5">
-                                    {items.map(
-                                        ({ icon: Icon, title, detail }) => (
-                                            <div
-                                                key={`${title}-${detail}`}
-                                                className="mx-auto flex max-w-sm items-start gap-3 text-left"
-                                            >
-                                                <span className="mt-1 grid h-8 w-8 shrink-0 place-items-center rounded-full border border-lantern-300/25 bg-night-900/55 text-lantern-300">
-                                                    <Icon
-                                                        className="h-4 w-4"
-                                                        aria-hidden="true"
-                                                    />
-                                                </span>
-                                                <p className="text-base leading-6 text-warm-white/82">
-                                                    <strong className="font-extrabold text-lantern-100">
-                                                        {title}
-                                                    </strong>
-                                                    <span className="block text-warm-white/76">
-                                                        {detail}
+                                    <div className="mt-8 space-y-5">
+                                        {items.map(
+                                            ({ icon: Icon, title, detail }) => (
+                                                <div
+                                                    key={`${title}-${detail}`}
+                                                    className="mx-auto flex max-w-sm items-start gap-3 text-left"
+                                                >
+                                                    <span className="mt-1 grid h-8 w-8 shrink-0 place-items-center rounded-full border border-lantern-300/25 bg-night-900/55 text-lantern-300">
+                                                        <Icon
+                                                            className="h-4 w-4"
+                                                            aria-hidden="true"
+                                                        />
                                                     </span>
-                                                </p>
-                                            </div>
-                                        ),
-                                    )}
+                                                    <p className="text-base leading-6 text-warm-white/82">
+                                                        <strong className="font-extrabold text-lantern-100">
+                                                            {title}
+                                                        </strong>
+                                                        <span className="block text-warm-white/76">
+                                                            {detail}
+                                                        </span>
+                                                    </p>
+                                                </div>
+                                            ),
+                                        )}
+                                    </div>
                                 </div>
-                            </div>
-                        </article>
+                            </article>
+                        </ScrollReveal>
                     ))}
                 </div>
             </div>

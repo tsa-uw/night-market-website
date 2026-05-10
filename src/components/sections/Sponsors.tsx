@@ -1,5 +1,6 @@
 import { HeartHandshake, Sparkles } from "lucide-react";
 import { OptimizedPicture } from "../media/OptimizedImage";
+import ScrollReveal from "../motion/ScrollReveal";
 
 const sponsorImageModules = import.meta.glob<ImagePicture>(
     "../../assets/images/sponsors/*.png",
@@ -71,7 +72,7 @@ export default function Sponsors() {
             <div className="pointer-events-none absolute bottom-6 left-[6%] -z-10 h-80 w-80 rounded-full bg-blossom-400/8 blur-3xl" />
 
             <div className="mx-auto max-w-6xl">
-                <div className="mx-auto mb-12 max-w-3xl text-center">
+                <ScrollReveal className="mx-auto mb-12 max-w-3xl text-center" y={30}>
                     <span className="inline-flex items-center gap-2 rounded-full border border-lantern-100/30 bg-night-900/40 px-4 py-1 text-xs font-semibold tracking-[0.25em] text-lantern-100/85 uppercase backdrop-blur-md">
                         <Sparkles className="h-3.5 w-3.5 text-lantern-300" aria-hidden="true" />
                         Community partners
@@ -85,50 +86,53 @@ export default function Sponsors() {
                     <p className="mt-3 text-base leading-7 text-warm-white/60">
                         Thank you to the local businesses and cultural partners helping bring the market to life.
                     </p>
-                </div>
+                </ScrollReveal>
 
                 <div className="relative">
                     <div className="pointer-events-none absolute -inset-x-4 top-1/2 h-px bg-linear-to-r from-transparent via-lantern-300/28 to-transparent" />
 
                     <div className="relative grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
                         {SPONSORS.map(({ name, image, slug }, index) => (
-                            <article
+                            <ScrollReveal
                                 key={name}
-                                className="group relative isolate grid min-h-36 grid-rows-[1fr_auto] overflow-hidden rounded-lg border border-lantern-100/10 bg-night-800/58 p-4 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-lantern-300/35 hover:bg-night-700/60 hover:shadow-[0_0_24px_rgba(251,184,72,0.1)]"
-                                style={{
-                                    transitionDelay: `${index * 20}ms`,
-                                }}
+                                delay={index * 0.035}
+                                y={30}
+                                scale={0.97}
                             >
-                                <div className="pointer-events-none absolute inset-0 -z-10 bg-linear-to-br from-lantern-400/6 via-transparent to-blossom-400/6 opacity-65 transition-opacity duration-300 group-hover:opacity-100" />
-                                <div className="pointer-events-none absolute inset-x-5 top-0 h-px bg-linear-to-r from-transparent via-lantern-300/35 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+                                <article className="group relative isolate grid min-h-36 grid-rows-[1fr_auto] overflow-hidden rounded-lg border border-lantern-100/10 bg-night-800/58 p-4 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-lantern-300/35 hover:bg-night-700/60 hover:shadow-[0_0_24px_rgba(251,184,72,0.1)]">
+                                    <div className="pointer-events-none absolute inset-0 -z-10 bg-linear-to-br from-lantern-400/6 via-transparent to-blossom-400/6 opacity-65 transition-opacity duration-300 group-hover:opacity-100" />
+                                    <div className="pointer-events-none absolute inset-x-5 top-0 h-px bg-linear-to-r from-transparent via-lantern-300/35 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
 
-                                <div className="grid h-22 w-full place-items-center self-center">
-                                    <div
-                                        className={`grid h-full w-full place-items-center ${LOGO_TREATMENTS[slug] ?? ""}`}
-                                    >
-                                        <OptimizedPicture
-                                            picture={image}
-                                            alt={name}
-                                            className="mx-auto block max-h-18 max-w-[82%] object-contain object-center opacity-88 brightness-110 drop-shadow-[0_8px_18px_rgba(0,0,0,0.28)] transition duration-300 group-hover:scale-105 group-hover:opacity-100"
-                                            sizes="(min-width: 1024px) 180px, (min-width: 640px) 240px, 70vw"
-                                        />
+                                    <div className="grid h-22 w-full place-items-center self-center">
+                                        <div
+                                            className={`grid h-full w-full place-items-center ${LOGO_TREATMENTS[slug] ?? ""}`}
+                                        >
+                                            <OptimizedPicture
+                                                picture={image}
+                                                alt={name}
+                                                className="mx-auto block max-h-18 max-w-[82%] object-contain object-center opacity-88 brightness-110 drop-shadow-[0_8px_18px_rgba(0,0,0,0.28)] transition duration-300 group-hover:scale-105 group-hover:opacity-100"
+                                                sizes="(min-width: 1024px) 180px, (min-width: 640px) 240px, 70vw"
+                                            />
+                                        </div>
                                     </div>
-                                </div>
 
-                                <h3 className="min-h-5 text-center text-sm font-semibold tracking-wide text-lantern-100/82 transition-colors duration-200 group-hover:text-lantern-100">
-                                    {name}
-                                </h3>
-                            </article>
+                                    <h3 className="min-h-5 text-center text-sm font-semibold tracking-wide text-lantern-100/82 transition-colors duration-200 group-hover:text-lantern-100">
+                                        {name}
+                                    </h3>
+                                </article>
+                            </ScrollReveal>
                         ))}
                     </div>
                 </div>
 
-                <div className="mx-auto mt-10 flex max-w-2xl items-center justify-center gap-3 rounded-lg border border-warm-white/10 bg-night-800/35 px-4 py-4 text-center text-sm leading-6 text-warm-white/58 backdrop-blur-sm">
-                    <HeartHandshake className="h-5 w-5 shrink-0 text-blossom-300" aria-hidden="true" />
-                    <p>
-                        Sponsor support keeps Night Market free to attend and helps us host a full evening of food, performances, and community.
-                    </p>
-                </div>
+                <ScrollReveal y={24} delay={0.12}>
+                    <div className="mx-auto mt-10 flex max-w-2xl items-center justify-center gap-3 rounded-lg border border-warm-white/10 bg-night-800/35 px-4 py-4 text-center text-sm leading-6 text-warm-white/58 backdrop-blur-sm">
+                        <HeartHandshake className="h-5 w-5 shrink-0 text-blossom-300" aria-hidden="true" />
+                        <p>
+                            Sponsor support keeps Night Market free to attend and helps us host a full evening of food, performances, and community.
+                        </p>
+                    </div>
+                </ScrollReveal>
             </div>
         </section>
     );

@@ -1,6 +1,7 @@
 import { ChevronDown } from "lucide-react";
 import { useState } from "react";
 import Section from "../layout/Section";
+import ScrollReveal from "../motion/ScrollReveal";
 
 interface FAQItem {
     question: string;
@@ -67,8 +68,15 @@ export default function FAQ() {
     return (
         <Section id="faq" title="FAQ">
             <div className="mx-auto max-w-2xl">
-                {FAQ_ITEMS.map((item) => (
-                    <Accordion key={item.question} {...item} />
+                {FAQ_ITEMS.map((item, index) => (
+                    <ScrollReveal
+                        key={item.question}
+                        delay={index * 0.05}
+                        y={24}
+                        scale={0.99}
+                    >
+                        <Accordion {...item} />
+                    </ScrollReveal>
                 ))}
             </div>
         </Section>

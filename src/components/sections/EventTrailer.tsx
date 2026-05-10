@@ -1,5 +1,6 @@
 import { RotateCcw, Volume2, VolumeX } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
+import ScrollReveal from "../motion/ScrollReveal";
 
 const CONTROL_BUTTON_CLASS =
     "absolute bottom-4 grid h-11 w-11 place-items-center rounded-full border border-lantern-100/25 bg-night-900/70 text-lantern-100 shadow-xl shadow-black/40 backdrop-blur-md transition duration-200 ease-out hover:scale-110 hover:border-lantern-300/50 hover:bg-night-800/90 hover:text-lantern-300 hover:shadow-[0_0_16px_2px_theme(colors.lantern.300/20%)] active:scale-95 active:duration-75 focus:outline-none md:bottom-6";
@@ -78,7 +79,12 @@ export default function EventTrailer() {
             <div className="absolute inset-0 -z-20 bg-night-900" />
             <div className="pointer-events-none absolute inset-0 -z-10 bg-radial from-blossom-400/16 via-night-900/70 to-black" />
 
-            <div className="w-full max-w-[min(calc(133.333svh-4rem),calc(100vw-2rem))]">
+            <ScrollReveal
+                className="w-full max-w-[min(calc(133.333svh-4rem),calc(100vw-2rem))]"
+                y={42}
+                scale={0.94}
+                duration={0.8}
+            >
                 <div className="relative aspect-4/3 w-full overflow-hidden bg-night-900 shadow-2xl shadow-black/60">
                     <video
                         ref={videoRef}
@@ -119,7 +125,7 @@ export default function EventTrailer() {
                         )}
                     </button>
                 </div>
-            </div>
+            </ScrollReveal>
         </section>
     );
 }

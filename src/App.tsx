@@ -1,4 +1,5 @@
 import Navbar from "./components/layout/Navbar";
+import ScrollProgress from "./components/layout/ScrollProgress";
 import Hero from "./components/sections/Hero";
 import Logistics from "./components/sections/Logistics";
 import RaffleTickets from "./components/sections/RaffleTickets";
@@ -11,6 +12,7 @@ import FAQ from "./components/sections/FAQ";
 export default function App() {
     return (
         <>
+            <ScrollProgress />
             <Navbar />
             <main className="relative">
                 <Hero />

@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import ScrollReveal from "../motion/ScrollReveal";
 
 interface SectionProps {
     id: string;
@@ -24,12 +25,14 @@ export default function Section({
 
             <div className="mx-auto max-w-6xl">
                 {title && (
-                    <h2
-                        className="mb-10 text-center text-3xl tracking-wide text-lantern-100 md:text-4xl"
-                        style={{ fontFamily: '"TenPounds", "Georgia", serif' }}
-                    >
-                        {title}
-                    </h2>
+                    <ScrollReveal y={26}>
+                        <h2
+                            className="mb-10 text-center text-3xl tracking-wide text-lantern-100 md:text-4xl"
+                            style={{ fontFamily: '"TenPounds", "Georgia", serif' }}
+                        >
+                            {title}
+                        </h2>
+                    </ScrollReveal>
                 )}
                 {children}
             </div>

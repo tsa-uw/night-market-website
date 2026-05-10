@@ -1,25 +1,46 @@
 import { ChevronDown } from "lucide-react";
+import { motion, useScroll, useTransform } from "motion/react";
+import { useRef } from "react";
 import OptimizedImage from "../media/OptimizedImage";
 import landingPageBackground from "../../assets/images/LandingPageBackground.png";
 
 export default function Hero() {
+    const sectionRef = useRef<HTMLElement>(null);
+    const { scrollYProgress } = useScroll({
+        target: sectionRef,
+        offset: ["start start", "end start"],
+    });
+    const backgroundY = useTransform(scrollYProgress, [0, 1], ["0%", "18%"]);
+    const backgroundScale = useTransform(scrollYProgress, [0, 1], [1, 1.08]);
+    const contentY = useTransform(scrollYProgress, [0, 1], ["0%", "22%"]);
+    const contentOpacity = useTransform(scrollYProgress, [0, 0.72], [1, 0]);
+
     return (
         <section
+            ref={sectionRef}
             id="home"
             className="relative isolate flex min-h-screen items-center overflow-hidden px-4 pb-16 pt-24 text-center md:px-8"
         >
-            <OptimizedImage
-                src={landingPageBackground}
-                alt=""
-                aria-hidden="true"
-                priority
-                className="pointer-events-none absolute inset-0 -z-30 h-full w-full object-cover object-center"
-            />
+            <motion.div
+                className="pointer-events-none absolute inset-0 -z-30"
+                style={{ y: backgroundY, scale: backgroundScale }}
+            >
+                <OptimizedImage
+                    src={landingPageBackground}
+                    alt=""
+                    aria-hidden="true"
+                    priority
+                    className="h-full w-full object-cover object-center"
+                />
+            </motion.div>
             <div className="animate-hero-darken pointer-events-none absolute inset-0 -z-20 bg-night-900/10" />
             <div className="animate-hero-darken pointer-events-none absolute inset-0 -z-10 bg-gradient-to-b from-night-900/5 via-night-900/20 to-night-900" />
             <div className="animate-hero-darken pointer-events-none absolute -top-28 left-1/2 -z-10 h-80 w-80 -translate-x-1/2 rounded-full bg-blossom-300/20 blur-3xl" />
 
-            <div className="animate-hero-fade-in mx-auto w-full max-w-4xl">
+            <motion.div
+                className="animate-hero-fade-in mx-auto w-full max-w-4xl"
+                style={{ y: contentY, opacity: contentOpacity }}
+            >
                 <p className="inline-flex rounded-full border border-lantern-100/30 bg-night-900/30 px-4 py-1 text-xs font-semibold tracking-[0.25em] text-lantern-100/85 uppercase backdrop-blur-md md:text-sm">
                     TSAUW
                 </p>
@@ -49,7 +70,7 @@ export default function Hero() {
                         View Schedule
                     </a>
                 </div>
-            </div>
+            </motion.div>
 
             {/* Scroll indicator */}
             <div className="animate-hero-fade-in-late absolute bottom-8">

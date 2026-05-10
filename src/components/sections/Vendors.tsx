@@ -1,5 +1,6 @@
 import { ChevronDown, ChevronUp, MapPin, Search, Sparkles } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
+import ScrollReveal from "../motion/ScrollReveal";
 import vendorsData from "../../data/vendors.json";
 
 type VendorCategory = "food" | "crafts";
@@ -351,7 +352,7 @@ export default function Vendors() {
             </div>
 
             <div className="mx-auto max-w-6xl">
-                <div className="mb-12 text-center">
+                <ScrollReveal className="mb-12 text-center" y={30}>
                     <span className="inline-flex items-center gap-2 rounded-full border border-lantern-100/30 bg-night-900/40 px-4 py-1 text-xs font-semibold tracking-[0.25em] text-lantern-100/85 uppercase backdrop-blur-md">
                         <Sparkles className="h-3.5 w-3.5 text-blossom-300" aria-hidden="true" />
                         {VENDORS.length} vendors - one night
@@ -365,8 +366,9 @@ export default function Vendors() {
                     <p className="mx-auto mt-3 max-w-2xl text-base leading-7 tracking-wide text-warm-white/58">
                         Food vendors in Red Square and makers along Rainier Vista, all pulled from this year's vendor lineup.
                     </p>
-                </div>
+                </ScrollReveal>
 
+                <ScrollReveal y={30} scale={0.98} duration={0.7}>
                 <div
                     className="group/marquees relative mb-9 overflow-hidden border-y border-warm-white/8 bg-night-800/25 before:pointer-events-none before:absolute before:inset-y-0 before:left-0 before:z-10 before:w-20 before:bg-linear-to-r before:from-night-900 before:to-transparent after:pointer-events-none after:absolute after:inset-y-0 after:right-0 after:z-10 after:w-20 after:bg-linear-to-l after:from-night-900 after:to-transparent md:before:w-36 md:after:w-36"
                     aria-hidden="true"
@@ -374,8 +376,9 @@ export default function Vendors() {
                     <MarqueeRow vendors={marqueeVendors} />
                     <MarqueeRow vendors={[...marqueeVendors].reverse()} reverse />
                 </div>
+                </ScrollReveal>
 
-                <div className="mb-6 flex flex-col gap-4 lg:flex-row lg:items-center">
+                <ScrollReveal className="mb-6 flex flex-col gap-4 lg:flex-row lg:items-center" y={22} delay={0.08}>
                     <div className="flex flex-wrap items-center gap-2">
                         <span className="mr-1 text-xs font-bold tracking-[0.22em] text-warm-white/45 uppercase">
                             Browse
@@ -405,13 +408,20 @@ export default function Vendors() {
                             className="w-full rounded-full border border-warm-white/10 bg-night-800/60 py-2.5 pr-4 pl-10 text-sm text-warm-white outline-none transition duration-200 placeholder:text-warm-white/36 focus:border-blossom-300/45 focus:bg-night-800/85"
                         />
                     </label>
-                </div>
+                </ScrollReveal>
 
                 {filteredVendors.length > 0 ? (
                     <>
                         <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-                            {visibleVendors.map((vendor) => (
-                                <VendorCard key={`${vendor.name}-${vendor.booth}`} vendor={vendor} />
+                            {visibleVendors.map((vendor, index) => (
+                                <ScrollReveal
+                                    key={`${vendor.name}-${vendor.booth}`}
+                                    delay={(index % 6) * 0.035}
+                                    y={28}
+                                    scale={0.98}
+                                >
+                                    <VendorCard vendor={vendor} />
+                                </ScrollReveal>
                             ))}
                         </div>
 
@@ -428,11 +438,15 @@ export default function Vendors() {
                                         maxHeight: hiddenPanelMaxHeight,
                                     }}
                                 >
-                                    {hiddenVendors.map((vendor) => (
-                                        <VendorCard
+                                    {hiddenVendors.map((vendor, index) => (
+                                        <ScrollReveal
                                             key={`${vendor.name}-${vendor.booth}`}
-                                            vendor={vendor}
-                                        />
+                                            delay={(index % 6) * 0.025}
+                                            y={24}
+                                            scale={0.98}
+                                        >
+                                            <VendorCard vendor={vendor} />
+                                        </ScrollReveal>
                                     ))}
                                 </div>
 
