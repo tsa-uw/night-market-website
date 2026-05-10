@@ -1,7 +1,6 @@
 import {
     Clapperboard,
     Expand,
-    Music,
     PersonStanding,
     Sparkles,
     Star,
@@ -9,18 +8,18 @@ import {
 import { useEffect, useRef, useState } from "react";
 
 const PARTICLES = [
-    { left: 12, dur: 22, delay: 0,  size: 2, gold: false },
-    { left: 28, dur: 18, delay: 4,  size: 3, gold: true  },
-    { left: 45, dur: 26, delay: 2,  size: 2, gold: false },
-    { left: 63, dur: 20, delay: 7,  size: 3, gold: true  },
-    { left: 78, dur: 24, delay: 1,  size: 2, gold: false },
-    { left: 35, dur: 19, delay: 9,  size: 2, gold: true  },
-    { left: 55, dur: 28, delay: 3,  size: 3, gold: false },
-    { left: 88, dur: 21, delay: 6,  size: 2, gold: true  },
+    { left: 12, dur: 22, delay: 0, size: 2, gold: false },
+    { left: 28, dur: 18, delay: 4, size: 3, gold: true },
+    { left: 45, dur: 26, delay: 2, size: 2, gold: false },
+    { left: 63, dur: 20, delay: 7, size: 3, gold: true },
+    { left: 78, dur: 24, delay: 1, size: 2, gold: false },
+    { left: 35, dur: 19, delay: 9, size: 2, gold: true },
+    { left: 55, dur: 28, delay: 3, size: 3, gold: false },
+    { left: 88, dur: 21, delay: 6, size: 2, gold: true },
     { left: 20, dur: 25, delay: 11, size: 2, gold: false },
-    { left: 70, dur: 17, delay: 5,  size: 3, gold: true  },
-    { left: 8,  dur: 23, delay: 8,  size: 2, gold: false },
-    { left: 93, dur: 29, delay: 13, size: 2, gold: true  },
+    { left: 70, dur: 17, delay: 5, size: 3, gold: true },
+    { left: 8, dur: 23, delay: 8, size: 2, gold: false },
+    { left: 93, dur: 29, delay: 13, size: 2, gold: true },
 ] as const;
 
 interface ScheduleEvent {
@@ -31,53 +30,170 @@ interface ScheduleEvent {
     headliner?: boolean;
 }
 
-const TYPE_COLORS: Record<string, { bg: string; border: string; text: string }> = {
-    "Opening":      { bg: "rgba(198,138,70,0.15)",  border: "rgba(198,138,70,0.35)",  text: "#c68a46" },
-    "Martial Arts": { bg: "rgba(244,92,141,0.12)",  border: "rgba(244,92,141,0.35)",  text: "#ff89ad" },
-    "Interactive":  { bg: "rgba(251,184,72,0.12)",  border: "rgba(251,184,72,0.35)",  text: "#ffd06a" },
-    "Dance":        { bg: "rgba(244,92,141,0.10)",  border: "rgba(244,92,141,0.28)",  text: "#ff89ad" },
-    "Cultural":     { bg: "rgba(198,138,70,0.12)",  border: "rgba(198,138,70,0.32)",  text: "#fbb848" },
-    "Break":        { bg: "rgba(63,79,115,0.25)",   border: "rgba(63,79,115,0.4)",    text: "#94a3b8" },
-    "Music":        { bg: "rgba(244,92,141,0.12)",  border: "rgba(244,92,141,0.35)",  text: "#ff89ad" },
-    "Acrobatics":   { bg: "rgba(198,138,70,0.15)",  border: "rgba(198,138,70,0.35)",  text: "#fbb848" },
-    "Headliner":    { bg: "rgba(251,184,72,0.14)",  border: "rgba(251,184,72,0.45)",  text: "#ffd06a" },
+const TYPE_COLORS: Record<
+    string,
+    { bg: string; border: string; text: string }
+> = {
+    Opening: {
+        bg: "rgba(198,138,70,0.15)",
+        border: "rgba(198,138,70,0.35)",
+        text: "#c68a46",
+    },
+    "Martial Arts": {
+        bg: "rgba(244,92,141,0.12)",
+        border: "rgba(244,92,141,0.35)",
+        text: "#ff89ad",
+    },
+    Interactive: {
+        bg: "rgba(251,184,72,0.12)",
+        border: "rgba(251,184,72,0.35)",
+        text: "#ffd06a",
+    },
+    Dance: {
+        bg: "rgba(244,92,141,0.10)",
+        border: "rgba(244,92,141,0.28)",
+        text: "#ff89ad",
+    },
+    Cultural: {
+        bg: "rgba(198,138,70,0.12)",
+        border: "rgba(198,138,70,0.32)",
+        text: "#fbb848",
+    },
+    Break: {
+        bg: "rgba(63,79,115,0.25)",
+        border: "rgba(63,79,115,0.4)",
+        text: "#94a3b8",
+    },
+    Music: {
+        bg: "rgba(244,92,141,0.12)",
+        border: "rgba(244,92,141,0.35)",
+        text: "#ff89ad",
+    },
+    Acrobatics: {
+        bg: "rgba(198,138,70,0.15)",
+        border: "rgba(198,138,70,0.35)",
+        text: "#fbb848",
+    },
+    Headliner: {
+        bg: "rgba(251,184,72,0.14)",
+        border: "rgba(251,184,72,0.45)",
+        text: "#ffd06a",
+    },
 };
 
 const TYPE_MEDIA_GRAD: Record<string, [string, string]> = {
-    "Opening":      ["#1a1206", "#2d1f0a"],
+    Opening: ["#1a1206", "#2d1f0a"],
     "Martial Arts": ["#1a0612", "#2d0a1c"],
-    "Interactive":  ["#1a1206", "#2d1f0a"],
-    "Dance":        ["#1a0612", "#2d0a1c"],
-    "Cultural":     ["#1a1206", "#2d1f0a"],
-    "Break":        ["#0e1424", "#19233a"],
-    "Music":        ["#1a0612", "#2d0a1c"],
-    "Acrobatics":   ["#1a1206", "#2d1f0a"],
-    "Headliner":    ["#1a1206", "#3d2806"],
+    Interactive: ["#1a1206", "#2d1f0a"],
+    Dance: ["#1a0612", "#2d0a1c"],
+    Cultural: ["#1a1206", "#2d1f0a"],
+    Break: ["#0e1424", "#19233a"],
+    Music: ["#1a0612", "#2d0a1c"],
+    Acrobatics: ["#1a1206", "#2d1f0a"],
+    Headliner: ["#1a1206", "#3d2806"],
 };
 
 const SCHEDULE_EVENTS: ScheduleEvent[] = [
-    { time: "4:30 PM", title: "Intro",                                    type: "Opening",      desc: "The night begins. Welcome to the UW Night Market — a celebration of culture, community, and performance." },
-    { time: "4:33 PM", title: "Husky Wushu",                             type: "Martial Arts", desc: "UW's own wushu team blends precision, power, and artistry in a dynamic showcase of traditional and contemporary Chinese martial arts." },
-    { time: "4:50 PM", title: "TSA Food Eating Contest",                  type: "Interactive",  desc: "Who has what it takes? Audience members battle it out in this crowd-favorite eating contest. Cheer on your champion." },
-    { time: "5:08 PM", title: "We Are Taiwan I",                          type: "Dance",        desc: "A vibrant cultural performance celebrating Taiwanese heritage through traditional and modern dance. Part one of two." },
-    { time: "5:21 PM", title: "Last Chance",                              type: "Dance",        desc: "An electrifying dance crew performance pushing the boundaries of movement, synchrony, and stage presence." },
-    { time: "5:39 PM", title: "We Are Taiwan II",                         type: "Dance",        desc: "The continuation of We Are Taiwan, building energy and telling a deeper story through movement and music." },
-    { time: "5:52 PM", title: "Mak Fai Dragon and Lion Dance Association", type: "Cultural",     desc: "The legendary Mak Fai Association brings good luck and fortune with a thunderous traditional lion and dragon dance performance." },
-    { time: "6:07 PM", title: "Intermission & Sponsor Speeches",          type: "Break",        desc: "A brief intermission. Visit the vendors, grab a bite, and hear from the incredible sponsors who made this night possible." },
-    { time: "6:27 PM", title: "Mitsu &  Remi Vernon",                              type: "Music",        desc: "Singer-songwriter Remi Vernon takes the stage for a captivating live performance. Expect soulful melodies and heartfelt lyrics." },
-    { time: "6:43 PM", title: "VSA Moonlit Dance Crew",                   type: "Dance",        desc: "VSA's Moonlit Dance Crew opens with a stunning set — fluid choreography inspired by the beauty of moonlit nights." },
-    { time: "6:49 PM", title: "Divine Dance Crew",                        type: "Dance",        desc: "Divine brings fierce energy and impeccable technique to the stage in a high-impact dance showcase." },
-    { time: "7:02 PM", title: "VSA Moonlit Dance Crew",                   type: "Dance",        desc: "VSA Moonlit returns for a second set, escalating the night's energy with a new routine." },
-    { time: "7:06 PM", title: "Step Up Dance Crew",                       type: "Dance",        desc: "Precision meets passion as Step Up delivers sharp, synchronized choreography that commands the stage." },
-    { time: "7:19 PM", title: "Apex Diabolo",                             type: "Acrobatics",   desc: "Watch in awe as Apex Diabolo performs breathtaking feats of skill — spinning, launching, and catching with unreal precision." },
-    { time: "7:30 PM", title: "PRYVT",                                    type: "Headliner",    desc: "The night's headliner. PRYVT closes out the Night Market with a genre-defying live set that will leave you speechless.", headliner: true },
+    {
+        time: "4:30 PM",
+        title: "Intro",
+        type: "Opening",
+        desc: "The night begins. Welcome to the UW Night Market — a celebration of culture, community, and performance.",
+    },
+    {
+        time: "4:33 PM",
+        title: "Husky Wushu",
+        type: "Martial Arts",
+        desc: "UW's own wushu team blends precision, power, and artistry in a dynamic showcase of traditional and contemporary Chinese martial arts.",
+    },
+    {
+        time: "4:50 PM",
+        title: "TSA Food Eating Contest",
+        type: "Interactive",
+        desc: "Who has what it takes? Audience members battle it out in this crowd-favorite eating contest. Cheer on your champion.",
+    },
+    {
+        time: "5:08 PM",
+        title: "We Are Taiwan I",
+        type: "Dance",
+        desc: "A vibrant cultural performance celebrating Taiwanese heritage through traditional and modern dance. Part one of two.",
+    },
+    {
+        time: "5:21 PM",
+        title: "Last Chance",
+        type: "Dance",
+        desc: "An electrifying dance crew performance pushing the boundaries of movement, synchrony, and stage presence.",
+    },
+    {
+        time: "5:39 PM",
+        title: "We Are Taiwan II",
+        type: "Dance",
+        desc: "The continuation of We Are Taiwan, building energy and telling a deeper story through movement and music.",
+    },
+    {
+        time: "5:52 PM",
+        title: "Mak Fai Dragon and Lion Dance Association",
+        type: "Cultural",
+        desc: "The legendary Mak Fai Association brings good luck and fortune with a thunderous traditional lion and dragon dance performance.",
+    },
+    {
+        time: "6:07 PM",
+        title: "Intermission & Sponsor Speeches",
+        type: "Break",
+        desc: "A brief intermission. Visit the vendors, grab a bite, and hear from the incredible sponsors who made this night possible.",
+    },
+    {
+        time: "6:27 PM",
+        title: "Mitsu &  Remi Vernon",
+        type: "Music",
+        desc: "Singer-songwriter Remi Vernon takes the stage for a captivating live performance. Expect soulful melodies and heartfelt lyrics.",
+    },
+    {
+        time: "6:43 PM",
+        title: "VSA Moonlit Dance Crew",
+        type: "Dance",
+        desc: "VSA's Moonlit Dance Crew opens with a stunning set — fluid choreography inspired by the beauty of moonlit nights.",
+    },
+    {
+        time: "6:49 PM",
+        title: "Divine Dance Crew",
+        type: "Dance",
+        desc: "Divine brings fierce energy and impeccable technique to the stage in a high-impact dance showcase.",
+    },
+    {
+        time: "7:02 PM",
+        title: "VSA Moonlit Dance Crew",
+        type: "Dance",
+        desc: "VSA Moonlit returns for a second set, escalating the night's energy with a new routine.",
+    },
+    {
+        time: "7:06 PM",
+        title: "Step Up Dance Crew",
+        type: "Dance",
+        desc: "Precision meets passion as Step Up delivers sharp, synchronized choreography that commands the stage.",
+    },
+    {
+        time: "7:19 PM",
+        title: "Apex Diabolo",
+        type: "Acrobatics",
+        desc: "Watch in awe as Apex Diabolo performs breathtaking feats of skill — spinning, launching, and catching with unreal precision.",
+    },
+    {
+        time: "7:30 PM",
+        title: "PRYVT",
+        type: "Headliner",
+        desc: "The night's headliner. PRYVT closes out the Night Market with a genre-defying live set that will leave you speechless.",
+        headliner: true,
+    },
 ];
 
 const regularEvents = SCHEDULE_EVENTS.filter((e) => !e.headliner);
 const headlinerEvent = SCHEDULE_EVENTS.find((e) => e.headliner)!;
 
 function MediaIcon({ type, headliner }: { type: string; headliner?: boolean }) {
-    const color = headliner ? "#fbb848" : (TYPE_COLORS[type]?.text ?? "#ff89ad");
+    const color = headliner
+        ? "#fbb848"
+        : (TYPE_COLORS[type]?.text ?? "#ff89ad");
     const iconProps = {
         size: 36,
         color,
@@ -85,24 +201,33 @@ function MediaIcon({ type, headliner }: { type: string; headliner?: boolean }) {
         "aria-hidden": true,
     } as const;
 
-    if (type === "Martial Arts") return (
-        <Star {...iconProps} />
-    );
-    if (type === "Dance" || type === "Cultural") return (
-        <PersonStanding {...iconProps} />
-    );
-    if (type === "Music" || type === "Headliner") return (
-        <Music {...iconProps} fill="currentColor" />
-    );
-    if (type === "Acrobatics") return (
-        <Sparkles {...iconProps} />
-    );
-    return (
-        <Clapperboard {...iconProps} opacity={0.35} />
-    );
+    if (type === "Martial Arts") return <Star {...iconProps} />;
+    if (type === "Dance" || type === "Cultural")
+        return <PersonStanding {...iconProps} />;
+    if (type === "Music" || type === "Headliner")
+        return (
+            <svg
+                width="36"
+                height="36"
+                viewBox="0 0 24 24"
+                fill={color}
+                opacity={0.35}
+                aria-hidden="true"
+            >
+                <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z" />
+            </svg>
+        );
+    if (type === "Acrobatics") return <Sparkles {...iconProps} />;
+    return <Clapperboard {...iconProps} opacity={0.35} />;
 }
 
-function PreviewCard({ event, visible }: { event: ScheduleEvent | null; visible: boolean }) {
+function PreviewCard({
+    event,
+    visible,
+}: {
+    event: ScheduleEvent | null;
+    visible: boolean;
+}) {
     const isHeadliner = event?.headliner;
     const typeColor = event ? TYPE_COLORS[event.type] : null;
     const [g1, g2] = event
@@ -153,97 +278,151 @@ function PreviewCard({ event, visible }: { event: ScheduleEvent | null; visible:
                             animation: "card-media-in 0.28s ease both",
                         }}
                     >
-                        <div style={{
-                            position: "absolute", inset: 0,
-                            backgroundImage: "repeating-linear-gradient(0deg, transparent, transparent 28px, rgba(246,239,223,0.02) 29px)",
-                        }} />
-                        <div style={{
-                            position: "absolute",
-                            top: "50%", left: "50%",
-                            transform: "translate(-50%,-50%)",
-                            width: 120, height: 120, borderRadius: "50%",
-                            background: isHeadliner
-                                ? "radial-gradient(circle, rgba(251,184,72,0.12) 0%, transparent 70%)"
-                                : "radial-gradient(circle, rgba(244,92,141,0.10) 0%, transparent 70%)",
-                            filter: "blur(12px)",
-                        }} />
-                        <div style={{ position: "relative", zIndex: 1, display: "flex", flexDirection: "column", alignItems: "center", gap: 10 }}>
-                            <MediaIcon type={event.type} headliner={isHeadliner} />
-                            <span style={{
-                                fontSize: 10.5,
-                                fontWeight: 500,
-                                letterSpacing: "0.18em",
-                                textTransform: "uppercase",
-                                color: isHeadliner
-                                    ? "rgba(251,184,72,0.4)"
-                                    : "rgba(246,239,223,0.25)",
-                            }}>
+                        <div
+                            style={{
+                                position: "absolute",
+                                inset: 0,
+                                backgroundImage:
+                                    "repeating-linear-gradient(0deg, transparent, transparent 28px, rgba(246,239,223,0.02) 29px)",
+                            }}
+                        />
+                        <div
+                            style={{
+                                position: "absolute",
+                                top: "50%",
+                                left: "50%",
+                                transform: "translate(-50%,-50%)",
+                                width: 120,
+                                height: 120,
+                                borderRadius: "50%",
+                                background: isHeadliner
+                                    ? "radial-gradient(circle, rgba(251,184,72,0.12) 0%, transparent 70%)"
+                                    : "radial-gradient(circle, rgba(244,92,141,0.10) 0%, transparent 70%)",
+                                filter: "blur(12px)",
+                            }}
+                        />
+                        <div
+                            style={{
+                                position: "relative",
+                                zIndex: 1,
+                                display: "flex",
+                                flexDirection: "column",
+                                alignItems: "center",
+                                gap: 10,
+                            }}
+                        >
+                            <MediaIcon
+                                type={event.type}
+                                headliner={isHeadliner}
+                            />
+                            <span
+                                style={{
+                                    fontSize: 10.5,
+                                    fontWeight: 500,
+                                    letterSpacing: "0.18em",
+                                    textTransform: "uppercase",
+                                    color: isHeadliner
+                                        ? "rgba(251,184,72,0.4)"
+                                        : "rgba(246,239,223,0.25)",
+                                }}
+                            >
                                 {isHeadliner ? "headliner" : "preview"}
                             </span>
                         </div>
-                        <div style={{
-                            position: "absolute", bottom: 8, right: 10,
-                            fontSize: 10, color: "rgba(246,239,223,0.18)",
-                            letterSpacing: "0.1em", fontStyle: "italic",
-                        }}>
+                        <div
+                            style={{
+                                position: "absolute",
+                                bottom: 8,
+                                right: 10,
+                                fontSize: 10,
+                                color: "rgba(246,239,223,0.18)",
+                                letterSpacing: "0.1em",
+                                fontStyle: "italic",
+                            }}
+                        >
                             img · video
                         </div>
                         {isHeadliner && (
-                            <div style={{
-                                position: "absolute", inset: 0,
-                                background: "linear-gradient(105deg, transparent 35%, rgba(255,208,106,0.06) 50%, transparent 65%)",
-                                animation: "shimmer-sweep 3.5s ease 1s infinite",
-                            }} />
+                            <div
+                                style={{
+                                    position: "absolute",
+                                    inset: 0,
+                                    background:
+                                        "linear-gradient(105deg, transparent 35%, rgba(255,208,106,0.06) 50%, transparent 65%)",
+                                    animation:
+                                        "shimmer-sweep 3.5s ease 1s infinite",
+                                }}
+                            />
                         )}
                     </div>
 
                     {/* Card body */}
                     <div style={{ padding: "14px 16px 16px" }}>
-                        <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 8 }}>
-                            <time style={{
-                                fontSize: 11, fontWeight: 600, letterSpacing: "0.05em",
-                                color: isHeadliner
-                                    ? "rgba(251,184,72,0.7)"
-                                    : "rgba(251,184,72,0.55)",
-                                fontVariantNumeric: "tabular-nums",
-                            }}>
+                        <div
+                            style={{
+                                display: "flex",
+                                alignItems: "center",
+                                gap: 8,
+                                marginBottom: 8,
+                            }}
+                        >
+                            <time
+                                style={{
+                                    fontSize: 11,
+                                    fontWeight: 600,
+                                    letterSpacing: "0.05em",
+                                    color: isHeadliner
+                                        ? "rgba(251,184,72,0.7)"
+                                        : "rgba(251,184,72,0.55)",
+                                    fontVariantNumeric: "tabular-nums",
+                                }}
+                            >
                                 {event.time}
                             </time>
                             {typeColor && (
-                                <span style={{
-                                    fontSize: 10, fontWeight: 600, letterSpacing: "0.16em",
-                                    textTransform: "uppercase",
-                                    padding: "2px 9px", borderRadius: 20,
-                                    background: typeColor.bg,
-                                    border: `1px solid ${typeColor.border}`,
-                                    color: typeColor.text,
-                                }}>
+                                <span
+                                    style={{
+                                        fontSize: 10,
+                                        fontWeight: 600,
+                                        letterSpacing: "0.16em",
+                                        textTransform: "uppercase",
+                                        padding: "2px 9px",
+                                        borderRadius: 20,
+                                        background: typeColor.bg,
+                                        border: `1px solid ${typeColor.border}`,
+                                        color: typeColor.text,
+                                    }}
+                                >
                                     {event.type}
                                 </span>
                             )}
                         </div>
-                        <h3 style={{
-                            fontFamily: '"TenPounds", "Georgia", serif',
-                            fontSize: isHeadliner ? 28 : 22,
-                            lineHeight: 1.1,
-                            color: isHeadliner
-                                ? "var(--color-lantern-100)"
-                                : "var(--color-warm-white)",
-                            marginBottom: 10,
-                            letterSpacing: isHeadliner ? "0.01em" : 0,
-                            textShadow: isHeadliner
-                                ? "0 2px 18px rgba(255,208,106,0.25)"
-                                : "none",
-                            animation: "fade-up 0.25s ease 0.06s both",
-                        }}>
+                        <h3
+                            style={{
+                                fontFamily: '"TenPounds", "Georgia", serif',
+                                fontSize: isHeadliner ? 28 : 22,
+                                lineHeight: 1.1,
+                                color: isHeadliner
+                                    ? "var(--color-lantern-100)"
+                                    : "var(--color-warm-white)",
+                                marginBottom: 10,
+                                letterSpacing: isHeadliner ? "0.01em" : 0,
+                                textShadow: isHeadliner
+                                    ? "0 2px 18px rgba(255,208,106,0.25)"
+                                    : "none",
+                                animation: "fade-up 0.25s ease 0.06s both",
+                            }}
+                        >
                             {event.title}
                         </h3>
-                        <p style={{
-                            fontSize: 12.5,
-                            lineHeight: 1.6,
-                            color: "rgba(246,239,223,0.58)",
-                            animation: "fade-up 0.25s ease 0.1s both",
-                        }}>
+                        <p
+                            style={{
+                                fontSize: 12.5,
+                                lineHeight: 1.6,
+                                color: "rgba(246,239,223,0.58)",
+                                animation: "fade-up 0.25s ease 0.1s both",
+                            }}
+                        >
                             {event.desc}
                         </p>
                     </div>
@@ -252,15 +431,19 @@ function PreviewCard({ event, visible }: { event: ScheduleEvent | null; visible:
 
             {/* Connector arrow pointing left toward the active row */}
             {visible && (
-                <div style={{
-                    position: "absolute",
-                    left: -8, top: 28,
-                    width: 0, height: 0,
-                    borderTop: "7px solid transparent",
-                    borderBottom: "7px solid transparent",
-                    borderRight: "8px solid rgba(14,20,36,0.95)",
-                    filter: "drop-shadow(-2px 0 4px rgba(0,0,0,0.3))",
-                }} />
+                <div
+                    style={{
+                        position: "absolute",
+                        left: -8,
+                        top: 28,
+                        width: 0,
+                        height: 0,
+                        borderTop: "7px solid transparent",
+                        borderBottom: "7px solid transparent",
+                        borderRight: "8px solid rgba(14,20,36,0.95)",
+                        filter: "drop-shadow(-2px 0 4px rgba(0,0,0,0.3))",
+                    }}
+                />
             )}
         </div>
     );
@@ -466,7 +649,9 @@ export default function Schedule() {
                         <div
                             ref={headlinerRef}
                             className="group relative overflow-hidden rounded-2xl border border-lantern-300/20 bg-night-800/60 p-5 backdrop-blur-sm transition-all duration-500 hover:border-lantern-300/40 hover:shadow-[0_0_40px_rgba(255,208,106,0.1)]"
-                            onMouseEnter={() => setActiveIdx(regularEvents.length)}
+                            onMouseEnter={() =>
+                                setActiveIdx(regularEvents.length)
+                            }
                             style={{
                                 opacity: headlinerVisible ? 1 : 0,
                                 transform: headlinerVisible
@@ -513,11 +698,14 @@ export default function Schedule() {
                                 <div className="relative hidden h-14 w-14 shrink-0 sm:block">
                                     <div className="animate-node-pulse-gold absolute inset-0 rounded-full bg-lantern-300/20 blur-lg" />
                                     <div className="relative z-10 flex h-full w-full items-center justify-center rounded-full border border-lantern-300/35 bg-lantern-400/10">
-                                        <Music
+                                        <svg
                                             className="h-5 w-5 text-lantern-300"
                                             fill="currentColor"
+                                            viewBox="0 0 24 24"
                                             aria-hidden="true"
-                                        />
+                                        >
+                                            <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z" />
+                                        </svg>
                                     </div>
                                 </div>
                             </div>
