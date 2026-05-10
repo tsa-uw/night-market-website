@@ -27,6 +27,16 @@
     100% { transform: translateY(-88vh) scale(0.7); opacity: 0; }
 }
 
+@keyframes vendors-marquee-left {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+}
+
+@keyframes vendors-marquee-right {
+    from { transform: translateX(-50%); }
+    to { transform: translateX(0); }
+}
+
 /* Glowing orb travels down the timeline line */
 @keyframes timeline-scan {
     0%   { top: 0%;   opacity: 0; }

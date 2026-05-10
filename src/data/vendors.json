@@ -1,0 +1,226 @@
+[
+    {
+        "type": "food",
+        "name": "Anh Oi Bake Shop",
+        "booth": "1",
+        "location": "Red Square",
+        "specificType": "Food Double"
+    },
+    {
+        "type": "food",
+        "name": "Dreamy Drinks",
+        "booth": "T",
+        "location": "Red Square",
+        "specificType": "Food Truck"
+    },
+    {
+        "type": "food",
+        "name": "Elotador",
+        "booth": "2",
+        "location": "Red Square",
+        "specificType": "Food Single"
+    },
+    {
+        "type": "food",
+        "name": "Heart in Seoul",
+        "booth": "T",
+        "location": "Red Square",
+        "specificType": "Food Truck"
+    },
+    {
+        "type": "food",
+        "name": "Kathmandu MomoCha",
+        "booth": "T",
+        "location": "Red Square",
+        "specificType": "Food Truck"
+    },
+    {
+        "type": "food",
+        "name": "Koto Jelly Coffee",
+        "booth": "1",
+        "location": "Red Square",
+        "specificType": "Food Single"
+    },
+    {
+        "type": "food",
+        "name": "Langostino / Gyopo Chicken",
+        "booth": "T",
+        "location": "Red Square",
+        "specificType": "Food Single"
+    },
+    {
+        "type": "food",
+        "name": "Mangosteen",
+        "booth": "T",
+        "location": "Red Square",
+        "specificType": "Food Truck"
+    },
+    {
+        "type": "food",
+        "name": "The Moo Bar",
+        "booth": "1",
+        "location": "Red Square",
+        "specificType": "Food Single"
+    },
+    {
+        "type": "food",
+        "name": "Oh Dang in a Cup",
+        "booth": "1",
+        "location": "Red Square",
+        "specificType": "Food Double"
+    },
+    {
+        "type": "food",
+        "name": "Seattle Best Tea",
+        "booth": "1",
+        "location": "Red Square",
+        "specificType": "Food Single"
+    },
+    {
+        "type": "food",
+        "name": "Supreme Dumplings",
+        "booth": "2",
+        "location": "Red Square",
+        "specificType": "Food Double"
+    },
+    {
+        "type": "crafts",
+        "name": "Binucho",
+        "booth": "S",
+        "location": "Rainier Vista",
+        "specificType": "Arts/Crafts"
+    },
+    {
+        "type": "crafts",
+        "name": "Bows&Knots",
+        "booth": "1",
+        "location": "Rainier Vista",
+        "specificType": "Arts/Crafts"
+    },
+    {
+        "type": "crafts",
+        "name": "Clara Jane",
+        "booth": "1",
+        "location": "Rainier Vista",
+        "specificType": "Arts/Crafts"
+    },
+    {
+        "type": "crafts",
+        "name": "Colored Lifestyle",
+        "booth": "SS",
+        "location": "Rainier Vista",
+        "specificType": "Student Arts/Crafts"
+    },
+    {
+        "type": "crafts",
+        "name": "Dooble Studios",
+        "booth": "S",
+        "location": "Rainier Vista",
+        "specificType": "Arts/Crafts"
+    },
+    {
+        "type": "crafts",
+        "name": "Dyme Designs",
+        "booth": "1",
+        "location": "Rainier Vista",
+        "specificType": "Arts/Crafts"
+    },
+    {
+        "type": "crafts",
+        "name": "Geekystop",
+        "booth": "S, Wanderella",
+        "location": "Rainier Vista",
+        "specificType": "Student Arts/Crafts"
+    },
+    {
+        "type": "crafts",
+        "name": "iSadlyfe",
+        "booth": "S",
+        "location": "Rainier Vista",
+        "specificType": "Student Arts/Crafts"
+    },
+    {
+        "type": "crafts",
+        "name": "Junky Junco",
+        "booth": "1",
+        "location": "Rainier Vista",
+        "specificType": "Student Arts/Crafts"
+    },
+    {
+        "type": "crafts",
+        "name": "Lessevilbun",
+        "booth": "S",
+        "location": "Rainier Vista",
+        "specificType": "Student Arts/Crafts"
+    },
+    {
+        "type": "crafts",
+        "name": "Misha Charms",
+        "booth": "1",
+        "location": "Rainier Vista",
+        "specificType": "Student Arts/Crafts"
+    },
+    {
+        "type": "crafts",
+        "name": "Shooley",
+        "booth": "S, Simple&Soft",
+        "location": "Rainier Vista",
+        "specificType": "Arts/Crafts"
+    },
+    {
+        "type": "crafts",
+        "name": "Simple & Soft",
+        "booth": "S, Shooley",
+        "location": "Rainier Vista",
+        "specificType": "Arts/Crafts"
+    },
+    {
+        "type": "crafts",
+        "name": "SipnGlow",
+        "booth": "SS",
+        "location": "Rainier Vista",
+        "specificType": "Student Arts/Crafts"
+    },
+    {
+        "type": "crafts",
+        "name": "Snippet",
+        "booth": "1, NT",
+        "location": "Rainier Vista",
+        "specificType": "Arts/Crafts"
+    },
+    {
+        "type": "crafts",
+        "name": "Soupermandoo",
+        "booth": "S",
+        "location": "Rainier Vista",
+        "specificType": "Student Arts/Crafts"
+    },
+    {
+        "type": "crafts",
+        "name": "Sparkle&Gleam",
+        "booth": "1",
+        "location": "Rainier Vista",
+        "specificType": "Arts/Crafts"
+    },
+    {
+        "type": "crafts",
+        "name": "Teddie House Art",
+        "booth": "1",
+        "location": "Rainier Vista",
+        "specificType": "Student Arts/Crafts"
+    },
+    {
+        "type": "crafts",
+        "name": "UW Mahjong Society",
+        "booth": "1, NT",
+        "location": "Rainier Vista",
+        "specificType": "Student Arts/Crafts"
+    },
+    {
+        "type": "crafts",
+        "name": "Wanderella",
+        "booth": "S, Geekystop",
+        "location": "Rainier Vista",
+        "specificType": "Student Arts/Crafts"
+    }
+]
