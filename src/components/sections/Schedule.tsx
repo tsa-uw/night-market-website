@@ -6,7 +6,13 @@ import {
     Star,
 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
-import OptimizedImage from "../media/OptimizedImage";
+import { OptimizedPicture } from "../media/OptimizedImage";
+import divineGroupImage from "../../assets/images/schedule/divine-group.jpg?w=336;672&format=avif;webp;jpg&as=picture";
+import divineLogoImage from "../../assets/images/schedule/divine-logo.png?w=96;192&format=avif;webp;png&as=picture";
+import huskyWushuImage from "../../assets/images/schedule/husky-wushu.jpg?w=336;672&format=avif;webp;jpg&as=picture";
+import huskyWushuLogoImage from "../../assets/images/schedule/husky-wushu-logo.png?w=96;192&format=avif;webp;png&as=picture";
+import weAreTaiwanBannerImage from "../../assets/images/schedule/we-are-taiwan-banner.jpg?w=336;672&format=avif;webp;jpg&as=picture";
+import weAreTwLogoImage from "../../assets/images/schedule/we-are-tw-logo.jpg?w=96;192&format=avif;webp;jpg&as=picture";
 
 const PARTICLES = [
     { left: 12, dur: 22, delay: 0, size: 2, gold: false },
@@ -28,11 +34,47 @@ interface ScheduleEvent {
     title: string;
     type: string;
     desc: string;
-    image?: string;
+    image?: ScheduleMedia;
     imagePosition?: string;
-    logo?: string;
+    logo?: ScheduleMedia;
     headliner?: boolean;
 }
+
+interface ScheduleMedia {
+    key: string;
+    picture: ImagePicture;
+}
+
+const SCHEDULE_MEDIA = {
+    divineGroup: {
+        key: "divine-group",
+        picture: divineGroupImage,
+    },
+    divineLogo: {
+        key: "divine-logo",
+        picture: divineLogoImage,
+    },
+    huskyWushu: {
+        key: "husky-wushu",
+        picture: huskyWushuImage,
+    },
+    huskyWushuLogo: {
+        key: "husky-wushu-logo",
+        picture: huskyWushuLogoImage,
+    },
+    weAreTaiwanBanner: {
+        key: "we-are-taiwan-banner",
+        picture: weAreTaiwanBannerImage,
+    },
+    weAreTwLogo: {
+        key: "we-are-tw-logo",
+        picture: weAreTwLogoImage,
+    },
+} satisfies Record<string, ScheduleMedia>;
+
+const SCHEDULE_MEDIA_BY_KEY = new Map(
+    Object.values(SCHEDULE_MEDIA).map((media) => [media.key, media]),
+);
 
 const TYPE_COLORS: Record<
     string,
@@ -109,8 +151,8 @@ const SCHEDULE_EVENTS: ScheduleEvent[] = [
         title: "Husky Wushu",
         type: "Martial Arts",
         desc: "Wushu is a Chinese martial art and international sport derived from hundreds of years of traditional Chinese Kung Fu. Husky Wushu has been an active club at UW since 2009, with a mission to foster an inclusive community around the practice of Chinese martial arts. They will perform a medley of individual forms, group forms, and fight sets - including hand forms and weapon forms such as sword, staff, and fan.",
-        image: "/entertainment group images/Husky Wushu.jpg",
-        logo: "/entertainment group images/Husky Wushu Logo.png",
+        image: SCHEDULE_MEDIA.huskyWushu,
+        logo: SCHEDULE_MEDIA.huskyWushuLogo,
     },
     {
         time: "4:50 PM",
@@ -123,9 +165,9 @@ const SCHEDULE_EVENTS: ScheduleEvent[] = [
         title: "We Are Taiwan I",
         type: "Dance",
         desc: "We are honored to welcome a special performance from the National Taiwan University of Sport. As part of their U.S. tour titled '2026 We Are Taiwan,' these talented students bring together athletic excellence, artistry, and cultural pride. Through dynamic movement and powerful storytelling, they showcase the energy, creativity, and spirit of Taiwan.",
-        image: "/entertainment group images/we are taiwan banner.jpg",
+        image: SCHEDULE_MEDIA.weAreTaiwanBanner,
         imagePosition: "object-right",
-        logo: "/entertainment group images/we are tw logo.jpg",
+        logo: SCHEDULE_MEDIA.weAreTwLogo,
     },
     {
         time: "5:21 PM",
@@ -138,9 +180,9 @@ const SCHEDULE_EVENTS: ScheduleEvent[] = [
         title: "We Are Taiwan II",
         type: "Dance",
         desc: "We are honored to welcome a special performance from the National Taiwan University of Sport. As part of their U.S. tour titled '2026 We Are Taiwan,' these talented students bring together athletic excellence, artistry, and cultural pride. Through dynamic movement and powerful storytelling, they showcase the energy, creativity, and spirit of Taiwan.",
-        image: "/entertainment group images/we are taiwan banner.jpg",
+        image: SCHEDULE_MEDIA.weAreTaiwanBanner,
         imagePosition: "object-right",
-        logo: "/entertainment group images/we are tw logo.jpg",
+        logo: SCHEDULE_MEDIA.weAreTwLogo,
     },
     {
         time: "5:52 PM",
@@ -171,8 +213,8 @@ const SCHEDULE_EVENTS: ScheduleEvent[] = [
         title: "Divine Dance Crew",
         type: "Dance",
         desc: "DIVINE DANCE CREW is a dance crew established in 2024 that does a variety of dance covers including K-Pop. Our members come from different places around the world but are united through a shared love and passion for dance and K-Pop. We aim to bring the excitement and enjoyment of performance to everyone!",
-        image: "/entertainment group images/Divine Group pic.JPG",
-        logo: "/entertainment group images/DIVINE LOGO.png",
+        image: SCHEDULE_MEDIA.divineGroup,
+        logo: SCHEDULE_MEDIA.divineLogo,
     },
     {
         time: "7:02 PM",
@@ -235,13 +277,15 @@ function MediaIcon({ type, headliner }: { type: string; headliner?: boolean }) {
 }
 
 type PreviewImageItem = {
-    src: string;
+    key: string;
+    picture: ImagePicture;
     alt: string;
     imagePosition?: string;
 };
 
 type PreviewLogoItem = {
-    src: string;
+    key: string;
+    picture: ImagePicture;
     alt: string;
 };
 
@@ -249,12 +293,13 @@ function getPreviewImages(previewedMedia: ReadonlySet<string>) {
     const seen = new Set<string>();
 
     return SCHEDULE_EVENTS.reduce<PreviewImageItem[]>((items, event) => {
-        if (!event.image || !previewedMedia.has(event.image)) return items;
-        if (seen.has(event.image)) return items;
+        if (!event.image || !previewedMedia.has(event.image.key)) return items;
+        if (seen.has(event.image.key)) return items;
 
-        seen.add(event.image);
+        seen.add(event.image.key);
         items.push({
-            src: event.image,
+            key: event.image.key,
+            picture: event.image.picture,
             alt: event.title,
             imagePosition: event.imagePosition,
         });
@@ -266,12 +311,13 @@ function getPreviewLogos(previewedMedia: ReadonlySet<string>) {
     const seen = new Set<string>();
 
     return SCHEDULE_EVENTS.reduce<PreviewLogoItem[]>((items, event) => {
-        if (!event.logo || !previewedMedia.has(event.logo)) return items;
-        if (seen.has(event.logo)) return items;
+        if (!event.logo || !previewedMedia.has(event.logo.key)) return items;
+        if (seen.has(event.logo.key)) return items;
 
-        seen.add(event.logo);
+        seen.add(event.logo.key);
         items.push({
-            src: event.logo,
+            key: event.logo.key,
+            picture: event.logo.picture,
             alt: `${event.title} logo`,
         });
         return items;
@@ -283,6 +329,10 @@ function ScheduleMediaCache({
 }: {
     previewedMedia: ReadonlySet<string>;
 }) {
+    const media = [...previewedMedia]
+        .map((src) => SCHEDULE_MEDIA_BY_KEY.get(src))
+        .filter((item): item is ScheduleMedia => Boolean(item));
+
     return (
         <div
             aria-hidden="true"
@@ -295,13 +345,14 @@ function ScheduleMediaCache({
                 width: 1,
             }}
         >
-            {[...previewedMedia].map((src) => (
-                <OptimizedImage
-                    key={src}
-                    src={src}
+            {media.map(({ key, picture }) => (
+                <OptimizedPicture
+                    key={key}
+                    picture={picture}
                     alt=""
                     fetchPriority="low"
                     loading="eager"
+                    sizes="1px"
                     style={{ height: 1, width: 1 }}
                 />
             ))}
@@ -372,16 +423,23 @@ function PreviewCard({
                         {event.image ? (
                             <>
                                 {previewImages.map(
-                                    ({ src, alt, imagePosition }) => {
-                                        const isActive = src === event.image;
+                                    ({
+                                        key,
+                                        picture,
+                                        alt,
+                                        imagePosition,
+                                    }) => {
+                                        const isActive =
+                                            key === event.image?.key;
 
                                         return (
-                                            <OptimizedImage
-                                                key={src}
-                                                src={src}
+                                            <OptimizedPicture
+                                                key={key}
+                                                picture={picture}
                                                 alt={isActive ? alt : ""}
                                                 aria-hidden={!isActive}
                                                 className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-150 ${imagePosition ?? ""}`}
+                                                sizes="336px"
                                                 style={{
                                                     opacity: isActive ? 1 : 0,
                                                 }}
@@ -415,16 +473,17 @@ function PreviewCard({
                                 </span>
                                 {event.logo && (
                                     <>
-                                        {previewLogos.map(({ src, alt }) => {
+                                        {previewLogos.map(({ key, picture, alt }) => {
                                             const isActive =
-                                                src === event.logo;
+                                                key === event.logo?.key;
 
                                             return (
-                                                <OptimizedImage
-                                                    key={src}
-                                                    src={src}
+                                                <OptimizedPicture
+                                                    key={key}
+                                                    picture={picture}
                                                     alt={isActive ? alt : ""}
                                                     aria-hidden={!isActive}
+                                                    sizes="74px"
                                                     style={{
                                                         position: "absolute",
                                                         right: 12,
@@ -644,8 +703,8 @@ export default function Schedule() {
         setActiveIdx(idx);
         setPreviewedMedia((current) => {
             const next = new Set(current);
-            if (event.image) next.add(event.image);
-            if (event.logo) next.add(event.logo);
+            if (event.image) next.add(event.image.key);
+            if (event.logo) next.add(event.logo.key);
 
             return next.size === current.size ? current : next;
         });

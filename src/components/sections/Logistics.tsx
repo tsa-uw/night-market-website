@@ -9,8 +9,7 @@ import {
     Train,
 } from "lucide-react";
 import OptimizedImage from "../media/OptimizedImage";
-import landingPageBackground from "../../assets/images/LandingPageBackground.png";
-import redSqaureDrawing from "../../assets/images/RedSquareDrawing.png";
+import redSquareDrawing from "../../assets/images/RedSquareDrawing.png";
 
 const DETAIL_CARDS = [
     {
@@ -57,7 +56,7 @@ const DETAIL_CARDS = [
     },
     {
         heading: "Accommodations",
-        image: redSqaureDrawing,
+        image: redSquareDrawing,
         items: [
             {
                 icon: Accessibility,
@@ -94,7 +93,7 @@ export default function Logistics() {
             <div className="relative">
                 <div className="relative isolate flex min-h-[72svh] items-center justify-center overflow-hidden px-4 py-24 text-center md:px-8">
                     <OptimizedImage
-                        src={redSqaureDrawing}
+                        src={redSquareDrawing}
                         alt=""
                         aria-hidden="true"
                         className="absolute inset-0 -z-30 h-full w-full object-cover"
