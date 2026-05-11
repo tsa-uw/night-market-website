@@ -1,6 +1,5 @@
 import { Clock, MapPin, Plane, Ticket, Trophy } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
-import { useEffect, useRef, useState } from "react";
 import type { ReactNode } from "react";
 import cinematicSky from "../../assets/images/CinematicSky.png";
 import ScrollReveal from "../motion/ScrollReveal";
@@ -31,78 +30,6 @@ function ScallopEdge({ flip = false }: { flip?: boolean }) {
             preserveAspectRatio="none"
         >
             <path d={d} fill="#060910" />
-        </svg>
-    );
-}
-
-function TicketGlowTrace({
-    wrapperRef,
-}: {
-    wrapperRef: React.RefObject<HTMLDivElement | null>;
-}) {
-    const [dims, setDims] = useState<{ w: number; h: number } | null>(null);
-
-    useEffect(() => {
-        const el = wrapperRef.current;
-        if (!el) return;
-        const ro = new ResizeObserver(([entry]) => {
-            const { width, height } = entry.contentRect;
-            setDims({ w: width, h: height });
-        });
-        ro.observe(el);
-        return () => ro.disconnect();
-    }, [wrapperRef]);
-
-    if (!dims || dims.w <= 0 || dims.h <= 0) return null;
-
-    const rx = Math.min(11, dims.w / 2, dims.h / 2);
-    const { w, h } = dims;
-    const perimeter =
-        2 * (w - 2 - 2 * rx) + 2 * (h - 2 - 2 * rx) + 2 * Math.PI * rx;
-    const segLen = Math.round(perimeter * 0.06);
-    const gap = Math.round(perimeter - segLen);
-
-    const anim = "ticket-trace 8s ease-in-out 2s infinite";
-    const rect = { x: 1, y: 1, width: w - 2, height: h - 2, rx, ry: rx } as const;
-
-    return (
-        <svg
-            className="pointer-events-none absolute inset-0 z-5 h-full w-full"
-            style={{ overflow: "visible" }}
-            aria-hidden="true"
-        >
-            <rect
-                {...rect} fill="none"
-                stroke="rgba(251,184,72,0.05)"
-                strokeWidth="28"
-                strokeDasharray={`${segLen} ${gap}`}
-                strokeLinecap="round"
-                style={{ strokeDashoffset: perimeter, animation: anim, filter: "blur(14px)" }}
-            />
-            <rect
-                {...rect} fill="none"
-                stroke="rgba(251,184,72,0.1)"
-                strokeWidth="12"
-                strokeDasharray={`${segLen} ${gap}`}
-                strokeLinecap="round"
-                style={{ strokeDashoffset: perimeter, animation: anim, filter: "blur(6px)" }}
-            />
-            <rect
-                {...rect} fill="none"
-                stroke="rgba(251,184,72,0.22)"
-                strokeWidth="4"
-                strokeDasharray={`${segLen} ${gap}`}
-                strokeLinecap="round"
-                style={{ strokeDashoffset: perimeter, animation: anim, filter: "blur(2px)" }}
-            />
-            <rect
-                {...rect} fill="none"
-                stroke="rgba(251,184,72,0.7)"
-                strokeWidth="1"
-                strokeDasharray={`${segLen} ${gap}`}
-                strokeLinecap="round"
-                style={{ strokeDashoffset: perimeter, animation: anim }}
-            />
         </svg>
     );
 }
@@ -196,8 +123,6 @@ const INFO_CARD_TILTS = [
 ];
 
 export default function RaffleTickets() {
-    const ticketRef = useRef<HTMLDivElement>(null);
-
     return (
         <section
             id="raffle"
@@ -236,10 +161,8 @@ export default function RaffleTickets() {
                 {/* Ticket */}
                 <ScrollReveal y={42} scale={0.96} duration={0.75}>
                     <div
-                        ref={ticketRef}
                         className="relative mx-auto mb-8 max-w-195 rounded-xl shadow-[0_8px_48px_rgba(0,0,0,0.65),0_0_32px_rgba(251,184,72,0.08),0_0_64px_rgba(244,92,141,0.06)] transition-shadow duration-350 ease-in-out hover:shadow-[0_12px_56px_rgba(0,0,0,0.75),0_0_48px_rgba(251,184,72,0.18),0_0_80px_rgba(244,92,141,0.12)]"
                     >
-                        <TicketGlowTrace wrapperRef={ticketRef} />
                         <div className="relative flex overflow-hidden rounded-xl border border-[rgba(251,184,72,0.18)] bg-[rgba(8,13,24,0.82)] backdrop-blur-md">
                             <ScallopEdge />
                             <ScallopEdge flip />
