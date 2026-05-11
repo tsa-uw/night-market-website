@@ -183,6 +183,18 @@ const INFO_CARDS: InfoCardData[] = [
     },
 ];
 
+const INFO_CARD_POSITIONS = [
+    "sm:mt-0",
+    "sm:mt-7",
+    "sm:mt-3",
+];
+
+const INFO_CARD_TILTS = [
+    "sm:-rotate-1",
+    "sm:rotate-[0.8deg]",
+    "sm:-rotate-[0.45deg]",
+];
+
 export default function RaffleTickets() {
     const ticketRef = useRef<HTMLDivElement>(null);
 
@@ -387,43 +399,53 @@ export default function RaffleTickets() {
                 </ScrollReveal>
 
                 {/* Info stubs */}
-                <div className="mx-auto grid max-w-195 grid-cols-1 gap-4 sm:grid-cols-3">
+                <div className="mx-auto grid max-w-195 grid-cols-1 items-start gap-4 pt-1 sm:grid-cols-3 sm:gap-5 sm:pt-3">
                     {INFO_CARDS.map(({ Icon, title, body, accent }, i) => {
                         const a = ACCENT[accent];
                         return (
                             <ScrollReveal
                                 key={title}
+                                className={`h-full ${INFO_CARD_POSITIONS[i] ?? ""}`}
                                 delay={i * 0.08}
                                 y={34}
                                 scale={0.97}
                             >
-                                <div
-                                    className={`group relative overflow-hidden rounded-[10px] border bg-[rgba(8,13,24,0.6)] backdrop-blur-sm transition-all duration-300 ${a.card}`}
-                                >
-                                    {/* Stub header */}
-                                    <div className="flex h-11 items-center justify-between px-5">
-                                        <span className={`text-[10px] font-semibold uppercase tracking-[0.2em] ${a.label}`}>
-                                            Stub No. 0{i + 1}
-                                        </span>
-                                        <span className={`flex h-6 w-6 items-center justify-center rounded-md border ${a.iconBox}`}>
-                                            <Icon size={13} aria-hidden="true" />
-                                        </span>
-                                    </div>
-
-                                    {/* Perforated tear line */}
+                                <div className="group relative h-full">
                                     <div
-                                        className="pointer-events-none absolute inset-x-0 top-11 h-px"
-                                        style={{
-                                            background: `repeating-linear-gradient(to right, transparent 0 4px, ${a.tear} 4px 8px)`,
-                                        }}
+                                        className={`pointer-events-none absolute inset-0 rounded-none border bg-[rgba(8,13,24,0.68)] shadow-[0_12px_26px_rgba(0,0,0,0.28)] backdrop-blur-sm transition-[border-color,box-shadow,background-color,transform] duration-300 ${INFO_CARD_TILTS[i] ?? ""} ${a.card}`}
+                                        aria-hidden="true"
                                     />
-                                    <div className={`absolute -left-1.5 top-11 h-3 w-3 -translate-y-1/2 rounded-full border bg-night-900 ${a.notch}`} />
-                                    <div className={`absolute -right-1.5 top-11 h-3 w-3 -translate-y-1/2 rounded-full border bg-night-900 ${a.notch}`} />
+                                    <div className="pointer-events-none absolute inset-0 overflow-hidden rounded-none" aria-hidden="true">
+                                        <div
+                                            className={`absolute inset-0 bg-linear-to-br from-warm-white/[0.035] via-transparent to-night-900/45 ${INFO_CARD_TILTS[i] ?? ""}`}
+                                        />
+                                    </div>
+                                    <div className="relative h-full overflow-hidden rounded-none">
+                                        {/* Stub header */}
+                                        <div className="relative flex h-11 items-center justify-between px-5">
+                                            <span className={`text-[10px] font-semibold uppercase tracking-[0.2em] ${a.label}`}>
+                                                Stub No. 0{i + 1}
+                                            </span>
+                                            <span className={`flex h-6 w-6 items-center justify-center rounded-none border ${a.iconBox}`}>
+                                                <Icon size={13} aria-hidden="true" />
+                                            </span>
+                                        </div>
 
-                                    {/* Stub body */}
-                                    <div className="px-5 pb-5 pt-4">
-                                        <div className={`mb-1.5 text-base font-semibold ${a.title}`}>{title}</div>
-                                        <p className="text-sm leading-relaxed text-warm-white/70">{body}</p>
+                                        {/* Perforated tear line */}
+                                        <div
+                                            className="pointer-events-none absolute inset-x-0 top-11 h-px"
+                                            style={{
+                                                background: `repeating-linear-gradient(to right, transparent 0 4px, ${a.tear} 4px 8px)`,
+                                            }}
+                                        />
+                                        <div className={`absolute -left-1.5 top-11 h-3 w-3 -translate-y-1/2 rounded-full border bg-night-900 ${a.notch}`} />
+                                        <div className={`absolute -right-1.5 top-11 h-3 w-3 -translate-y-1/2 rounded-full border bg-night-900 ${a.notch}`} />
+
+                                        {/* Stub body */}
+                                        <div className="relative px-5 pb-5 pt-4">
+                                            <div className={`mb-1.5 text-base font-semibold ${a.title}`}>{title}</div>
+                                            <p className="text-sm leading-relaxed text-warm-white/70">{body}</p>
+                                        </div>
                                     </div>
                                 </div>
                             </ScrollReveal>
