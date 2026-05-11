@@ -172,13 +172,13 @@ export default function RaffleTickets() {
                 <OptimizedImage
                     src={cinematicSky}
                     alt=""
-                    className="h-full w-full object-cover object-top"
+                    className="h-full w-full object-cover object-center"
                 />
                 {/* Gradient: sky visible at top, fades to night at bottom */}
                 <div
                     className="absolute inset-0"
                     style={{
-                        background: "linear-gradient(to bottom, rgba(6,9,16,0.15) 0%, rgba(6,9,16,0.45) 50%, rgba(6,9,16,0.88) 75%, #060910 100%)",
+                        background: "linear-gradient(to bottom, rgba(6,9,16,0.05) 0%, rgba(6,9,16,0.30) 50%, rgba(6,9,16,0.65) 75%, rgba(6,9,16,0.85) 100%)",
                     }}
                 />
             </div>
