@@ -1,17 +1,17 @@
 import { Clock, MapPin, Plane, Ticket, Trophy } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
-import type { ReactNode } from "react";
+import type { CSSProperties, PointerEvent, ReactNode } from "react";
 import cinematicSky from "../../assets/images/CinematicSky.png";
 import ScrollReveal from "../motion/ScrollReveal";
 import OptimizedImage from "../media/OptimizedImage";
 
 function AirlineLogo() {
     return (
-        <div className="flex h-[48px] w-[48px] shrink-0 items-center justify-center rounded-[10px] border border-[rgba(251,184,72,0.2)] bg-[rgba(251,184,72,0.07)]">
+        <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-[10px] border border-[rgba(251,184,72,0.2)] bg-[rgba(251,184,72,0.07)] sm:h-12 sm:w-12">
             <OptimizedImage
                 src="/alaska_airlines_eskimo-logo.png"
                 alt="Alaska Airlines"
-                className="h-10 w-10 object-contain"
+                className="h-9 w-9 object-contain sm:h-10 sm:w-10"
             />
         </div>
     );
@@ -122,6 +122,45 @@ const INFO_CARD_TILTS = [
     "sm:-rotate-[0.45deg]",
 ];
 
+type TicketTiltStyle = CSSProperties & {
+    "--ticket-glow-x": string;
+    "--ticket-glow-y": string;
+    "--ticket-lift": string;
+    "--ticket-rotate-x": string;
+    "--ticket-rotate-y": string;
+};
+
+const TICKET_TILT_STYLE: TicketTiltStyle = {
+    "--ticket-glow-x": "50%",
+    "--ticket-glow-y": "50%",
+    "--ticket-lift": "0px",
+    "--ticket-rotate-x": "0deg",
+    "--ticket-rotate-y": "0deg",
+};
+
+function handleTicketPointerMove(event: PointerEvent<HTMLDivElement>) {
+    const { currentTarget, clientX, clientY } = event;
+    const rect = currentTarget.getBoundingClientRect();
+    const x = (clientX - rect.left) / rect.width;
+    const y = (clientY - rect.top) / rect.height;
+
+    currentTarget.style.setProperty("--ticket-glow-x", `${Math.round(x * 100)}%`);
+    currentTarget.style.setProperty("--ticket-glow-y", `${Math.round(y * 100)}%`);
+    currentTarget.style.setProperty("--ticket-lift", "-3px");
+    currentTarget.style.setProperty("--ticket-rotate-x", `${((0.5 - y) * 3).toFixed(2)}deg`);
+    currentTarget.style.setProperty("--ticket-rotate-y", `${((x - 0.5) * 4).toFixed(2)}deg`);
+}
+
+function handleTicketPointerLeave(event: PointerEvent<HTMLDivElement>) {
+    const { currentTarget } = event;
+
+    currentTarget.style.setProperty("--ticket-glow-x", "50%");
+    currentTarget.style.setProperty("--ticket-glow-y", "50%");
+    currentTarget.style.setProperty("--ticket-lift", "0px");
+    currentTarget.style.setProperty("--ticket-rotate-x", "0deg");
+    currentTarget.style.setProperty("--ticket-rotate-y", "0deg");
+}
+
 export default function RaffleTickets() {
     return (
         <section
@@ -161,51 +200,65 @@ export default function RaffleTickets() {
                 {/* Ticket */}
                 <ScrollReveal y={42} scale={0.96} duration={0.75}>
                     <div
-                        className="relative mx-auto mb-8 max-w-195 rounded-xl shadow-[0_8px_48px_rgba(0,0,0,0.65),0_0_32px_rgba(251,184,72,0.08),0_0_64px_rgba(244,92,141,0.06)] transition-shadow duration-350 ease-in-out hover:shadow-[0_12px_56px_rgba(0,0,0,0.75),0_0_48px_rgba(251,184,72,0.18),0_0_80px_rgba(244,92,141,0.12)]"
+                        className="group/ticket relative mx-auto mb-8 max-w-195 rounded-xl [perspective:1200px]"
+                        style={TICKET_TILT_STYLE}
+                        onPointerMove={handleTicketPointerMove}
+                        onPointerLeave={handleTicketPointerLeave}
                     >
+                        <div className="relative rounded-xl shadow-[0_8px_48px_rgba(0,0,0,0.65),0_0_32px_rgba(251,184,72,0.08),0_0_64px_rgba(244,92,141,0.06)] transition-[transform,box-shadow] duration-300 ease-out [transform:rotateX(var(--ticket-rotate-x))_rotateY(var(--ticket-rotate-y))_translateY(var(--ticket-lift))] [transform-style:preserve-3d] group-hover/ticket:shadow-[0_16px_58px_rgba(0,0,0,0.76),0_0_34px_rgba(251,184,72,0.13),0_0_60px_rgba(244,92,141,0.09)]">
+                            <div className="pointer-events-none absolute -inset-4 rounded-2xl bg-[radial-gradient(circle_at_var(--ticket-glow-x)_var(--ticket-glow-y),rgba(246,239,223,0.075),transparent_42%)] opacity-0 blur-xl transition-opacity duration-300 group-hover/ticket:opacity-85" />
                         <div className="relative flex overflow-hidden rounded-xl border border-[rgba(251,184,72,0.18)] bg-[rgba(8,13,24,0.82)] backdrop-blur-md">
+                            <div
+                                className="pointer-events-none absolute inset-0 opacity-[0.18] mix-blend-soft-light"
+                                style={{
+                                    backgroundImage:
+                                        "radial-gradient(circle at 1px 1px, rgba(246,239,223,0.5) 1px, transparent 0), linear-gradient(115deg, rgba(255,255,255,0.04), transparent 38%, rgba(0,0,0,0.18))",
+                                    backgroundSize: "7px 7px, 100% 100%",
+                                }}
+                            />
+                            <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_var(--ticket-glow-x)_var(--ticket-glow-y),rgba(246,239,223,0.085),transparent_34%)] opacity-0 mix-blend-screen transition-opacity duration-300 group-hover/ticket:opacity-80" />
                             <ScallopEdge />
                             <ScallopEdge flip />
 
                             {/* Body */}
-                            <div className="relative flex-1 overflow-hidden p-5 sm:p-7">
+                            <div className="relative flex-1 overflow-hidden p-4 sm:p-7">
                                 {/* Header */}
-                                <div className="relative mb-4 flex items-center justify-between gap-4">
-                                    <div className="flex items-center gap-3">
+                                <div className="relative mb-5 grid gap-3 sm:mb-4 sm:flex sm:items-center sm:justify-between sm:gap-4">
+                                    <div className="flex min-w-0 items-center gap-3">
                                         <AirlineLogo />
-                                        <div>
-                                            <div className="mb-0.5 text-[10px] font-semibold uppercase tracking-[0.2em] text-[rgba(251,184,72,0.6)]">
+                                        <div className="min-w-0">
+                                            <div className="mb-1 text-[9px] leading-tight font-semibold tracking-[0.18em] text-[rgba(251,184,72,0.68)] uppercase sm:mb-0.5 sm:text-[10px] sm:tracking-[0.2em]">
                                                 Grand Prize · Sponsored by
                                             </div>
                                             <div
-                                                className="text-[22px] leading-tight tracking-wide text-lantern-100"
+                                                className="text-[20px] leading-[1.05] tracking-wide text-lantern-100 sm:text-[22px] sm:leading-tight"
                                                 style={{ fontFamily: '"TenPounds", "Georgia", serif' }}
                                             >
                                                 Alaska Airlines Round-Trip
                                             </div>
                                         </div>
                                     </div>
-                                    <span className="shrink-0 whitespace-nowrap rounded-full border border-[rgba(244,92,141,0.3)] bg-[rgba(244,92,141,0.1)] px-3 py-1 text-xs font-semibold uppercase tracking-[0.08em] text-blossom-300">
+                                    <span className="w-fit shrink-0 whitespace-nowrap rounded-full border border-[rgba(244,92,141,0.3)] bg-[rgba(244,92,141,0.1)] px-3 py-1 text-[11px] font-semibold tracking-[0.08em] text-blossom-300 uppercase sm:text-xs">
                                         2 Winners
                                     </span>
                                 </div>
 
                                 {/* Route display — single compact row */}
-                                <div className="relative mb-4 flex items-center gap-3">
+                                <div className="relative mb-5 grid grid-cols-[1fr_minmax(74px,0.8fr)_1fr] items-end gap-2 sm:mb-4 sm:flex sm:items-center sm:gap-3">
                                     {/* FROM */}
                                     <div className="min-w-0">
                                         <div className="text-[9px] font-semibold uppercase tracking-[0.25em] text-[rgba(251,184,72,0.5)]">From</div>
                                         <div
-                                            className="text-[32px] leading-none tracking-tight text-lantern-100 sm:text-[38px]"
+                                            className="text-[31px] leading-none tracking-tight text-lantern-100 sm:text-[38px]"
                                             style={{ fontFamily: '"TenPounds", "Georgia", serif' }}
                                         >
                                             SEA
                                         </div>
-                                        <div className="text-[11px] text-warm-white/40">Seattle · Tacoma</div>
+                                        <div className="text-[10px] leading-tight text-warm-white/45 sm:text-[11px]">Seattle · Tacoma</div>
                                     </div>
 
                                     {/* Flight path */}
-                                    <div className="flex flex-1 flex-col items-center gap-1.5">
+                                    <div className="flex min-w-0 flex-col items-center gap-1.5 self-center sm:flex-1">
                                         <div className="flex w-full items-center gap-1.5">
                                             <div
                                                 className="flex-1"
@@ -223,7 +276,7 @@ export default function RaffleTickets() {
                                                 }}
                                             />
                                         </div>
-                                        <span className="rounded-full border border-[rgba(244,92,141,0.25)] bg-[rgba(244,92,141,0.07)] px-2 py-px text-[9px] font-semibold uppercase tracking-[0.12em] text-blossom-300/80">
+                                        <span className="rounded-full border border-[rgba(244,92,141,0.25)] bg-[rgba(244,92,141,0.07)] px-2 py-px text-[8px] font-semibold tracking-[0.1em] text-blossom-300/80 uppercase sm:text-[9px] sm:tracking-[0.12em]">
                                             Round-Trip
                                         </span>
                                     </div>
@@ -237,7 +290,7 @@ export default function RaffleTickets() {
                                         >
                                             ???
                                         </div>
-                                        <div className="text-[11px] text-warm-white/40">Anywhere AS flies</div>
+                                        <div className="text-[10px] leading-tight text-warm-white/45 sm:text-[11px]">Anywhere AS flies</div>
                                     </div>
                                 </div>
 
@@ -250,7 +303,7 @@ export default function RaffleTickets() {
                                 />
 
                                 {/* Bottom row */}
-                                <div className="relative flex flex-wrap items-center justify-between gap-3">
+                                <div className="relative grid gap-3 sm:flex sm:flex-wrap sm:items-center sm:justify-between">
                                     <div className="flex items-baseline gap-2">
                                         <span
                                             className="text-3xl leading-none text-lantern-300"
@@ -260,12 +313,12 @@ export default function RaffleTickets() {
                                         </span>
                                         <span className="text-sm text-warm-white/50">per ticket</span>
                                     </div>
-                                    <div className="flex flex-wrap gap-2">
-                                        <span className="flex items-center gap-1.5 rounded-md border border-dashed border-[rgba(251,184,72,0.2)] bg-[rgba(251,184,72,0.04)] px-2.5 py-1 text-xs text-warm-white/60">
+                                    <div className="grid grid-cols-1 gap-2 min-[380px]:grid-cols-2 sm:flex sm:flex-wrap">
+                                        <span className="flex items-center justify-center gap-1.5 rounded-md border border-dashed border-[rgba(251,184,72,0.2)] bg-[rgba(251,184,72,0.04)] px-2.5 py-1.5 text-xs text-warm-white/60 sm:justify-start sm:py-1">
                                             <Ticket size={12} aria-hidden="true" />
                                             TSA Info Booth
                                         </span>
-                                        <span className="flex items-center gap-1.5 rounded-md border border-dashed border-[rgba(251,184,72,0.2)] bg-[rgba(251,184,72,0.04)] px-2.5 py-1 text-xs text-warm-white/60">
+                                        <span className="flex items-center justify-center gap-1.5 rounded-md border border-dashed border-[rgba(251,184,72,0.2)] bg-[rgba(251,184,72,0.04)] px-2.5 py-1.5 text-xs text-warm-white/60 sm:justify-start sm:py-1">
                                             <Clock size={12} aria-hidden="true" />
                                             Drawing at 8:35 PM
                                         </span>
@@ -279,6 +332,8 @@ export default function RaffleTickets() {
                                 style={{
                                     background:
                                         "repeating-linear-gradient(to bottom, transparent 0px, transparent 6px, rgba(251,184,72,0.25) 6px, rgba(251,184,72,0.25) 12px)",
+                                    animation: "ticket-perforation-drift 3.8s linear infinite",
+                                    boxShadow: "0 0 18px rgba(251,184,72,0.14)",
                                 }}
                             >
                                 <div className="absolute -top-2.5 left-1/2 z-[4] h-5 w-5 -translate-x-1/2 rounded-full border border-[rgba(251,184,72,0.2)] bg-night-900" />
@@ -317,6 +372,7 @@ export default function RaffleTickets() {
                                     2026
                                 </span>
                             </div>
+                        </div>
                         </div>
                     </div>
                 </ScrollReveal>

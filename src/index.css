@@ -75,12 +75,10 @@
     to   { opacity: 1; transform: translateY(0); }
 }
 
-/* Glow tracer travels around the raffle ticket border */
-@keyframes ticket-trace {
-    0%   { opacity: 0; }
-    6%   { opacity: 1; }
-    88%  { opacity: 0.85; }
-    100% { stroke-dashoffset: 0; opacity: 0; }
+/* Subtle movement for raffle ticket perforation */
+@keyframes ticket-perforation-drift {
+    from { background-position: 0 0; }
+    to { background-position: 0 24px; }
 }
 
 @theme {
