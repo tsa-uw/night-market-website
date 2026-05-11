@@ -87,20 +87,22 @@ export default function Logistics() {
     return (
         <section
             id="logistics"
-            className="relative overflow-hidden border-y border-lantern-100/10 bg-night-900"
+            className="relative overflow-hidden border-y border-lantern-100/10"
         >
-            <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_12%_8%,rgb(244_92_141_/_13%),transparent_32%),radial-gradient(circle_at_86%_18%,rgb(251_184_72_/_10%),transparent_34%)]" />
+            {/* Background spanning full section */}
+            <OptimizedImage
+                src={redSquareDrawing}
+                alt=""
+                aria-hidden="true"
+                className="absolute inset-0 -z-30 h-full w-full object-cover object-center"
+            />
+            <div className="absolute inset-0 -z-20 bg-night-900/50" />
+            <div className="absolute inset-0 -z-10 bg-linear-to-b from-night-900/10 via-transparent to-night-900/85" />
+
+            <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_12%_8%,rgb(244_92_141/13%),transparent_32%),radial-gradient(circle_at_86%_18%,rgb(251_184_72/10%),transparent_34%)]" />
 
             <div className="relative">
-                <div className="relative isolate flex min-h-[72svh] items-center justify-center overflow-hidden px-4 py-24 text-center md:px-8">
-                    <OptimizedImage
-                        src={redSquareDrawing}
-                        alt=""
-                        aria-hidden="true"
-                        className="absolute inset-0 -z-30 h-full w-full object-cover"
-                    />
-                    <div className="absolute inset-0 -z-20 bg-night-900/72" />
-                    <div className="absolute inset-0 -z-10 bg-gradient-to-b from-night-900/45 via-night-900/62 to-night-900" />
+                <div className="relative flex min-h-[72svh] items-center justify-center px-4 py-24 text-center md:px-8">
 
                     <ScrollReveal className="mx-auto max-w-5xl" y={36} duration={0.75}>
                         <p className="mb-4 text-xs font-bold tracking-[0.28em] text-lantern-300/90 uppercase">
