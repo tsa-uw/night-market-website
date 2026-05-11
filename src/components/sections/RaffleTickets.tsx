@@ -2,17 +2,17 @@ import { Clock, MapPin, Plane, Ticket, Trophy } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import type { ReactNode } from "react";
-import Section from "../layout/Section";
-import OptimizedImage from "../media/OptimizedImage";
+import cinematicSky from "../../assets/images/CinematicSky.png";
 import ScrollReveal from "../motion/ScrollReveal";
+import OptimizedImage from "../media/OptimizedImage";
 
 function AirlineLogo() {
     return (
-        <div className="flex h-[52px] w-[52px] shrink-0 items-center justify-center rounded-[10px] border border-[rgba(251,184,72,0.2)] bg-[rgba(251,184,72,0.07)]">
+        <div className="flex h-[48px] w-[48px] shrink-0 items-center justify-center rounded-[10px] border border-[rgba(251,184,72,0.2)] bg-[rgba(251,184,72,0.07)]">
             <OptimizedImage
                 src="/alaska_airlines_eskimo-logo.png"
                 alt="Alaska Airlines"
-                className="h-11 w-11 object-contain"
+                className="h-10 w-10 object-contain"
             />
         </div>
     );
@@ -71,7 +71,6 @@ function TicketGlowTrace({
             style={{ overflow: "visible" }}
             aria-hidden="true"
         >
-            {/* Outermost diffuse halo */}
             <rect
                 {...rect} fill="none"
                 stroke="rgba(251,184,72,0.05)"
@@ -80,7 +79,6 @@ function TicketGlowTrace({
                 strokeLinecap="round"
                 style={{ strokeDashoffset: perimeter, animation: anim, filter: "blur(14px)" }}
             />
-            {/* Mid bloom */}
             <rect
                 {...rect} fill="none"
                 stroke="rgba(251,184,72,0.1)"
@@ -89,7 +87,6 @@ function TicketGlowTrace({
                 strokeLinecap="round"
                 style={{ strokeDashoffset: perimeter, animation: anim, filter: "blur(6px)" }}
             />
-            {/* Inner glow */}
             <rect
                 {...rect} fill="none"
                 stroke="rgba(251,184,72,0.22)"
@@ -98,7 +95,6 @@ function TicketGlowTrace({
                 strokeLinecap="round"
                 style={{ strokeDashoffset: perimeter, animation: anim, filter: "blur(2px)" }}
             />
-            {/* Bright core */}
             <rect
                 {...rect} fill="none"
                 stroke="rgba(251,184,72,0.7)"
@@ -187,210 +183,254 @@ const INFO_CARDS: InfoCardData[] = [
     },
 ];
 
-const DETAIL_CELLS = [
-    { label: "Destination", value: "Anywhere AS flies" },
-    { label: "Class", value: "Round-Trip Airfare" },
-    { label: "Entries", value: "1 ticket = 1 entry" },
-] as const;
-
 export default function RaffleTickets() {
     const ticketRef = useRef<HTMLDivElement>(null);
 
     return (
-        <Section id="raffle" title="Raffle Tickets">
-            {/* Ticket */}
-            <ScrollReveal y={42} scale={0.96} duration={0.75}>
-            <div ref={ticketRef} className="relative mx-auto mb-8 max-w-195 rounded-xl shadow-[0_8px_48px_rgba(0,0,0,0.55),0_0_32px_rgba(251,184,72,0.08),0_0_64px_rgba(244,92,141,0.06)] transition-shadow duration-350 ease-in-out hover:shadow-[0_12px_56px_rgba(0,0,0,0.65),0_0_48px_rgba(251,184,72,0.18),0_0_80px_rgba(244,92,141,0.12)]">
-                    <TicketGlowTrace wrapperRef={ticketRef} />
-                <div className="relative flex overflow-hidden rounded-xl border border-[rgba(251,184,72,0.18)] bg-night-800">
-                    <ScallopEdge />
-                    <ScallopEdge flip />
-
-                    {/* Body */}
-                    <div className="relative flex-1 overflow-hidden p-6 sm:p-10">
-                        {/* Grid texture */}
-                        <div
-                            className="pointer-events-none absolute inset-0"
-                            style={{
-                                backgroundImage:
-                                    "linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px)",
-                                backgroundSize: "32px 32px",
-                            }}
-                        />
-                        {/* Blossom warmth */}
-                        <div className="pointer-events-none absolute -top-16 -right-16 h-44 w-44 rounded-full bg-blossom-400/10 blur-3xl" />
-
-                        {/* Header */}
-                        <div className="relative mb-6 flex items-start justify-between gap-4">
-                            <div className="flex items-center gap-3">
-                                <AirlineLogo />
-                                <div>
-                                    <div className="mb-1 text-[11px] font-semibold uppercase tracking-[0.2em] text-[rgba(251,184,72,0.65)]">
-                                        Grand Prize · Sponsored by
-                                    </div>
-                                    <div
-                                        className="text-[26px] leading-snug tracking-wide text-lantern-100"
-                                        style={{ fontFamily: '"TenPounds", "Georgia", serif' }}
-                                    >
-                                        Alaska Airlines Round-Trip
-                                    </div>
-                                </div>
-                            </div>
-                            <span className="shrink-0 whitespace-nowrap rounded-full border border-[rgba(244,92,141,0.3)] bg-[rgba(244,92,141,0.1)] px-3.5 py-1 text-xs font-semibold uppercase tracking-[0.08em] text-blossom-300">
-                                2 Winners
-                            </span>
-                        </div>
-
-                        {/* Detail cells — boarding-pass fields */}
-                        <div className="relative mb-6 grid grid-cols-3 divide-x divide-dashed divide-[rgba(251,184,72,0.18)] overflow-hidden rounded-lg border border-dashed border-[rgba(251,184,72,0.18)] bg-[rgba(251,184,72,0.025)]">
-                            {DETAIL_CELLS.map(({ label, value }) => (
-                                <div key={label} className="p-3 sm:p-4">
-                                    <div className="mb-1.5 text-[10px] font-semibold uppercase tracking-[0.2em] text-[rgba(251,184,72,0.6)]">
-                                        {label}
-                                    </div>
-                                    <div className="inline-block border-b border-dotted border-[rgba(251,184,72,0.3)] pb-0.5 text-sm font-semibold text-lantern-100 sm:text-base">
-                                        {value}
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
-
-                        {/* Divider */}
-                        <div
-                            className="relative mb-6 h-px"
-                            style={{
-                                background: "linear-gradient(90deg, transparent, rgba(251,184,72,0.2), transparent)",
-                            }}
-                        />
-
-                        {/* Bottom row */}
-                        <div className="relative flex flex-wrap items-center justify-between gap-4">
-                            <div className="flex items-baseline gap-2">
-                                <span
-                                    className="text-4xl leading-none text-lantern-300"
-                                    style={{ fontFamily: '"TenPounds", "Georgia", serif' }}
-                                >
-                                    $3
-                                </span>
-                                <span className="text-sm text-warm-white/55">per ticket</span>
-                            </div>
-                            <div className="flex flex-wrap gap-2">
-                                <span className="flex items-center gap-1.5 rounded-md border border-dashed border-[rgba(251,184,72,0.2)] bg-[rgba(251,184,72,0.04)] px-3 py-1.5 text-xs text-warm-white/70">
-                                    <Ticket size={13} aria-hidden="true" />
-                                    TSA Info Booth
-                                </span>
-                                <span className="flex items-center gap-1.5 rounded-md border border-dashed border-[rgba(251,184,72,0.2)] bg-[rgba(251,184,72,0.04)] px-3 py-1.5 text-xs text-warm-white/70">
-                                    <Clock size={13} aria-hidden="true" />
-                                    Sales close 8:00 PM
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-
-                    {/* Perforation */}
-                    <div
-                        className="relative z-[3] w-[2px] shrink-0"
-                        style={{
-                            background:
-                                "repeating-linear-gradient(to bottom, transparent 0px, transparent 6px, rgba(251,184,72,0.25) 6px, rgba(251,184,72,0.25) 12px)",
-                        }}
-                    >
-                        <div className="absolute -top-2.5 left-1/2 z-[4] h-5 w-5 -translate-x-1/2 rounded-full border border-[rgba(251,184,72,0.2)] bg-night-900" />
-                        <div className="absolute -bottom-2.5 left-1/2 z-[4] h-5 w-5 -translate-x-1/2 rounded-full border border-[rgba(251,184,72,0.2)] bg-night-900" />
-                    </div>
-
-                    {/* Stub — hidden on mobile */}
-                    <div className="relative hidden w-[120px] shrink-0 flex-col items-center justify-between gap-3 bg-[rgba(6,9,16,0.4)] px-4 py-7 sm:flex">
-                        <div
-                            className="pointer-events-none absolute top-0 left-0 right-0 h-[3px] opacity-40"
-                            style={{
-                                background: "linear-gradient(90deg, transparent, #fbb848, transparent)",
-                            }}
-                        />
-                        <span
-                            className="text-[8px] font-semibold uppercase tracking-[0.3em] text-warm-white/35"
-                            style={{
-                                writingMode: "vertical-lr",
-                                textOrientation: "mixed",
-                                transform: "rotate(180deg)",
-                            }}
-                        >
-                            Night Market
-                        </span>
-                        <div className="flex h-11 w-11 items-center justify-center rounded-lg border border-[rgba(251,184,72,0.15)] bg-[rgba(251,184,72,0.06)] text-[rgba(251,184,72,0.5)]">
-                            <Plane size={20} aria-hidden="true" />
-                        </div>
-                        <span
-                            className="text-3xl leading-none text-lantern-400/65"
-                            style={{
-                                fontFamily: '"TenPounds", "Georgia", serif',
-                                writingMode: "vertical-lr",
-                                textOrientation: "mixed",
-                                transform: "rotate(180deg)",
-                                letterSpacing: "0.08em",
-                            }}
-                        >
-                            #
-                        </span>
-                        <span
-                            className="text-[8px] font-semibold uppercase tracking-[0.3em] text-warm-white/35"
-                            style={{
-                                writingMode: "vertical-lr",
-                                textOrientation: "mixed",
-                                transform: "rotate(180deg)",
-                            }}
-                        >
-                            2026
-                        </span>
-                    </div>
-                </div>
+        <section
+            id="raffle"
+            className="relative overflow-hidden border-t border-night-700/75 px-4 py-16 md:py-24"
+        >
+            {/* Cinematic sky background */}
+            <div className="pointer-events-none absolute inset-0 -z-20">
+                <OptimizedImage
+                    src={cinematicSky}
+                    alt=""
+                    className="h-full w-full object-cover object-top"
+                />
+                {/* Gradient: sky visible at top, fades to night at bottom */}
+                <div
+                    className="absolute inset-0"
+                    style={{
+                        background: "linear-gradient(to bottom, rgba(6,9,16,0.15) 0%, rgba(6,9,16,0.45) 50%, rgba(6,9,16,0.88) 75%, #060910 100%)",
+                    }}
+                />
             </div>
-            </ScrollReveal>
 
-            {/* Info stubs */}
-            <div className="mx-auto grid max-w-195 grid-cols-1 gap-4 sm:grid-cols-3">
-                {INFO_CARDS.map(({ Icon, title, body, accent }, i) => {
-                    const a = ACCENT[accent];
-                    return (
-                        <ScrollReveal
-                            key={title}
-                            delay={i * 0.08}
-                            y={34}
-                            scale={0.97}
-                        >
-                            <div
-                                className={`group relative overflow-hidden rounded-[10px] border bg-night-800/50 backdrop-blur-sm transition-all duration-300 ${a.card}`}
-                            >
-                                {/* Stub header */}
-                                <div className="flex h-11 items-center justify-between px-5">
-                                    <span className={`text-[10px] font-semibold uppercase tracking-[0.2em] ${a.label}`}>
-                                        Stub No. 0{i + 1}
-                                    </span>
-                                    <span className={`flex h-6 w-6 items-center justify-center rounded-md border ${a.iconBox}`}>
-                                        <Icon size={13} aria-hidden="true" />
+            {/* Ambient side glows */}
+            <div className="pointer-events-none absolute top-10 -left-20 -z-10 h-52 w-52 rounded-full bg-blossom-400/10 blur-3xl" />
+            <div className="pointer-events-none absolute right-0 bottom-0 -z-10 h-64 w-64 rounded-full bg-lantern-400/10 blur-3xl" />
+
+            <div className="mx-auto max-w-6xl">
+                <ScrollReveal y={26}>
+                    <h2
+                        className="mb-10 text-center text-3xl tracking-wide text-lantern-100 md:text-4xl"
+                        style={{ fontFamily: '"TenPounds", "Georgia", serif' }}
+                    >
+                        Raffle Tickets
+                    </h2>
+                </ScrollReveal>
+
+                {/* Ticket */}
+                <ScrollReveal y={42} scale={0.96} duration={0.75}>
+                    <div
+                        ref={ticketRef}
+                        className="relative mx-auto mb-8 max-w-195 rounded-xl shadow-[0_8px_48px_rgba(0,0,0,0.65),0_0_32px_rgba(251,184,72,0.08),0_0_64px_rgba(244,92,141,0.06)] transition-shadow duration-350 ease-in-out hover:shadow-[0_12px_56px_rgba(0,0,0,0.75),0_0_48px_rgba(251,184,72,0.18),0_0_80px_rgba(244,92,141,0.12)]"
+                    >
+                        <TicketGlowTrace wrapperRef={ticketRef} />
+                        <div className="relative flex overflow-hidden rounded-xl border border-[rgba(251,184,72,0.18)] bg-[rgba(8,13,24,0.82)] backdrop-blur-md">
+                            <ScallopEdge />
+                            <ScallopEdge flip />
+
+                            {/* Body */}
+                            <div className="relative flex-1 overflow-hidden p-5 sm:p-7">
+                                {/* Header */}
+                                <div className="relative mb-4 flex items-center justify-between gap-4">
+                                    <div className="flex items-center gap-3">
+                                        <AirlineLogo />
+                                        <div>
+                                            <div className="mb-0.5 text-[10px] font-semibold uppercase tracking-[0.2em] text-[rgba(251,184,72,0.6)]">
+                                                Grand Prize · Sponsored by
+                                            </div>
+                                            <div
+                                                className="text-[22px] leading-tight tracking-wide text-lantern-100"
+                                                style={{ fontFamily: '"TenPounds", "Georgia", serif' }}
+                                            >
+                                                Alaska Airlines Round-Trip
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <span className="shrink-0 whitespace-nowrap rounded-full border border-[rgba(244,92,141,0.3)] bg-[rgba(244,92,141,0.1)] px-3 py-1 text-xs font-semibold uppercase tracking-[0.08em] text-blossom-300">
+                                        2 Winners
                                     </span>
                                 </div>
 
-                                {/* Perforated tear line */}
+                                {/* Route display — single compact row */}
+                                <div className="relative mb-4 flex items-center gap-3">
+                                    {/* FROM */}
+                                    <div className="min-w-0">
+                                        <div className="text-[9px] font-semibold uppercase tracking-[0.25em] text-[rgba(251,184,72,0.5)]">From</div>
+                                        <div
+                                            className="text-[32px] leading-none tracking-tight text-lantern-100 sm:text-[38px]"
+                                            style={{ fontFamily: '"TenPounds", "Georgia", serif' }}
+                                        >
+                                            SEA
+                                        </div>
+                                        <div className="text-[11px] text-warm-white/40">Seattle · Tacoma</div>
+                                    </div>
+
+                                    {/* Flight path */}
+                                    <div className="flex flex-1 flex-col items-center gap-1.5">
+                                        <div className="flex w-full items-center gap-1.5">
+                                            <div
+                                                className="flex-1"
+                                                style={{
+                                                    height: "1px",
+                                                    background: "repeating-linear-gradient(to right, rgba(251,184,72,0.35) 0 4px, transparent 4px 8px)",
+                                                }}
+                                            />
+                                            <Plane size={15} className="text-lantern-400/70 -rotate-[10deg] shrink-0" aria-hidden="true" />
+                                            <div
+                                                className="flex-1"
+                                                style={{
+                                                    height: "1px",
+                                                    background: "repeating-linear-gradient(to right, rgba(251,184,72,0.35) 0 4px, transparent 4px 8px)",
+                                                }}
+                                            />
+                                        </div>
+                                        <span className="rounded-full border border-[rgba(244,92,141,0.25)] bg-[rgba(244,92,141,0.07)] px-2 py-px text-[9px] font-semibold uppercase tracking-[0.12em] text-blossom-300/80">
+                                            Round-Trip
+                                        </span>
+                                    </div>
+
+                                    {/* TO */}
+                                    <div className="min-w-0 text-right">
+                                        <div className="text-[9px] font-semibold uppercase tracking-[0.25em] text-[rgba(244,92,141,0.5)]">To</div>
+                                        <div
+                                            className="text-[32px] leading-none tracking-tight text-blossom-200 sm:text-[38px]"
+                                            style={{ fontFamily: '"TenPounds", "Georgia", serif' }}
+                                        >
+                                            ???
+                                        </div>
+                                        <div className="text-[11px] text-warm-white/40">Anywhere AS flies</div>
+                                    </div>
+                                </div>
+
+                                {/* Divider */}
                                 <div
-                                    className="pointer-events-none absolute inset-x-0 top-11 h-px"
+                                    className="relative mb-4 h-px"
                                     style={{
-                                        background: `repeating-linear-gradient(to right, transparent 0 4px, ${a.tear} 4px 8px)`,
+                                        background: "linear-gradient(90deg, transparent, rgba(251,184,72,0.2), transparent)",
                                     }}
                                 />
-                                <div className={`absolute -left-1.5 top-11 h-3 w-3 -translate-y-1/2 rounded-full border bg-night-900 ${a.notch}`} />
-                                <div className={`absolute -right-1.5 top-11 h-3 w-3 -translate-y-1/2 rounded-full border bg-night-900 ${a.notch}`} />
 
-                                {/* Stub body */}
-                                <div className="px-5 pb-5 pt-4">
-                                    <div className={`mb-1.5 text-base font-semibold ${a.title}`}>{title}</div>
-                                    <p className="text-sm leading-relaxed text-warm-white/75">{body}</p>
+                                {/* Bottom row */}
+                                <div className="relative flex flex-wrap items-center justify-between gap-3">
+                                    <div className="flex items-baseline gap-2">
+                                        <span
+                                            className="text-3xl leading-none text-lantern-300"
+                                            style={{ fontFamily: '"TenPounds", "Georgia", serif' }}
+                                        >
+                                            $3
+                                        </span>
+                                        <span className="text-sm text-warm-white/50">per ticket</span>
+                                    </div>
+                                    <div className="flex flex-wrap gap-2">
+                                        <span className="flex items-center gap-1.5 rounded-md border border-dashed border-[rgba(251,184,72,0.2)] bg-[rgba(251,184,72,0.04)] px-2.5 py-1 text-xs text-warm-white/60">
+                                            <Ticket size={12} aria-hidden="true" />
+                                            TSA Info Booth
+                                        </span>
+                                        <span className="flex items-center gap-1.5 rounded-md border border-dashed border-[rgba(251,184,72,0.2)] bg-[rgba(251,184,72,0.04)] px-2.5 py-1 text-xs text-warm-white/60">
+                                            <Clock size={12} aria-hidden="true" />
+                                            Drawing at 8:35 PM
+                                        </span>
+                                    </div>
                                 </div>
                             </div>
-                        </ScrollReveal>
-                    );
-                })}
+
+                            {/* Perforation */}
+                            <div
+                                className="relative z-[3] w-[2px] shrink-0"
+                                style={{
+                                    background:
+                                        "repeating-linear-gradient(to bottom, transparent 0px, transparent 6px, rgba(251,184,72,0.25) 6px, rgba(251,184,72,0.25) 12px)",
+                                }}
+                            >
+                                <div className="absolute -top-2.5 left-1/2 z-[4] h-5 w-5 -translate-x-1/2 rounded-full border border-[rgba(251,184,72,0.2)] bg-night-900" />
+                                <div className="absolute -bottom-2.5 left-1/2 z-[4] h-5 w-5 -translate-x-1/2 rounded-full border border-[rgba(251,184,72,0.2)] bg-night-900" />
+                            </div>
+
+                            {/* Stub — hidden on mobile */}
+                            <div className="relative hidden w-[120px] shrink-0 flex-col items-center justify-between gap-3 bg-[rgba(6,9,16,0.45)] px-4 py-7 sm:flex">
+                                <div
+                                    className="pointer-events-none absolute top-0 left-0 right-0 h-[2px] opacity-35"
+                                    style={{
+                                        background: "linear-gradient(90deg, transparent, #fbb848, transparent)",
+                                    }}
+                                />
+                                <span
+                                    className="text-[8px] font-semibold uppercase tracking-[0.3em] text-warm-white/30"
+                                    style={{
+                                        writingMode: "vertical-lr",
+                                        textOrientation: "mixed",
+                                        transform: "rotate(180deg)",
+                                    }}
+                                >
+                                    Night Market
+                                </span>
+                                <div className="flex h-11 w-11 items-center justify-center rounded-lg border border-[rgba(251,184,72,0.15)] bg-[rgba(251,184,72,0.06)] text-[rgba(251,184,72,0.5)]">
+                                    <Plane size={20} aria-hidden="true" />
+                                </div>
+                                <span
+                                    className="text-[8px] font-semibold uppercase tracking-[0.3em] text-warm-white/30"
+                                    style={{
+                                        writingMode: "vertical-lr",
+                                        textOrientation: "mixed",
+                                        transform: "rotate(180deg)",
+                                    }}
+                                >
+                                    2026
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </ScrollReveal>
+
+                {/* Info stubs */}
+                <div className="mx-auto grid max-w-195 grid-cols-1 gap-4 sm:grid-cols-3">
+                    {INFO_CARDS.map(({ Icon, title, body, accent }, i) => {
+                        const a = ACCENT[accent];
+                        return (
+                            <ScrollReveal
+                                key={title}
+                                delay={i * 0.08}
+                                y={34}
+                                scale={0.97}
+                            >
+                                <div
+                                    className={`group relative overflow-hidden rounded-[10px] border bg-[rgba(8,13,24,0.6)] backdrop-blur-sm transition-all duration-300 ${a.card}`}
+                                >
+                                    {/* Stub header */}
+                                    <div className="flex h-11 items-center justify-between px-5">
+                                        <span className={`text-[10px] font-semibold uppercase tracking-[0.2em] ${a.label}`}>
+                                            Stub No. 0{i + 1}
+                                        </span>
+                                        <span className={`flex h-6 w-6 items-center justify-center rounded-md border ${a.iconBox}`}>
+                                            <Icon size={13} aria-hidden="true" />
+                                        </span>
+                                    </div>
+
+                                    {/* Perforated tear line */}
+                                    <div
+                                        className="pointer-events-none absolute inset-x-0 top-11 h-px"
+                                        style={{
+                                            background: `repeating-linear-gradient(to right, transparent 0 4px, ${a.tear} 4px 8px)`,
+                                        }}
+                                    />
+                                    <div className={`absolute -left-1.5 top-11 h-3 w-3 -translate-y-1/2 rounded-full border bg-night-900 ${a.notch}`} />
+                                    <div className={`absolute -right-1.5 top-11 h-3 w-3 -translate-y-1/2 rounded-full border bg-night-900 ${a.notch}`} />
+
+                                    {/* Stub body */}
+                                    <div className="px-5 pb-5 pt-4">
+                                        <div className={`mb-1.5 text-base font-semibold ${a.title}`}>{title}</div>
+                                        <p className="text-sm leading-relaxed text-warm-white/70">{body}</p>
+                                    </div>
+                                </div>
+                            </ScrollReveal>
+                        );
+                    })}
+                </div>
             </div>
-        </Section>
+        </section>
     );
 }
