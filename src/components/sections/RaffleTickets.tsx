@@ -172,7 +172,7 @@ export default function RaffleTickets() {
                 <OptimizedImage
                     src={cinematicSky}
                     alt=""
-                    className="h-full w-full object-cover object-center"
+                    className="h-full w-full object-cover object-[center_60%]"
                 />
                 {/* Gradient: sky visible at top, fades to night at bottom */}
                 <div
