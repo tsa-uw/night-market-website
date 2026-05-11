@@ -811,7 +811,7 @@ export default function Schedule() {
             <div
                 className="pointer-events-none absolute inset-0 -z-20"
                 style={{
-                    background: "linear-gradient(to bottom, rgba(6,9,16,0.15) 0%, rgba(6,9,16,0.45) 50%, rgba(6,9,16,0.88) 75%, #060910 100%)",
+                    background: "linear-gradient(to bottom, rgba(6,9,16,0.08) 0%, rgba(6,9,16,0.32) 50%, rgba(6,9,16,0.75) 75%, #060910 100%)",
                 }}
             />
 
