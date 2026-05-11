@@ -6,7 +6,8 @@ import {
     Star,
 } from "lucide-react";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { OptimizedPicture } from "../media/OptimizedImage";
+import OptimizedImage, { OptimizedPicture } from "../media/OptimizedImage";
+import performanceDrawing from "../../assets/images/PerformanceDrawing.png";
 import divineGroupImage from "../../assets/images/schedule/divine-group.jpg?w=336;672&format=avif;webp;jpg&as=picture";
 import divineLogoImage from "../../assets/images/schedule/divine-logo.png?w=96;192&format=avif;webp;png&as=picture";
 import huskyWushuImage from "../../assets/images/schedule/husky-wushu.jpg?w=336;672&format=avif;webp;jpg&as=picture";
@@ -801,7 +802,26 @@ export default function Schedule() {
             className="relative overflow-x-clip border-t border-night-700/75 px-4 py-20 md:py-32"
         >
             {/* Background */}
-            <div className="pointer-events-none absolute inset-0 -z-20 bg-linear-to-b from-night-900/70 via-night-900/95 to-night-800/95" />
+            <OptimizedImage
+                src={performanceDrawing}
+                alt=""
+                aria-hidden="true"
+                className="pointer-events-none absolute inset-0 -z-30 h-full w-full object-cover object-center"
+            />
+            <div
+                className="pointer-events-none absolute inset-0 -z-20"
+                style={{
+                    background: "linear-gradient(to bottom, rgba(6,9,16,0.15) 0%, rgba(6,9,16,0.45) 50%, rgba(6,9,16,0.88) 75%, #060910 100%)",
+                }}
+            />
+
+            {/* Centre vignette — darkens the content area so the timeline pops */}
+            <div
+                className="pointer-events-none absolute inset-0 -z-10"
+                style={{
+                    background: "radial-gradient(ellipse 70% 60% at 50% 50%, rgba(6,9,16,0.55) 0%, transparent 100%)",
+                }}
+            />
 
             {/* Ambient orbs */}
             <div
@@ -918,15 +938,15 @@ export default function Schedule() {
                                             <div className="pointer-events-none absolute -left-28 top-1 bottom-1 w-0.5 origin-center scale-y-0 rounded-full bg-blossom-400 shadow-[0_0_6px_rgba(244,92,141,0.8)] transition-transform duration-300 ease-out group-hover:scale-y-100" />
 
                                             {/* Time */}
-                                            <time className="absolute right-full mr-4 w-24 -translate-x-1 text-right text-sm tabular-nums font-medium text-lantern-300/65 transition-all duration-300 ease-out group-hover:translate-x-0 group-hover:text-lantern-200">
+                                            <time className="absolute right-full mr-4 w-24 -translate-x-1 text-right text-sm tabular-nums font-medium text-lantern-300/90 transition-all duration-300 ease-out group-hover:translate-x-0 group-hover:text-lantern-200" style={{ textShadow: "0 1px 6px rgba(0,0,0,0.8)" }}>
                                                 {time}
                                             </time>
 
                                             {/* Node */}
-                                            <div className="absolute left-0 z-10 h-2.5 w-2.5 -translate-x-1/2 rounded-full bg-blossom-400 shadow-[0_0_8px_rgba(244,92,141,0.7)] transition-all duration-300 ease-out group-hover:scale-[1.5] group-hover:bg-blossom-300 group-hover:shadow-[0_0_0_2px_rgba(244,92,141,0.35),0_0_16px_rgba(244,92,141,1)]" />
+                                            <div className="absolute left-0 z-10 h-2.5 w-2.5 -translate-x-1/2 rounded-full bg-blossom-400 shadow-[0_0_10px_2px_rgba(244,92,141,0.9)] transition-all duration-300 ease-out group-hover:scale-[1.5] group-hover:bg-blossom-300 group-hover:shadow-[0_0_0_2px_rgba(244,92,141,0.45),0_0_20px_rgba(244,92,141,1)]" />
 
                                             {/* Title */}
-                                            <span className="text-[0.9375rem] leading-relaxed text-warm-white/70 transition-all duration-200 ease-out group-hover:translate-x-0.5 group-hover:text-warm-white">
+                                            <span className="text-[0.9375rem] leading-relaxed text-warm-white/90 transition-all duration-200 ease-out group-hover:translate-x-0.5 group-hover:text-warm-white" style={{ textShadow: "0 1px 8px rgba(0,0,0,0.9)" }}>
                                                 {title}
                                             </span>
                                         </li>
