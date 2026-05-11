@@ -205,7 +205,7 @@ export default function RaffleTickets() {
                         onPointerMove={handleTicketPointerMove}
                         onPointerLeave={handleTicketPointerLeave}
                     >
-                        <div className="relative rounded-xl shadow-[0_8px_48px_rgba(0,0,0,0.65),0_0_32px_rgba(251,184,72,0.08),0_0_64px_rgba(244,92,141,0.06)] transition-[transform,box-shadow] duration-300 ease-out [transform:rotateX(var(--ticket-rotate-x))_rotateY(var(--ticket-rotate-y))_translateY(var(--ticket-lift))] [transform-style:preserve-3d] group-hover/ticket:shadow-[0_16px_58px_rgba(0,0,0,0.76),0_0_34px_rgba(251,184,72,0.13),0_0_60px_rgba(244,92,141,0.09)]">
+                        <div className="ticket-depth-card relative rounded-xl shadow-[0_8px_48px_rgba(0,0,0,0.65),0_0_32px_rgba(251,184,72,0.08),0_0_64px_rgba(244,92,141,0.06)] transition-[transform,box-shadow] duration-300 ease-out [transform:rotateX(var(--ticket-rotate-x))_rotateY(var(--ticket-rotate-y))_translateY(var(--ticket-lift))] [transform-style:preserve-3d] group-hover/ticket:shadow-[0_16px_58px_rgba(0,0,0,0.76),0_0_34px_rgba(251,184,72,0.13),0_0_60px_rgba(244,92,141,0.09)]">
                             <div className="pointer-events-none absolute -inset-4 rounded-2xl bg-[radial-gradient(circle_at_var(--ticket-glow-x)_var(--ticket-glow-y),rgba(246,239,223,0.075),transparent_42%)] opacity-0 blur-xl transition-opacity duration-300 group-hover/ticket:opacity-85" />
                         <div className="relative flex overflow-hidden rounded-xl border border-[rgba(251,184,72,0.18)] bg-[rgba(8,13,24,0.82)] backdrop-blur-md">
                             <div

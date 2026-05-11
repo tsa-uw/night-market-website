@@ -81,6 +81,49 @@
     to { background-position: 0 24px; }
 }
 
+/* Idle raffle ticket depth tilt, traced like an infinity sign */
+@keyframes ticket-depth-figure-eight {
+    0%, 100% {
+        transform: rotateX(0deg) rotateY(0deg) translateY(0);
+    }
+    12.5% {
+        transform: rotateX(1.1deg) rotateY(-1.6deg) translateY(-1px);
+    }
+    25% {
+        transform: rotateX(0deg) rotateY(-2.3deg) translateY(-2px);
+    }
+    37.5% {
+        transform: rotateX(-1.1deg) rotateY(-1.6deg) translateY(-1px);
+    }
+    50% {
+        transform: rotateX(0deg) rotateY(0deg) translateY(0);
+    }
+    62.5% {
+        transform: rotateX(1.1deg) rotateY(1.6deg) translateY(-1px);
+    }
+    75% {
+        transform: rotateX(0deg) rotateY(2.3deg) translateY(-2px);
+    }
+    87.5% {
+        transform: rotateX(-1.1deg) rotateY(1.6deg) translateY(-1px);
+    }
+}
+
+.ticket-depth-card {
+    animation: ticket-depth-figure-eight 8.5s ease-in-out infinite;
+    will-change: transform;
+}
+
+.group\/ticket:hover .ticket-depth-card {
+    animation: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ticket-depth-card {
+        animation: none;
+    }
+}
+
 @theme {
     --animate-hero-darken: hero-darken 1.8s ease-in 0.2s both;
     --animate-hero-fade-in: hero-fade-in 0.9s ease-out 0.8s both;
