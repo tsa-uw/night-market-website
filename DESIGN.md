@@ -121,6 +121,32 @@ bg-linear-to-b from-night-900/70 via-night-900/95 to-night-800/95
 + ambient orb bot-right: bg-lantern-400/10    blur-3xl  h-80 w-80
 ```
 
+### Full-bleed photo background (Raffle, About/Logistics)
+Used when a section has a thematic photo (e.g. CinematicSky, RedSquareDrawing) that
+should fill the entire section and remain visible near the top.
+
+Structure (raw `<section>`, bypasses Section.tsx):
+```
+<section class="relative overflow-hidden border-t border-night-700/75 px-4 py-16 md:py-24">
+  <img class="absolute inset-0 -z-30 h-full w-full object-cover object-[position]" />
+  <div class="absolute inset-0 -z-20" style="background: linear-gradient(
+    to bottom,
+    rgba(6,9,16,0.15)  0%,    /* sky/photo nearly bare at top */
+    rgba(6,9,16,0.45) 50%,    /* half-way — still readable */
+    rgba(6,9,16,0.88) 75%,    /* content area fades in */
+    #060910           100%    /* full night-900 at bottom */
+  )" />
+  <!-- ambient orbs at z-10 remain the same -->
+</section>
+```
+
+Rules:
+- Use a **single gradient div** for the overlay — no separate solid `bg-night-900/*` layer.
+- The gradient stops are standardized across all photo-background sections (Raffle & About).
+  Do not deviate without updating both sections together.
+- `object-top` for sky/aerial images; `object-center` for ground-level/architectural images.
+- No `backdrop-blur` on the section overlay — keep the image crisp.
+
 ---
 
 ## Glow & Shadow Patterns
