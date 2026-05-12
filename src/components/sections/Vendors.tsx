@@ -116,15 +116,10 @@ function MarqueeRow({
                 }}
             >
                 {repeatedVendors.map((vendor, index) => {
-                    const shouldAccent = index % (reverse ? 4 : 5) === 2;
-                    const accentClass = shouldAccent
-                        ? CATEGORY_STYLES[vendor.type].marquee
-                        : "text-warm-white";
-
                     return (
                         <span key={`${vendor.name}-${index}`} className="inline-flex items-center">
                             <span
-                                className={`px-5 text-3xl leading-none tracking-normal transition-colors duration-200 hover:text-lantern-100 md:px-8 md:text-5xl ${accentClass}`}
+                                className="px-5 text-3xl leading-none tracking-normal text-warm-white transition-colors duration-200 hover:text-lantern-100 md:px-8 md:text-5xl"
                                 style={{
                                     fontFamily: '"TenPounds", "Georgia", serif',
                                 }}
