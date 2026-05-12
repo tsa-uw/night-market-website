@@ -61,7 +61,7 @@ const DETAIL_CARDS = [
         items: [
             {
                 icon: Accessibility,
-                title: "12 portable restrooms",
+                title: "5 portable restrooms",
                 detail: "2 ADA-accessible",
             },
             {
@@ -103,8 +103,11 @@ export default function Logistics() {
 
             <div className="relative">
                 <div className="relative flex min-h-[72svh] items-center justify-center px-4 py-24 text-center md:px-8">
-
-                    <ScrollReveal className="mx-auto max-w-5xl" y={36} duration={0.75}>
+                    <ScrollReveal
+                        className="mx-auto max-w-5xl"
+                        y={36}
+                        duration={0.75}
+                    >
                         <p className="mb-4 text-xs font-bold tracking-[0.28em] text-lantern-300/90 uppercase">
                             Details
                         </p>
