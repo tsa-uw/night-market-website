@@ -14,6 +14,7 @@ import huskyWushuImage from "../../assets/images/schedule/husky-wushu.jpg?w=336;
 import huskyWushuLogoImage from "../../assets/images/schedule/husky-wushu-logo.png?w=96;192&format=avif;webp;png&as=picture";
 import weAreTaiwanBannerImage from "../../assets/images/schedule/we-are-taiwan-banner.jpg?w=336;672&format=avif;webp;jpg&as=picture";
 import weAreTwLogoImage from "../../assets/images/schedule/we-are-tw-logo.jpg?w=96;192&format=avif;webp;jpg&as=picture";
+import scheduleData from "../../data/schedule.json";
 
 const PARTICLES = [
     { left: 12, dur: 22, delay: 0, size: 2, gold: false },
@@ -151,109 +152,20 @@ const TYPE_MEDIA_GRAD: Record<string, [string, string]> = {
     Headliner: ["#1a1206", "#3d2806"],
 };
 
-const SCHEDULE_EVENTS: ScheduleEvent[] = [
-    {
-        time: "4:30 PM",
-        title: "Intro",
-        type: "Opening",
-        desc: "The night begins. Welcome to the UW Night Market — a celebration of culture, community, and performance.",
-    },
-    {
-        time: "4:33 PM",
-        title: "Husky Wushu",
-        type: "Martial Arts",
-        desc: "Wushu is a Chinese martial art and international sport derived from hundreds of years of traditional Chinese Kung Fu. Husky Wushu has been an active club at UW since 2009, with a mission to foster an inclusive community around the practice of Chinese martial arts. They will perform a medley of individual forms, group forms, and fight sets - including hand forms and weapon forms such as sword, staff, and fan.",
-        image: SCHEDULE_MEDIA.huskyWushu,
-        logo: SCHEDULE_MEDIA.huskyWushuLogo,
-    },
-    {
-        time: "4:50 PM",
-        title: "TSA Food Eating Contest",
-        type: "Interactive",
-        desc: "Who has what it takes? Audience members battle it out in this crowd-favorite eating contest. Cheer on your champion.",
-    },
-    {
-        time: "5:08 PM",
-        title: "We Are Taiwan I",
-        type: "Dance",
-        desc: "We are honored to welcome a special performance from the National Taiwan University of Sport. As part of their U.S. tour titled '2026 We Are Taiwan,' these talented students bring together athletic excellence, artistry, and cultural pride. Through dynamic movement and powerful storytelling, they showcase the energy, creativity, and spirit of Taiwan.",
-        image: SCHEDULE_MEDIA.weAreTaiwanBanner,
-        imagePosition: "object-right",
-        logo: SCHEDULE_MEDIA.weAreTwLogo,
-    },
-    {
-        time: "5:21 PM",
-        title: "Last Chance",
-        type: "Dance",
-        desc: "An electrifying dance crew performance pushing the boundaries of movement, synchrony, and stage presence.",
-    },
-    {
-        time: "5:39 PM",
-        title: "We Are Taiwan II",
-        type: "Dance",
-        desc: "We are honored to welcome a special performance from the National Taiwan University of Sport. As part of their U.S. tour titled '2026 We Are Taiwan,' these talented students bring together athletic excellence, artistry, and cultural pride. Through dynamic movement and powerful storytelling, they showcase the energy, creativity, and spirit of Taiwan.",
-        image: SCHEDULE_MEDIA.weAreTaiwanBanner,
-        imagePosition: "object-right",
-        logo: SCHEDULE_MEDIA.weAreTwLogo,
-    },
-    {
-        time: "5:52 PM",
-        title: "Mak Fai Dragon and Lion Dance Association",
-        type: "Cultural",
-        desc: "The legendary Mak Fai Association brings good luck and fortune with a thunderous traditional lion and dragon dance performance.",
-    },
-    {
-        time: "6:07 PM",
-        title: "Intermission & Sponsor Speeches",
-        type: "Break",
-        desc: "A brief intermission. Visit the vendors, grab a bite, and hear from the incredible sponsors who made this night possible.",
-    },
-    {
-        time: "6:27 PM",
-        title: "Mitsu &  Remi Vernon",
-        type: "Music",
-        desc: "Singer-songwriter Remi Vernon takes the stage for a captivating live performance. Expect soulful melodies and heartfelt lyrics.",
-    },
-    {
-        time: "6:43 PM",
-        title: "VSA Moonlit Dance Crew",
-        type: "Dance",
-        desc: "VSA's Moonlit Dance Crew opens with a stunning set — fluid choreography inspired by the beauty of moonlit nights.",
-    },
-    {
-        time: "6:49 PM",
-        title: "Divine Dance Crew",
-        type: "Dance",
-        desc: "DIVINE DANCE CREW is a dance crew established in 2024 that does a variety of dance covers including K-Pop. Our members come from different places around the world but are united through a shared love and passion for dance and K-Pop. We aim to bring the excitement and enjoyment of performance to everyone!",
-        image: SCHEDULE_MEDIA.divineGroup,
-        logo: SCHEDULE_MEDIA.divineLogo,
-    },
-    {
-        time: "7:02 PM",
-        title: "VSA Moonlit Dance Crew",
-        type: "Dance",
-        desc: "VSA Moonlit returns for a second set, escalating the night's energy with a new routine.",
-    },
-    {
-        time: "7:06 PM",
-        title: "Step Up Dance Crew",
-        type: "Dance",
-        desc: "Precision meets passion as Step Up delivers sharp, synchronized choreography that commands the stage.",
-    },
-    {
-        time: "7:19 PM",
-        title: "Apex Diabolo",
-        type: "Acrobatics",
-        desc: "Watch in awe as Apex Diabolo performs breathtaking feats of skill — spinning, launching, and catching with unreal precision.",
-    },
-    {
-        time: "7:30 PM",
-        title: "PRYVT",
-        type: "Headliner",
-        desc: "The night's headliner. PRYVT closes out the Night Market with a genre-defying live set that will leave you speechless.",
-        headliner: true,
-    },
-];
+const SCHEDULE_EVENTS: ScheduleEvent[] = scheduleData.map((entry) => ({
+    time: entry.time,
+    title: entry.title,
+    type: entry.type,
+    desc: entry.desc,
+    headliner: entry.headliner ?? false,
+    imagePosition: entry.imagePosition,
+    image: entry.imageKey
+        ? SCHEDULE_MEDIA[entry.imageKey as keyof typeof SCHEDULE_MEDIA]
+        : undefined,
+    logo: entry.logoKey
+        ? SCHEDULE_MEDIA[entry.logoKey as keyof typeof SCHEDULE_MEDIA]
+        : undefined,
+}));
 
 const regularEvents = SCHEDULE_EVENTS.filter((e) => !e.headliner);
 const headlinerEvent = SCHEDULE_EVENTS.find((e) => e.headliner)!;

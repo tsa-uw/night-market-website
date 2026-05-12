@@ -1,0 +1,103 @@
+[
+    {
+        "time": "4:30 PM",
+        "title": "Intro",
+        "type": "Opening",
+        "desc": "The night begins. Welcome to the UW Night Market: a celebration of culture, community, and performance."
+    },
+    {
+        "time": "4:33 PM",
+        "title": "Husky Wushu",
+        "type": "Martial Arts",
+        "desc": "Wushu is a Chinese martial art and international sport derived from hundreds of years of traditional Chinese Kung Fu. Husky Wushu has been an active club at UW since 2009, with a mission to foster an inclusive community around the practice of Chinese martial arts. We will be performing a medley of individual forms, group forms and fight sets, including hand forms and weapon forms such as sword, staff, and fan.",
+        "imageKey": "huskyWushu",
+        "logoKey": "huskyWushuLogo"
+    },
+    {
+        "time": "4:50 PM",
+        "title": "TSA Food Eating Contest",
+        "type": "Interactive",
+        "desc": "TSA-UW presents a live cup noodle eating competition open to all attendees. Up to six competitors race to finish four cups of instant noodles in the fastest time, capped at five minutes. Hot water is prepared on-site and all participants are required to sign a liability waiver before competing."
+    },
+    {
+        "time": "5:08 PM",
+        "title": "We Are Taiwan I",
+        "type": "Dance",
+        "desc": "We are honored to welcome a special performance from the National Taiwan University of Sport. As part of their U.S. tour titled '2026 We Are Taiwan,' these talented students bring together athletic excellence, artistry, and cultural pride. Through dynamic movement and powerful storytelling, they showcase the energy, creativity, and spirit of Taiwan.",
+        "imageKey": "weAreTaiwanBanner",
+        "imagePosition": "object-right",
+        "logoKey": "weAreTwLogo"
+    },
+    {
+        "time": "5:21 PM",
+        "title": "Last Chance",
+        "type": "Dance",
+        "desc": "Last Chance is a Seattle-based indie/alternative band performing indie rock, alt-pop, and bedroom pop covers. Last Chance was formed 2026 with members Angelina Ly (main vocals, guitarist),  Ricky Gurango (drums), Isaiah Hoagland (guitarist, bassist), and Martin Li (bassist, guitarist)."
+    },
+    {
+        "time": "5:39 PM",
+        "title": "We Are Taiwan II",
+        "type": "Dance",
+        "desc": "We are honored to welcome a special performance from the National Taiwan University of Sport. As part of their U.S. tour titled '2026 We Are Taiwan,' these talented students bring together athletic excellence, artistry, and cultural pride. Through dynamic movement and powerful storytelling, they showcase the energy, creativity, and spirit of Taiwan.",
+        "imageKey": "weAreTaiwanBanner",
+        "imagePosition": "object-right",
+        "logoKey": "weAreTwLogo"
+    },
+    {
+        "time": "5:52 PM",
+        "title": "Mak Fai Dragon and Lion Dance Association",
+        "type": "Cultural",
+        "desc": "Established in 1974, the Mak Fai Kung Fu Dragon & Lion Dance Association stands as Seattle's premier lion dance troupe. They proudly represent the city in national and international lion dance competitions, while performing several hundred shows throughout the year. Across generations, the team preserves tradition by imparting their knowledge to the younger students within the community."
+    },
+    {
+        "time": "6:07 PM",
+        "title": "Intermission & Sponsor Speeches",
+        "type": "Break",
+        "desc": "A brief intermission. Visit the vendors, grab a bite, and hear from the incredible sponsors who made this night possible."
+    },
+    {
+        "time": "6:27 PM",
+        "title": "mitsu &  Remi Vernon",
+        "type": "Music",
+        "desc": "mitsu & Remi Vernon are a rapper and producer hip-hop duo based in Seattle, WA. The lyrical substance of their work consists of honest self reflection infused with metaphor and references. Their instrumental atmosphere blends hard hitting boom bap drums with smooth jazz, soul, and classical vinyl samples. They recently just released their debut album “Highway Pacific” which has reached over 360,000 streams worldwide. You can stream their music on all streaming platforms."
+    },
+    {
+        "time": "6:43 PM",
+        "title": "VSA Moonlit Dance Crew",
+        "type": "Dance",
+        "desc": "Moonlit Lotus is the Vietnamese Student Association's dance team that combines the traditional and the modern. Lotuses represent regeneration and rebirth, which is something that is important in celebrating our culture. 'Even if the roots are in the dirtiest waters, the lotus produces the most beautiful flower.' Today, they are proud to perform a fan and commercial piece with that same resilience as we return to traditions with modern twists."
+    },
+    {
+        "time": "6:49 PM",
+        "title": "Divine Dance Crew",
+        "type": "Dance",
+        "desc": "DIVINE DANCE CREW is a dance crew established in 2024 that does a variety of dance covers including K-Pop. Our members come from different places around the world but are united through a shared love and passion for dance and K-Pop. We aim to bring the excitement and enjoyment of performance to everyone!",
+        "imageKey": "divineGroup",
+        "logoKey": "divineLogo"
+    },
+    {
+        "time": "7:02 PM",
+        "title": "VSA Moonlit Dance Crew",
+        "type": "Dance",
+        "desc": "Moonlit Lotus is the Vietnamese Student Association's dance team that combines the traditional and the modern. Lotuses represent regeneration and rebirth, which is something that is important in celebrating our culture. 'Even if the roots are in the dirtiest waters, the lotus produces the most beautiful flower.' Today, they are proud to perform a fan and commercial piece with that same resilience as we return to traditions with modern twists."
+    },
+    {
+        "time": "7:06 PM",
+        "title": "Step Up Dance Crew",
+        "type": "Dance",
+        "desc": "Step Up Dance Crew is a dynamic Choreo and hip-hop dance team based at the University of Washington, bringing together passionate dancers from diverse backgrounds. Known for their high-energy performances, creative choreography, and strong stage presence. The team is dedicated to building an inclusive dance community while delivering powerful and engaging performances that connect with audiences."
+    },
+    {
+        "time": "7:19 PM",
+        "title": "Apex Diabolo",
+        "type": "Acrobatics",
+        "desc": "Apex is a performance group based in Seattle specializing in a unique circus prop called the diabolo, or Chinese Yo-yo. They have performed at the Night Market in previous years as well as other cultural events in the Seattle area. Today they will combine elements of modern pop with traditional techniques to bring you an unforgettable show."
+    },
+    {
+        "time": "7:30 PM",
+        "title": "PRYVT",
+        "type": "Headliner",
+        "desc": "Formed on Discord in 2023, atmospheric indie rock band PRYVT launched their career with a highly unusual feat, amassing more than 20 million streams, landing on Spotify’s Viral 50 charts in several countries, and opening for one of South Korea’s biggest indie rock band wave to earth, all before the members had ever even met in person.",
+        "headliner": true
+    }
+]
