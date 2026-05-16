@@ -4,8 +4,9 @@ import {
     PersonStanding,
     Sparkles,
     Star,
+    X,
 } from "lucide-react";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { type KeyboardEvent, useCallback, useEffect, useRef, useState } from "react";
 import OptimizedImage, { OptimizedPicture } from "../media/OptimizedImage";
 import performanceDrawing from "../../assets/images/PerformanceDrawing.png";
 import divineGroupImage from "../../assets/images/schedule/divine-group.jpg?w=336;672&format=avif;webp;jpg&as=picture";
@@ -330,10 +331,12 @@ function PreviewCard({
     event,
     previewedMedia,
     visible,
+    showConnector = true,
 }: {
     event: ScheduleEvent | null;
     previewedMedia: ReadonlySet<string>;
     visible: boolean;
+    showConnector?: boolean;
 }) {
     const isHeadliner = event?.headliner;
     const typeColor = event ? TYPE_COLORS[event.type] : null;
@@ -631,7 +634,7 @@ function PreviewCard({
             )}
 
             {/* Connector arrow pointing left toward the active row */}
-            {visible && (
+            {visible && showConnector && (
                 <div
                     style={{
                         position: "absolute",
@@ -646,6 +649,60 @@ function PreviewCard({
                     }}
                 />
             )}
+        </div>
+    );
+}
+
+function MobileScheduleSheet({
+    event,
+    previewedMedia,
+    onClose,
+}: {
+    event: ScheduleEvent | null;
+    previewedMedia: ReadonlySet<string>;
+    onClose: () => void;
+}) {
+    const isOpen = Boolean(event);
+
+    return (
+        <div className="md:hidden" aria-hidden={!isOpen}>
+            <button
+                type="button"
+                className={`fixed inset-0 z-40 bg-night-950/55 backdrop-blur-[2px] transition-opacity duration-250 ${
+                    isOpen
+                        ? "pointer-events-auto opacity-100"
+                        : "pointer-events-none opacity-0"
+                }`}
+                aria-label="Close schedule details"
+                onClick={onClose}
+                tabIndex={isOpen ? 0 : -1}
+            />
+            <aside
+                className={`fixed inset-x-0 bottom-0 z-50 max-h-[78dvh] overflow-y-auto rounded-t-2xl border-t border-warm-white/15 bg-night-900/95 px-3 pt-3 pb-[calc(1rem+env(safe-area-inset-bottom))] shadow-[0_-18px_56px_rgba(0,0,0,0.55)] backdrop-blur-xl transition-transform duration-300 ease-out ${
+                    isOpen ? "translate-y-0" : "translate-y-full"
+                }`}
+                role="dialog"
+                aria-modal="true"
+                aria-label="Schedule event details"
+            >
+                <div className="mx-auto mb-3 h-1 w-10 rounded-full bg-warm-white/25" />
+                <button
+                    type="button"
+                    className="absolute top-3 right-3 z-10 flex h-9 w-9 items-center justify-center rounded-full border border-warm-white/12 bg-night-800/80 text-warm-white/70 transition-colors hover:text-warm-white"
+                    aria-label="Close schedule details"
+                    onClick={onClose}
+                    tabIndex={isOpen ? 0 : -1}
+                >
+                    <X size={18} aria-hidden="true" />
+                </button>
+                <ScheduleMediaCache previewedMedia={previewedMedia} />
+                <PreviewCard
+                    event={event}
+                    previewedMedia={previewedMedia}
+                    visible={isOpen}
+                    showConnector={false}
+                />
+            </aside>
         </div>
     );
 }
@@ -685,6 +742,18 @@ export default function Schedule() {
 
             return next.size === current.size ? current : next;
         });
+    };
+
+    const closeMobileSheet = () => setActiveIdx(null);
+
+    const handleTimelineKeyDown = (
+        event: KeyboardEvent<HTMLElement>,
+        idx: number,
+    ) => {
+        if (event.key !== "Enter" && event.key !== " ") return;
+
+        event.preventDefault();
+        activatePreview(idx);
     };
 
     useEffect(() => {
@@ -872,6 +941,9 @@ export default function Schedule() {
                                                 itemRefs.current[i] = el;
                                             }}
                                             className="group relative flex items-center py-[0.65rem] pl-8"
+                                            role="button"
+                                            tabIndex={0}
+                                            aria-label={`View details for ${title}`}
                                             style={{
                                                 opacity: isVisible ? 1 : 0,
                                                 transform: isVisible
@@ -881,6 +953,10 @@ export default function Schedule() {
                                             }}
                                             onMouseEnter={() =>
                                                 activatePreview(i)
+                                            }
+                                            onClick={() => activatePreview(i)}
+                                            onKeyDown={(event) =>
+                                                handleTimelineKeyDown(event, i)
                                             }
                                         >
                                             {/* Sweep background */}
@@ -921,8 +997,20 @@ export default function Schedule() {
                         <div
                             ref={headlinerRef}
                             className="group relative overflow-hidden rounded-2xl border border-lantern-300/20 bg-night-800/60 p-5 backdrop-blur-sm transition-all duration-500 hover:border-lantern-300/40 hover:shadow-[0_0_40px_rgba(255,208,106,0.1)]"
+                            role="button"
+                            tabIndex={0}
+                            aria-label={`View details for ${headlinerEvent.title}`}
                             onMouseEnter={() =>
                                 activatePreview(regularEvents.length)
+                            }
+                            onClick={() =>
+                                activatePreview(regularEvents.length)
+                            }
+                            onKeyDown={(event) =>
+                                handleTimelineKeyDown(
+                                    event,
+                                    regularEvents.length,
+                                )
                             }
                             style={{
                                 opacity: headlinerVisible ? 1 : 0,
@@ -967,7 +1055,7 @@ export default function Schedule() {
                                 </div>
 
                                 {/* Decorative music note orb */}
-                                <div className="relative hidden h-14 w-14 shrink-0 sm:block">
+                                <div className="relative h-11 w-11 shrink-0 sm:h-14 sm:w-14">
                                     <div className="animate-node-pulse-gold absolute inset-0 rounded-full bg-lantern-300/20 blur-lg" />
                                     <div className="relative z-10 flex h-full w-full items-center justify-center rounded-full border border-lantern-300/35 bg-lantern-400/10">
                                         <svg
@@ -1022,6 +1110,17 @@ export default function Schedule() {
                     </div>
                 </div>
             </div>
+            <MobileScheduleSheet
+                event={
+                    activeIdx !== null
+                        ? activeIdx < regularEvents.length
+                            ? regularEvents[activeIdx]
+                            : headlinerEvent
+                        : null
+                }
+                previewedMedia={previewedMedia}
+                onClose={closeMobileSheet}
+            />
         </section>
     );
 }
