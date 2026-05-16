@@ -32,7 +32,8 @@
         "time": "5:21 PM",
         "title": "Last Chance",
         "type": "Dance",
-        "desc": "Last Chance is a Seattle-based indie/alternative band performing indie rock, alt-pop, and bedroom pop covers. Last Chance was formed 2026 with members Angelina Ly (main vocals, guitarist),  Ricky Gurango (drums), Isaiah Hoagland (guitarist, bassist), and Martin Li (bassist, guitarist)."
+        "desc": "Last Chance is a Seattle-based indie/alternative band performing indie rock, alt-pop, and bedroom pop covers. Last Chance was formed 2026 with members Angelina Ly (main vocals, guitarist), Ricky Gurango (drums), Isaiah Hoagland (guitarist, bassist), and Martin Li (bassist, guitarist).",
+        "imageKey": "lastChance"
     },
     {
         "time": "5:39 PM",
@@ -47,7 +48,8 @@
         "time": "5:52 PM",
         "title": "Mak Fai Dragon and Lion Dance Association",
         "type": "Cultural",
-        "desc": "Established in 1974, the Mak Fai Kung Fu Dragon & Lion Dance Association stands as Seattle's premier lion dance troupe. They proudly represent the city in national and international lion dance competitions, while performing several hundred shows throughout the year. Across generations, the team preserves tradition by imparting their knowledge to the younger students within the community."
+        "desc": "Established in 1974, the Mak Fai Kung Fu Dragon & Lion Dance Association stands as Seattle's premier lion dance troupe. They proudly represent the city in national and international lion dance competitions, while performing several hundred shows throughout the year. Across generations, the team preserves tradition by imparting their knowledge to the younger students within the community.",
+        "imageKey": "makFai"
     },
     {
         "time": "6:07 PM",
@@ -57,15 +59,18 @@
     },
     {
         "time": "6:27 PM",
-        "title": "mitsu &  Remi Vernon",
+        "title": "mitsu & Remi Vernon",
         "type": "Music",
-        "desc": "mitsu & Remi Vernon are a rapper and producer hip-hop duo based in Seattle, WA. The lyrical substance of their work consists of honest self reflection infused with metaphor and references. Their instrumental atmosphere blends hard hitting boom bap drums with smooth jazz, soul, and classical vinyl samples. They recently just released their debut album “Highway Pacific” which has reached over 360,000 streams worldwide. You can stream their music on all streaming platforms."
+        "desc": "mitsu & Remi Vernon are a rapper and producer hip-hop duo based in Seattle, WA. The lyrical substance of their work consists of honest self reflection infused with metaphor and references. Their instrumental atmosphere blends hard hitting boom bap drums with smooth jazz, soul, and classical vinyl samples. They recently just released their debut album \"Highway Pacific\" which has reached over 360,000 streams worldwide. You can stream their music on all streaming platforms.",
+        "imageKey": "mitsuRemi",
+        "imagePosition": "object-top"
     },
     {
         "time": "6:43 PM",
         "title": "VSA Moonlit Dance Crew",
         "type": "Dance",
-        "desc": "Moonlit Lotus is the Vietnamese Student Association's dance team that combines the traditional and the modern. Lotuses represent regeneration and rebirth, which is something that is important in celebrating our culture. 'Even if the roots are in the dirtiest waters, the lotus produces the most beautiful flower.' Today, they are proud to perform a fan and commercial piece with that same resilience as we return to traditions with modern twists."
+        "desc": "Moonlit Lotus is the Vietnamese Student Association's dance team that combines the traditional and the modern. Lotuses represent regeneration and rebirth, which is something that is important in celebrating our culture. 'Even if the roots are in the dirtiest waters, the lotus produces the most beautiful flower.' Today, they are proud to perform a fan and commercial piece with that same resilience as we return to traditions with modern twists.",
+        "imageKey": "vsaMoonlitOne"
     },
     {
         "time": "6:49 PM",
@@ -79,13 +84,15 @@
         "time": "7:02 PM",
         "title": "VSA Moonlit Dance Crew",
         "type": "Dance",
-        "desc": "Moonlit Lotus is the Vietnamese Student Association's dance team that combines the traditional and the modern. Lotuses represent regeneration and rebirth, which is something that is important in celebrating our culture. 'Even if the roots are in the dirtiest waters, the lotus produces the most beautiful flower.' Today, they are proud to perform a fan and commercial piece with that same resilience as we return to traditions with modern twists."
+        "desc": "Moonlit Lotus is the Vietnamese Student Association's dance team that combines the traditional and the modern. Lotuses represent regeneration and rebirth, which is something that is important in celebrating our culture. 'Even if the roots are in the dirtiest waters, the lotus produces the most beautiful flower.' Today, they are proud to perform a fan and commercial piece with that same resilience as we return to traditions with modern twists.",
+        "imageKey": "vsaMoonlitTwo"
     },
     {
         "time": "7:06 PM",
         "title": "Step Up Dance Crew",
         "type": "Dance",
-        "desc": "Step Up Dance Crew is a dynamic Choreo and hip-hop dance team based at the University of Washington, bringing together passionate dancers from diverse backgrounds. Known for their high-energy performances, creative choreography, and strong stage presence. The team is dedicated to building an inclusive dance community while delivering powerful and engaging performances that connect with audiences."
+        "desc": "Step Up Dance Crew is a dynamic Choreo and hip-hop dance team based at the University of Washington, bringing together passionate dancers from diverse backgrounds. Known for their high-energy performances, creative choreography, and strong stage presence. The team is dedicated to building an inclusive dance community while delivering powerful and engaging performances that connect with audiences.",
+        "imageKey": "stepUp"
     },
     {
         "time": "7:19 PM",
@@ -97,7 +104,8 @@
         "time": "7:30 PM",
         "title": "PRYVT",
         "type": "Headliner",
-        "desc": "Formed on Discord in 2023, atmospheric indie rock band PRYVT launched their career with a highly unusual feat, amassing more than 20 million streams, landing on Spotify’s Viral 50 charts in several countries, and opening for one of South Korea’s biggest indie rock band wave to earth, all before the members had ever even met in person.",
+        "desc": "Formed on Discord in 2023, atmospheric indie rock band PRYVT launched their career with a highly unusual feat, amassing more than 20 million streams, landing on Spotify's Viral 50 charts in several countries, and opening for one of South Korea's biggest indie rock band wave to earth, all before the members had ever even met in person.",
+        "imageKey": "pryvt",
         "headliner": true
     }
 ]

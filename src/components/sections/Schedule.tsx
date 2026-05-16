@@ -12,6 +12,13 @@ import divineGroupImage from "../../assets/images/schedule/divine-group.jpg?w=33
 import divineLogoImage from "../../assets/images/schedule/divine-logo.png?w=96;192&format=avif;webp;png&as=picture";
 import huskyWushuImage from "../../assets/images/schedule/husky-wushu.jpg?w=336;672&format=avif;webp;jpg&as=picture";
 import huskyWushuLogoImage from "../../assets/images/schedule/husky-wushu-logo.png?w=96;192&format=avif;webp;png&as=picture";
+import lastChanceImage from "../../assets/images/schedule/last-chance.jpg?w=336;672&format=avif;webp;jpg&as=picture";
+import makFaiImage from "../../assets/images/schedule/mak-fai.jpg?w=336;672&format=avif;webp;jpg&as=picture";
+import mitsuRemiImage from "../../assets/images/schedule/mitsu-remi.jpg?w=336;672&format=avif;webp;jpg&as=picture";
+import pryvtImage from "../../assets/images/schedule/pryvt.jpg?w=336;672&format=avif;webp;jpg&as=picture";
+import stepUpImage from "../../assets/images/schedule/step-up.jpg?w=336;672&format=avif;webp;jpg&as=picture";
+import vsaMoonlitOneImage from "../../assets/images/schedule/vsa-moonlit-1.jpg?w=336;672&format=avif;webp;jpg&as=picture";
+import vsaMoonlitTwoImage from "../../assets/images/schedule/vsa-moonlit-2.jpg?w=336;672&format=avif;webp;jpg&as=picture";
 import weAreTaiwanBannerImage from "../../assets/images/schedule/we-are-taiwan-banner.jpg?w=336;672&format=avif;webp;jpg&as=picture";
 import weAreTwLogoImage from "../../assets/images/schedule/we-are-tw-logo.jpg?w=96;192&format=avif;webp;jpg&as=picture";
 import scheduleData from "../../data/schedule.json";
@@ -68,6 +75,41 @@ const SCHEDULE_MEDIA = {
         key: "husky-wushu-logo",
         picture: huskyWushuLogoImage,
         prefetchSizes: "74px",
+    },
+    lastChance: {
+        key: "last-chance",
+        picture: lastChanceImage,
+        prefetchSizes: "336px",
+    },
+    makFai: {
+        key: "mak-fai",
+        picture: makFaiImage,
+        prefetchSizes: "336px",
+    },
+    mitsuRemi: {
+        key: "mitsu-remi",
+        picture: mitsuRemiImage,
+        prefetchSizes: "336px",
+    },
+    pryvt: {
+        key: "pryvt",
+        picture: pryvtImage,
+        prefetchSizes: "336px",
+    },
+    stepUp: {
+        key: "step-up",
+        picture: stepUpImage,
+        prefetchSizes: "336px",
+    },
+    vsaMoonlitOne: {
+        key: "vsa-moonlit-1",
+        picture: vsaMoonlitOneImage,
+        prefetchSizes: "336px",
+    },
+    vsaMoonlitTwo: {
+        key: "vsa-moonlit-2",
+        picture: vsaMoonlitTwoImage,
+        prefetchSizes: "336px",
     },
     weAreTaiwanBanner: {
         key: "we-are-taiwan-banner",
@@ -412,8 +454,8 @@ function PreviewCard({
                                                         position: "absolute",
                                                         right: 12,
                                                         bottom: 12,
-                                                        maxWidth: 74,
-                                                        maxHeight: 46,
+                                                        width: 46,
+                                                        height: 46,
                                                         objectFit: "contain",
                                                         borderRadius: 8,
                                                         background:
