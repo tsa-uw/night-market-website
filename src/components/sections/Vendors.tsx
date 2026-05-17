@@ -1,5 +1,6 @@
 import { ChevronDown, ChevronUp, MapPin, Search, Sparkles } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
+import { OptimizedPicture } from "../media/OptimizedImage";
 import ScrollReveal from "../motion/ScrollReveal";
 import vendorsData from "../../data/vendors.json";
 
@@ -15,6 +16,15 @@ interface Vendor {
 }
 
 const VENDORS = vendorsData as Vendor[];
+
+const vendorImageModules = import.meta.glob<ImagePicture>(
+    "../../assets/images/vendors/*.{jpg,jpeg,png,webp}",
+    {
+        eager: true,
+        import: "default",
+        query: "?w=96;192&format=avif;webp;jpg&as=picture",
+    },
+);
 
 const FILTERS: VendorFilter[] = ["all", "food", "crafts"];
 const MOBILE_FILTERS: VendorFilter[] = ["food", "crafts"];
@@ -64,6 +74,38 @@ const PARTICLES = [
     { left: 73, dur: 24, delay: 4, size: 2, gold: false },
     { left: 88, dur: 29, delay: 9, size: 2, gold: true },
 ] as const;
+
+const VENDOR_IMAGE_OVERRIDES: Record<string, string> = {
+    "langostino-gyopo-chicken": "gyopo-chicken",
+    sipnglow: "sips-glow",
+    "uw-mahjong-society": "uw-mjs",
+};
+
+const VENDOR_IMAGES = Object.fromEntries(
+    Object.entries(vendorImageModules).map(([path, image]) => {
+        const slug = path
+            .split("/")
+            .pop()
+            ?.replace(/\.[^.]+$/, "")
+            .toLowerCase();
+
+        return [slug, image];
+    }),
+) as Record<string, ImagePicture>;
+
+function getVendorSlug(name: string) {
+    return name
+        .toLowerCase()
+        .replace(/&/g, " ")
+        .replace(/[^a-z0-9]+/g, "-")
+        .replace(/^-|-$/g, "");
+}
+
+function getVendorImage(name: string) {
+    const slug = getVendorSlug(name);
+
+    return VENDOR_IMAGES[VENDOR_IMAGE_OVERRIDES[slug] ?? slug];
+}
 
 function getInitials(name: string) {
     return name
@@ -187,6 +229,7 @@ function FilterButton({
 
 function VendorCard({ vendor }: { vendor: Vendor }) {
     const categoryStyle = CATEGORY_STYLES[vendor.type];
+    const vendorImage = getVendorImage(vendor.name);
 
     return (
         <article
@@ -197,15 +240,24 @@ function VendorCard({ vendor }: { vendor: Vendor }) {
                 style={{ fontFamily: '"TenPounds", "Georgia", serif' }}
             >
                 <div className="absolute inset-0 bg-[repeating-linear-gradient(135deg,transparent_0_8px,rgb(255_255_255_/_4%)_8px_9px)]" />
-                <span
-                    className="absolute inset-0 flex items-center justify-center text-center"
-                    style={{
-                        lineHeight: 0.8,
-                        transform: "translateY(0.08em)",
-                    }}
-                >
-                    {getInitials(vendor.name)}
-                </span>
+                {vendorImage ? (
+                    <OptimizedPicture
+                        picture={vendorImage}
+                        alt={`${vendor.name} logo`}
+                        className="relative z-10 h-full w-full object-contain object-top brightness-110 drop-shadow-[0_6px_12px_rgba(0,0,0,0.22)] transition duration-300 group-hover:scale-105"
+                        sizes="64px"
+                    />
+                ) : (
+                    <span
+                        className="absolute inset-0 flex items-center justify-center text-center"
+                        style={{
+                            lineHeight: 0.8,
+                            transform: "translateY(0.08em)",
+                        }}
+                    >
+                        {getInitials(vendor.name)}
+                    </span>
+                )}
             </div>
 
             <div className="min-w-0 flex-1">
