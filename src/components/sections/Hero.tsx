@@ -1,4 +1,4 @@
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, MapPin } from "lucide-react";
 import { motion, useScroll, useTransform } from "motion/react";
 import { useRef } from "react";
 import OptimizedImage from "../media/OptimizedImage";
@@ -55,6 +55,16 @@ export default function Hero() {
                 <p className="mt-6 text-xl font-medium text-lantern-100 md:text-2xl">
                     May 23, 2026 | 4:30 PM - 10:00 PM
                 </p>
+
+                <a
+                    href="https://maps.app.goo.gl/JrxY1tsELNo338uXA"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mt-3 inline-flex items-center gap-1.5 text-sm font-medium text-lantern-100/70 transition-colors duration-200 hover:text-lantern-100 md:text-base"
+                >
+                    <MapPin className="h-4 w-4 shrink-0" aria-hidden="true" />
+                    Red Square, University of Washington
+                </a>
 
                 <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
                     <a
