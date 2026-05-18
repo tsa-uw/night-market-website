@@ -1,5 +1,5 @@
-import { ChevronDown, ChevronUp, MapPin, Search, Sparkles } from "lucide-react";
-import { useEffect, useMemo, useState } from "react";
+import { ChevronDown, ChevronUp, Search, Sparkles } from "lucide-react";
+import { type CSSProperties, useEffect, useMemo, useState } from "react";
 import { OptimizedPicture } from "../media/OptimizedImage";
 import ScrollReveal from "../motion/ScrollReveal";
 import vendorsData from "../../data/vendors.json";
@@ -74,6 +74,10 @@ const PARTICLES = [
     { left: 73, dur: 24, delay: 4, size: 2, gold: false },
     { left: 88, dur: 29, delay: 9, size: 2, gold: true },
 ] as const;
+
+const TILTS = [-2, 1.7, -1.0, 2.4, -1.5, 0.8] as const;
+// Vertical offsets per column position (index % 6) to create a wave across each row
+const ROW_OFFSETS = [4, 28, 8, 32, 14, 22] as const;
 
 const VENDOR_IMAGE_OVERRIDES: Record<string, string> = {
     "langostino-gyopo-chicken": "gyopo-chicken",
@@ -227,60 +231,74 @@ function FilterButton({
     );
 }
 
-function VendorCard({ vendor }: { vendor: Vendor }) {
+function VendorCard({ vendor, index }: { vendor: Vendor; index: number }) {
     const categoryStyle = CATEGORY_STYLES[vendor.type];
     const vendorImage = getVendorImage(vendor.name);
+    const tilt = TILTS[index % TILTS.length];
+    const staggerOffset = ROW_OFFSETS[index % ROW_OFFSETS.length];
 
     return (
         <article
-            className={`group relative isolate flex min-h-28 gap-4 overflow-hidden rounded-lg border border-warm-white/8 bg-night-800/50 p-4 backdrop-blur-sm transition-all duration-300 before:absolute before:top-0 before:bottom-0 before:left-0 before:w-1 before:bg-linear-to-b before:opacity-70 hover:-translate-y-0.5 hover:bg-night-700/55 ${categoryStyle.card}`}
+            className="pol-card relative cursor-default rounded-sm bg-[#f5ecd9] px-2.25 pt-2.25 pb-5 shadow-[0_1px_0_rgba(255,255,255,0.30)_inset,0_14px_30px_-8px_rgba(0,0,0,0.55),0_4px_10px_-4px_rgba(0,0,0,0.40)] hover:shadow-[0_1px_0_rgba(255,255,255,0.30)_inset,0_22px_42px_-8px_rgba(0,0,0,0.65),0_6px_16px_-4px_rgba(0,0,0,0.45)]"
+            style={{ "--tilt": `${tilt}deg`, "--offset": `${staggerOffset}px` } as CSSProperties}
         >
-            <div
-                className={`relative grid h-16 w-16 shrink-0 place-items-center overflow-hidden rounded-md border text-2xl ${categoryStyle.thumbnail}`}
-                style={{ fontFamily: '"TenPounds", "Georgia", serif' }}
-            >
-                <div className="absolute inset-0 bg-[repeating-linear-gradient(135deg,transparent_0_8px,rgb(255_255_255_/_4%)_8px_9px)]" />
+            {/* Tape strip */}
+            <span
+                className="pointer-events-none absolute -top-1.75 left-1/2 h-3.75 w-10.5 -translate-x-1/2 -rotate-3 border-x border-dashed border-black/10 bg-[rgba(255,230,130,0.65)] shadow-[0_1px_3px_rgba(0,0,0,0.22)]"
+                aria-hidden="true"
+            />
+
+            {/* Photo */}
+            <div className="relative aspect-square overflow-hidden bg-[#1b1b1b]">
                 {vendorImage ? (
                     <OptimizedPicture
                         picture={vendorImage}
-                        alt={`${vendor.name} logo`}
-                        className="relative z-10 h-full w-full object-contain object-top brightness-110 drop-shadow-[0_6px_12px_rgba(0,0,0,0.22)] transition duration-300 group-hover:scale-105"
-                        sizes="64px"
+                        alt={vendor.name}
+                        className="h-full w-full object-cover object-top brightness-105 saturate-105 contrast-105"
+                        sizes="(max-width: 560px) 45vw, (max-width: 900px) 30vw, 17vw"
                     />
                 ) : (
-                    <span
-                        className="absolute inset-0 flex items-center justify-center text-center"
-                        style={{
-                            lineHeight: 0.8,
-                            transform: "translateY(0.08em)",
-                        }}
+                    <div
+                        className={`flex h-full w-full items-center justify-center text-3xl ${categoryStyle.thumbnail}`}
+                        style={{ fontFamily: '"TenPounds", "Georgia", serif' }}
                     >
                         {getInitials(vendor.name)}
-                    </span>
+                    </div>
                 )}
+                {/* Vignette */}
+                <div
+                    className="pointer-events-none absolute inset-0"
+                    style={{ background: "radial-gradient(circle at 50% 40%, transparent 50%, rgba(0,0,0,0.28) 100%)" }}
+                    aria-hidden="true"
+                />
             </div>
 
-            <div className="min-w-0 flex-1">
-                <h3 className="truncate text-lg leading-6 font-semibold text-lantern-100">
-                    {vendor.name}
-                </h3>
+            {/* Vendor name */}
+            <p
+                className="mt-2.25 text-balance text-center leading-none text-[#2a1f12]"
+                style={{
+                    fontFamily: '"TenPounds", "Georgia", serif',
+                    fontSize: "clamp(13px, 1.4vw, 17px)",
+                }}
+            >
+                {vendor.name}
+            </p>
 
-                <div className="mt-2 flex flex-wrap items-center gap-2">
-                    <span
-                        className={`rounded-full border px-2 py-1 text-[0.62rem] font-bold tracking-[0.18em] uppercase ${categoryStyle.typeBadge}`}
-                    >
-                        {vendor.specificType}
-                    </span>
-                    <span className="rounded-full border border-warm-white/10 bg-night-900/35 px-2 py-1 text-xs font-semibold text-warm-white/58">
-                        Booth {vendor.booth}
-                    </span>
-                </div>
+            {/* Location sub-label */}
+            <p
+                className="mt-1.25 text-center leading-none text-[#6b5235]"
+                style={{
+                    fontFamily: '"Caveat", "Comic Sans MS", cursive',
+                    fontSize: "clamp(11px, 1.1vw, 13px)",
+                }}
+            >
+                {vendor.location}
+            </p>
 
-                <p className="mt-3 flex items-center gap-1.5 text-xs text-warm-white/56 transition-colors duration-200 group-hover:text-warm-white/75">
-                    <MapPin className="h-3.5 w-3.5 text-lantern-300/72" aria-hidden="true" />
-                    <span>{vendor.location}</span>
-                </p>
-            </div>
+            {/* Booth number — bottom-right of cream paper area */}
+            <span className="absolute right-2 bottom-1.5 text-[11px] font-bold tracking-[0.14em] uppercase text-[#3d2b0e]">
+                №{vendor.booth}
+            </span>
         </article>
     );
 }
@@ -352,7 +370,7 @@ export default function Vendors() {
     const hiddenVendorCount = hiddenVendors.length;
     const hiddenPanelMaxHeight =
         isListExpanded && hiddenVendors.length > 0
-            ? `${hiddenVendors.length * 148}px`
+            ? `${Math.ceil(hiddenVendors.length / 2) * 260}px`
             : "0px";
 
     const handleFilterChange = (filter: VendorFilter) => {
@@ -460,15 +478,15 @@ export default function Vendors() {
 
                 {filteredVendors.length > 0 ? (
                     <>
-                        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+                        <div className="grid grid-cols-2 gap-4 py-6 px-1 sm:grid-cols-3 lg:grid-cols-6 lg:gap-5">
                             {visibleVendors.map((vendor, index) => (
                                 <ScrollReveal
                                     key={`${vendor.name}-${vendor.booth}`}
                                     delay={(index % 6) * 0.035}
-                                    y={28}
-                                    scale={0.98}
+                                    y={20}
+                                    scale={0.97}
                                 >
-                                    <VendorCard vendor={vendor} />
+                                    <VendorCard vendor={vendor} index={index} />
                                 </ScrollReveal>
                             ))}
                         </div>
@@ -477,23 +495,21 @@ export default function Vendors() {
                             <>
                                 <div
                                     id="vendors-reveal-panel"
-                                    className={`grid overflow-hidden transition-[max-height,opacity,transform] duration-500 ease-out sm:grid-cols-2 lg:grid-cols-3 ${
+                                    className={`grid grid-cols-2 overflow-hidden transition-[max-height,opacity,transform] duration-500 ease-out sm:grid-cols-3 lg:grid-cols-6 ${
                                         isListExpanded
-                                            ? "mt-3 gap-3 opacity-100"
+                                            ? "mt-4 gap-4 px-1 lg:gap-5 opacity-100"
                                             : "mt-0 gap-0 -translate-y-1 opacity-0"
                                     }`}
-                                    style={{
-                                        maxHeight: hiddenPanelMaxHeight,
-                                    }}
+                                    style={{ maxHeight: hiddenPanelMaxHeight }}
                                 >
                                     {hiddenVendors.map((vendor, index) => (
                                         <ScrollReveal
                                             key={`${vendor.name}-${vendor.booth}`}
                                             delay={(index % 6) * 0.025}
-                                            y={24}
-                                            scale={0.98}
+                                            y={20}
+                                            scale={0.97}
                                         >
-                                            <VendorCard vendor={vendor} />
+                                            <VendorCard vendor={vendor} index={visibleVendors.length + index} />
                                         </ScrollReveal>
                                     ))}
                                 </div>
