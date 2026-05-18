@@ -60,7 +60,7 @@ export default function Hero() {
                     href="https://maps.app.goo.gl/JrxY1tsELNo338uXA"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="mt-3 inline-flex items-center gap-1.5 text-sm font-medium text-lantern-100/70 transition-colors duration-200 hover:text-lantern-100 md:text-base"
+                    className="mt-3 inline-flex items-center gap-1.5 text-sm font-medium text-lantern-100/70 underline decoration-lantern-100/45 underline-offset-4 transition-colors duration-200 hover:text-lantern-100 hover:decoration-lantern-100 md:text-base"
                 >
                     <MapPin className="h-4 w-4 shrink-0" aria-hidden="true" />
                     Red Square, University of Washington
