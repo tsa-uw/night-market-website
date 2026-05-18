@@ -24,8 +24,8 @@ const DETAIL_CARDS = [
             },
             {
                 icon: MapPin,
-                title: "Red Square @ UW",
-                detail: "4063 Spokane Ln, Seattle, WA 98105",
+                title: "Red Square at UW",
+                detail: "4063 Spokane Ln, Seattle, WA 98195",
             },
         ],
     },
@@ -46,7 +46,7 @@ const DETAIL_CARDS = [
             {
                 icon: Train,
                 title: "Light Rail Lines 1 & 2",
-                detail: "to UW District Station",
+                detail: "to University of Washington Station",
             },
             {
                 icon: MapPin,
@@ -76,7 +76,7 @@ const DETAIL_CARDS = [
             },
             {
                 icon: CreditCard,
-                title: "Card & Apple Pay",
+                title: "Card / Apple Pay",
                 detail: "only",
             },
         ],

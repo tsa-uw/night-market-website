@@ -110,7 +110,7 @@ const INFO_CARDS: InfoCardData[] = [
         accent: "lantern",
         body: (
             <>
-                Buy as many tickets as you like —{" "}
+                Buy as many tickets as you like -{" "}
                 <strong className={em}>each ticket is one entry</strong> for one
                 plane ticket. More tickets = more chances to win!
             </>
@@ -207,11 +207,16 @@ export default function RaffleTickets() {
             <div className="mx-auto max-w-6xl">
                 <ScrollReveal y={26}>
                     <h2
-                        className="mb-10 text-center text-3xl tracking-wide text-lantern-100 md:text-4xl"
+                        className="text-center text-5xl leading-tight text-lantern-100 drop-shadow-[0_4px_24px_rgba(0,0,0,0.65)] md:text-6xl"
                         style={{ fontFamily: '"TenPounds", "Georgia", serif' }}
                     >
                         Raffle Tickets
                     </h2>
+                    <p className="mx-auto mb-10 mt-3 max-w-2xl text-center text-base leading-7 text-warm-white/60">
+                        Enter for a chance to win Alaska Airlines round-trip
+                        tickets, then stay for the live drawing on the main
+                        stage.
+                    </p>
                 </ScrollReveal>
 
                 {/* Ticket */}
@@ -245,7 +250,7 @@ export default function RaffleTickets() {
                                             <AirlineLogo />
                                             <div className="min-w-0">
                                                 <div className="mb-1 text-[9px] leading-tight font-semibold tracking-[0.18em] text-[rgba(251,184,72,0.68)] uppercase sm:mb-0.5 sm:text-[10px] sm:tracking-[0.2em]">
-                                                    Grand Prize · Sponsored by
+                                                    Grand Prize / Sponsored by
                                                 </div>
                                                 <div
                                                     className="text-[20px] leading-[1.05] tracking-wide text-lantern-100 sm:text-[22px] sm:leading-tight"
@@ -263,7 +268,7 @@ export default function RaffleTickets() {
                                         </span>
                                     </div>
 
-                                    {/* Route display — single compact row */}
+                                    {/* Route display - single compact row */}
                                     <div className="relative mb-5 grid grid-cols-[1fr_minmax(74px,0.8fr)_1fr] items-end gap-2 sm:mb-4 sm:flex sm:items-center sm:gap-3">
                                         {/* FROM */}
                                         <div className="min-w-0">
@@ -280,7 +285,7 @@ export default function RaffleTickets() {
                                                 SEA
                                             </div>
                                             <div className="text-[10px] leading-tight text-warm-white/45 sm:text-[11px]">
-                                                Seattle · Tacoma
+                                                Seattle-Tacoma
                                             </div>
                                         </div>
 
@@ -326,10 +331,10 @@ export default function RaffleTickets() {
                                                         '"TenPounds", "Georgia", serif',
                                                 }}
                                             >
-                                                ???
+                                                OPEN
                                             </div>
                                             <div className="text-[10px] leading-tight text-warm-white/45 sm:text-[11px]">
-                                                Anywhere AS flies
+                                                Any Alaska destination
                                             </div>
                                         </div>
                                     </div>
@@ -394,7 +399,7 @@ export default function RaffleTickets() {
                                     <div className="absolute -bottom-2.5 left-1/2 z-[4] h-5 w-5 -translate-x-1/2 rounded-full border border-[rgba(251,184,72,0.2)] bg-night-900" />
                                 </div>
 
-                                {/* Stub — hidden on mobile */}
+                                {/* Stub - hidden on mobile */}
                                 <div className="relative hidden w-[120px] shrink-0 flex-col items-center justify-between gap-3 bg-[rgba(6,9,16,0.45)] px-4 py-7 sm:flex">
                                     <div
                                         className="pointer-events-none absolute top-0 left-0 right-0 h-[2px] opacity-35"

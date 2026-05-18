@@ -1,7 +1,7 @@
 [
     {
         "time": "4:30 PM",
-        "title": "Intro",
+        "title": "Welcome",
         "type": "Opening",
         "desc": "The night begins. Welcome to the UW Night Market: a celebration of culture, community, and performance."
     },
@@ -9,7 +9,7 @@
         "time": "4:33 PM",
         "title": "Husky Wushu",
         "type": "Martial Arts",
-        "desc": "Wushu is a Chinese martial art and international sport derived from hundreds of years of traditional Chinese Kung Fu. Husky Wushu has been an active club at UW since 2009, with a mission to foster an inclusive community around the practice of Chinese martial arts. We will be performing a medley of individual forms, group forms and fight sets, including hand forms and weapon forms such as sword, staff, and fan.",
+        "desc": "Wushu is a Chinese martial art and international sport derived from hundreds of years of traditional Chinese kung fu. Husky Wushu has been an active club at UW since 2009, with a mission to foster an inclusive community around the practice of Chinese martial arts. They will perform a medley of individual forms, group forms, and fight sets, including hand forms and weapon forms such as sword, staff, and fan.",
         "imageKey": "huskyWushu",
         "logoKey": "huskyWushuLogo"
     },
@@ -32,7 +32,7 @@
         "time": "5:21 PM",
         "title": "Last Chance",
         "type": "Dance",
-        "desc": "Last Chance is a Seattle-based indie/alternative band performing indie rock, alt-pop, and bedroom pop covers. Last Chance was formed 2026 with members Angelina Ly (main vocals, guitarist), Ricky Gurango (drums), Isaiah Hoagland (guitarist, bassist), and Martin Li (bassist, guitarist).",
+        "desc": "Last Chance is a Seattle-based indie/alternative band performing indie rock, alt-pop, and bedroom pop covers. The band formed in 2026 with Angelina Ly (main vocals, guitar), Ricky Gurango (drums), Isaiah Hoagland (guitar, bass), and Martin Li (bass, guitar).",
         "imageKey": "lastChance"
     },
     {
@@ -61,7 +61,7 @@
         "time": "6:27 PM",
         "title": "mitsu & Remi Vernon",
         "type": "Music",
-        "desc": "mitsu & Remi Vernon are a rapper and producer hip-hop duo based in Seattle, WA. The lyrical substance of their work consists of honest self reflection infused with metaphor and references. Their instrumental atmosphere blends hard hitting boom bap drums with smooth jazz, soul, and classical vinyl samples. They recently just released their debut album \"Highway Pacific\" which has reached over 360,000 streams worldwide. You can stream their music on all streaming platforms.",
+        "desc": "mitsu & Remi Vernon are a rapper and producer hip-hop duo based in Seattle, WA. Their work pairs honest self-reflection with metaphor and references, while their instrumentals blend hard-hitting boom bap drums with smooth jazz, soul, and classical vinyl samples. Their debut album, \"Highway Pacific,\" has reached over 360,000 streams worldwide and is available on all streaming platforms.",
         "imageKey": "mitsuRemi",
         "imagePosition": "object-top"
     },
@@ -91,7 +91,7 @@
         "time": "7:06 PM",
         "title": "Step Up Dance Crew",
         "type": "Dance",
-        "desc": "Step Up Dance Crew is a dynamic Choreo and hip-hop dance team based at the University of Washington, bringing together passionate dancers from diverse backgrounds. Known for their high-energy performances, creative choreography, and strong stage presence. The team is dedicated to building an inclusive dance community while delivering powerful and engaging performances that connect with audiences.",
+        "desc": "Step Up Dance Crew is a dynamic choreo and hip-hop dance team based at the University of Washington, bringing together passionate dancers from diverse backgrounds. Known for high-energy performances, creative choreography, and strong stage presence, the team builds an inclusive dance community while delivering powerful performances that connect with audiences.",
         "imageKey": "stepUp"
     },
     {
@@ -104,7 +104,7 @@
         "time": "7:30 PM",
         "title": "PRYVT",
         "type": "Headliner",
-        "desc": "Formed on Discord in 2023, atmospheric indie rock band PRYVT launched their career with a highly unusual feat, amassing more than 20 million streams, landing on Spotify's Viral 50 charts in several countries, and opening for one of South Korea's biggest indie rock band wave to earth, all before the members had ever even met in person.",
+        "desc": "Formed on Discord in 2023, atmospheric indie rock band PRYVT launched their career with a highly unusual feat: amassing more than 20 million streams, landing on Spotify's Viral 50 charts in several countries, and opening for one of South Korea's biggest indie rock bands, wave to earth, all before the members had ever met in person.",
         "imageKey": "pryvt",
         "headliner": true
     }

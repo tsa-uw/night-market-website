@@ -411,7 +411,8 @@ export default function Vendors() {
                         Meet the Vendors
                     </h2>
                     <p className="mx-auto mt-3 max-w-2xl text-base leading-7 tracking-wide text-warm-white/58">
-                        Food vendors in Red Square and makers along Rainier Vista, all pulled from this year's vendor lineup.
+                        Food vendors in Red Square and makers in Lower Red
+                        Square, all from this year's vendor lineup.
                     </p>
                 </ScrollReveal>
 
