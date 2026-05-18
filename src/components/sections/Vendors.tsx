@@ -60,7 +60,8 @@ const CATEGORY_STYLES: Record<
         active: "bg-lantern-300 text-night-900 shadow-[0_0_16px_rgba(251,184,72,0.3)]",
         card: "before:from-lantern-300 before:to-lantern-500 hover:border-lantern-300/35 hover:shadow-[0_16px_42px_rgba(251,184,72,0.12)]",
         chip: "hover:border-lantern-300/40 hover:text-lantern-100",
-        marquee: "text-lantern-300 drop-shadow-[0_0_20px_rgba(251,184,72,0.38)]",
+        marquee:
+            "text-lantern-300 drop-shadow-[0_0_20px_rgba(251,184,72,0.38)]",
         thumbnail: "border-lantern-300/15 bg-lantern-400/10 text-lantern-200",
         typeBadge: "border-lantern-300/28 bg-lantern-400/10 text-lantern-200",
     },
@@ -163,7 +164,10 @@ function MarqueeRow({
             >
                 {repeatedVendors.map((vendor, index) => {
                     return (
-                        <span key={`${vendor.name}-${index}`} className="inline-flex items-center">
+                        <span
+                            key={`${vendor.name}-${index}`}
+                            className="inline-flex items-center"
+                        >
                             <span
                                 className="px-5 text-3xl leading-none tracking-normal text-warm-white transition-colors duration-200 hover:text-lantern-100 md:px-8 md:text-5xl"
                                 style={{
@@ -235,12 +239,18 @@ function VendorCard({ vendor, index }: { vendor: Vendor; index: number }) {
     const categoryStyle = CATEGORY_STYLES[vendor.type];
     const vendorImage = getVendorImage(vendor.name);
     const tilt = TILTS[index % TILTS.length];
+    const accentColor = vendor.type === "food" ? "#f45c8d" : "#ffd06a";
     const staggerOffset = ROW_OFFSETS[index % ROW_OFFSETS.length];
 
     return (
         <article
             className="pol-card relative cursor-default rounded-sm bg-[#f5ecd9] px-2.25 pt-2.25 pb-5 shadow-[0_1px_0_rgba(255,255,255,0.30)_inset,0_14px_30px_-8px_rgba(0,0,0,0.55),0_4px_10px_-4px_rgba(0,0,0,0.40)] hover:shadow-[0_1px_0_rgba(255,255,255,0.30)_inset,0_22px_42px_-8px_rgba(0,0,0,0.65),0_6px_16px_-4px_rgba(0,0,0,0.45)]"
-            style={{ "--tilt": `${tilt}deg`, "--offset": `${staggerOffset}px` } as CSSProperties}
+            style={
+                {
+                    "--tilt": `${tilt}deg`,
+                    "--offset": `${staggerOffset}px`,
+                } as CSSProperties
+            }
         >
             {/* Tape strip */}
             <span
@@ -268,7 +278,10 @@ function VendorCard({ vendor, index }: { vendor: Vendor; index: number }) {
                 {/* Vignette */}
                 <div
                     className="pointer-events-none absolute inset-0"
-                    style={{ background: "radial-gradient(circle at 50% 40%, transparent 50%, rgba(0,0,0,0.28) 100%)" }}
+                    style={{
+                        background:
+                            "radial-gradient(circle at 50% 40%, transparent 50%, rgba(0,0,0,0.28) 100%)",
+                    }}
                     aria-hidden="true"
                 />
             </div>
@@ -297,8 +310,15 @@ function VendorCard({ vendor, index }: { vendor: Vendor; index: number }) {
 
             {/* Booth number — bottom-right of cream paper area */}
             <span className="absolute right-2 bottom-1.5 text-[11px] font-bold tracking-[0.14em] uppercase text-[#3d2b0e]">
-                №{vendor.booth}
+                #{vendor.booth}
             </span>
+
+            {/* Category color bar */}
+            <span
+                className="absolute inset-x-0 bottom-0 h-0.75 rounded-b-sm"
+                style={{ background: accentColor }}
+                aria-hidden="true"
+            />
         </article>
     );
 }
@@ -393,7 +413,10 @@ export default function Vendors() {
             <div className="pointer-events-none absolute right-[6%] bottom-[12%] -z-10 h-80 w-80 rounded-full bg-lantern-400/10 blur-3xl" />
             <div className="pointer-events-none absolute top-[42%] left-[42%] -z-10 h-110 w-110 rounded-full bg-blossom-300/6 blur-[80px]" />
 
-            <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
+            <div
+                className="pointer-events-none absolute inset-0 overflow-hidden"
+                aria-hidden="true"
+            >
                 {PARTICLES.map((particle) => (
                     <span
                         key={`${particle.left}-${particle.delay}`}
@@ -419,7 +442,10 @@ export default function Vendors() {
             <div className="mx-auto max-w-6xl">
                 <ScrollReveal className="mb-12 text-center" y={30}>
                     <span className="inline-flex items-center gap-2 rounded-full border border-lantern-100/30 bg-night-900/40 px-4 py-1 text-xs font-semibold tracking-[0.25em] text-lantern-100/85 uppercase backdrop-blur-md">
-                        <Sparkles className="h-3.5 w-3.5 text-blossom-300" aria-hidden="true" />
+                        <Sparkles
+                            className="h-3.5 w-3.5 text-blossom-300"
+                            aria-hidden="true"
+                        />
                         {VENDORS.length} vendors - one night
                     </span>
                     <h2
@@ -435,16 +461,23 @@ export default function Vendors() {
                 </ScrollReveal>
 
                 <ScrollReveal y={30} scale={0.98} duration={0.7}>
-                <div
-                    className="group/marquees relative mb-9 overflow-hidden border-y border-warm-white/8 bg-night-800/25 before:pointer-events-none before:absolute before:inset-y-0 before:left-0 before:z-10 before:w-20 before:bg-linear-to-r before:from-night-900 before:to-transparent after:pointer-events-none after:absolute after:inset-y-0 after:right-0 after:z-10 after:w-20 after:bg-linear-to-l after:from-night-900 after:to-transparent md:before:w-36 md:after:w-36"
-                    aria-hidden="true"
-                >
-                    <MarqueeRow vendors={marqueeVendors} />
-                    <MarqueeRow vendors={[...marqueeVendors].reverse()} reverse />
-                </div>
+                    <div
+                        className="group/marquees relative mb-9 overflow-hidden border-y border-warm-white/8 bg-night-800/25 before:pointer-events-none before:absolute before:inset-y-0 before:left-0 before:z-10 before:w-20 before:bg-linear-to-r before:from-night-900 before:to-transparent after:pointer-events-none after:absolute after:inset-y-0 after:right-0 after:z-10 after:w-20 after:bg-linear-to-l after:from-night-900 after:to-transparent md:before:w-36 md:after:w-36"
+                        aria-hidden="true"
+                    >
+                        <MarqueeRow vendors={marqueeVendors} />
+                        <MarqueeRow
+                            vendors={[...marqueeVendors].reverse()}
+                            reverse
+                        />
+                    </div>
                 </ScrollReveal>
 
-                <ScrollReveal className="mb-6 flex flex-col gap-4 lg:flex-row lg:items-center" y={22} delay={0.08}>
+                <ScrollReveal
+                    className="mb-6 flex flex-col gap-4 lg:flex-row lg:items-center"
+                    y={22}
+                    delay={0.08}
+                >
                     <div className="flex flex-wrap items-center gap-2">
                         <span className="mr-1 text-xs font-bold tracking-[0.22em] text-warm-white/45 uppercase">
                             Browse
@@ -469,7 +502,9 @@ export default function Vendors() {
                         <input
                             type="search"
                             value={query}
-                            onChange={(event) => handleQueryChange(event.target.value)}
+                            onChange={(event) =>
+                                handleQueryChange(event.target.value)
+                            }
                             placeholder="Search vendors or booths"
                             className="w-full rounded-full border border-warm-white/10 bg-night-800/60 py-2.5 pr-4 pl-10 text-sm text-warm-white outline-none transition duration-200 placeholder:text-warm-white/36 focus:border-blossom-300/45 focus:bg-night-800/85"
                         />
@@ -509,7 +544,13 @@ export default function Vendors() {
                                             y={20}
                                             scale={0.97}
                                         >
-                                            <VendorCard vendor={vendor} index={visibleVendors.length + index} />
+                                            <VendorCard
+                                                vendor={vendor}
+                                                index={
+                                                    visibleVendors.length +
+                                                    index
+                                                }
+                                            />
                                         </ScrollReveal>
                                     ))}
                                 </div>
@@ -520,7 +561,9 @@ export default function Vendors() {
                                         aria-controls="vendors-reveal-panel"
                                         aria-expanded={isListExpanded}
                                         onClick={() =>
-                                            setIsListExpanded((expanded) => !expanded)
+                                            setIsListExpanded(
+                                                (expanded) => !expanded,
+                                            )
                                         }
                                         className="inline-flex items-center gap-2 rounded-full border border-lantern-300/28 bg-night-800/60 px-5 py-2.5 text-sm font-bold text-lantern-100 shadow-[0_0_18px_rgba(251,184,72,0.08)] backdrop-blur-sm transition duration-200 hover:border-lantern-300/45 hover:bg-night-700/70"
                                     >
