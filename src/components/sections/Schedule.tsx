@@ -6,9 +6,15 @@ import {
     Star,
     X,
 } from "lucide-react";
-import { type KeyboardEvent, useCallback, useEffect, useRef, useState } from "react";
+import {
+    type KeyboardEvent,
+    useCallback,
+    useEffect,
+    useRef,
+    useState,
+} from "react";
 import OptimizedImage, { OptimizedPicture } from "../media/OptimizedImage";
-import performanceDrawing from "../../assets/images/PerformanceDrawing.png";
+import nightStage from "../../assets/images/NightStage.png";
 import divineGroupImage from "../../assets/images/schedule/divine-group.jpg?w=336;672&format=avif;webp;jpg&as=picture";
 import divineLogoImage from "../../assets/images/schedule/divine-logo.png?w=96;192&format=avif;webp;png&as=picture";
 import huskyWushuImage from "../../assets/images/schedule/husky-wushu.jpg?w=336;672&format=avif;webp;jpg&as=picture";
@@ -124,9 +130,7 @@ const SCHEDULE_MEDIA = {
     },
 } satisfies Record<string, ScheduleMedia>;
 
-const SCHEDULE_MEDIA_KEYS = Object.values(SCHEDULE_MEDIA).map(
-    ({ key }) => key,
-);
+const SCHEDULE_MEDIA_KEYS = Object.values(SCHEDULE_MEDIA).map(({ key }) => key);
 
 const SCHEDULE_MEDIA_BY_KEY = new Map(
     Object.values(SCHEDULE_MEDIA).map((media) => [media.key, media]),
@@ -392,12 +396,7 @@ function PreviewCard({
                         {event.image ? (
                             <>
                                 {previewImages.map(
-                                    ({
-                                        key,
-                                        picture,
-                                        alt,
-                                        imagePosition,
-                                    }) => {
+                                    ({ key, picture, alt, imagePosition }) => {
                                         const isActive =
                                             key === event.image?.key;
 
@@ -442,39 +441,45 @@ function PreviewCard({
                                 </span>
                                 {event.logo && (
                                     <>
-                                        {previewLogos.map(({ key, picture, alt }) => {
-                                            const isActive =
-                                                key === event.logo?.key;
+                                        {previewLogos.map(
+                                            ({ key, picture, alt }) => {
+                                                const isActive =
+                                                    key === event.logo?.key;
 
-                                            return (
-                                                <OptimizedPicture
-                                                    key={key}
-                                                    picture={picture}
-                                                    alt={isActive ? alt : ""}
-                                                    aria-hidden={!isActive}
-                                                    sizes="74px"
-                                                    style={{
-                                                        position: "absolute",
-                                                        right: 12,
-                                                        bottom: 12,
-                                                        width: 46,
-                                                        height: 46,
-                                                        objectFit: "contain",
-                                                        borderRadius: 8,
-                                                        background:
-                                                            "rgba(246,239,223,0.86)",
-                                                        padding: 6,
-                                                        boxShadow:
-                                                            "0 8px 24px rgba(0,0,0,0.35)",
-                                                        opacity: isActive
-                                                            ? 1
-                                                            : 0,
-                                                        transition:
-                                                            "opacity 0.15s ease",
-                                                    }}
-                                                />
-                                            );
-                                        })}
+                                                return (
+                                                    <OptimizedPicture
+                                                        key={key}
+                                                        picture={picture}
+                                                        alt={
+                                                            isActive ? alt : ""
+                                                        }
+                                                        aria-hidden={!isActive}
+                                                        sizes="74px"
+                                                        style={{
+                                                            position:
+                                                                "absolute",
+                                                            right: 12,
+                                                            bottom: 12,
+                                                            width: 46,
+                                                            height: 46,
+                                                            objectFit:
+                                                                "contain",
+                                                            borderRadius: 8,
+                                                            background:
+                                                                "rgba(246,239,223,0.86)",
+                                                            padding: 6,
+                                                            boxShadow:
+                                                                "0 8px 24px rgba(0,0,0,0.35)",
+                                                            opacity: isActive
+                                                                ? 1
+                                                                : 0,
+                                                            transition:
+                                                                "opacity 0.15s ease",
+                                                        }}
+                                                    />
+                                                );
+                                            },
+                                        )}
                                     </>
                                 )}
                             </>
@@ -826,7 +831,7 @@ export default function Schedule() {
         >
             {/* Background */}
             <OptimizedImage
-                src={performanceDrawing}
+                src={nightStage}
                 alt=""
                 aria-hidden="true"
                 className="pointer-events-none absolute inset-0 -z-30 h-full w-full object-cover object-center"
@@ -834,7 +839,8 @@ export default function Schedule() {
             <div
                 className="pointer-events-none absolute inset-0 -z-20"
                 style={{
-                    background: "linear-gradient(to bottom, rgba(6,9,16,0.08) 0%, rgba(6,9,16,0.32) 50%, rgba(6,9,16,0.75) 75%, #060910 100%)",
+                    background:
+                        "linear-gradient(to bottom, rgba(6,9,16,0.18) 0%, rgba(6,9,16,0.48) 50%, rgba(6,9,16,0.82) 75%, #060910 100%)",
                 }}
             />
 
@@ -842,7 +848,8 @@ export default function Schedule() {
             <div
                 className="pointer-events-none absolute inset-0 -z-10"
                 style={{
-                    background: "radial-gradient(ellipse 70% 60% at 50% 50%, rgba(6,9,16,0.55) 0%, transparent 100%)",
+                    background:
+                        "radial-gradient(ellipse 70% 60% at 50% 50%, rgba(6,9,16,0.55) 0%, transparent 100%)",
                 }}
             />
 
@@ -905,7 +912,7 @@ export default function Schedule() {
                 >
                     {/* Timeline + headliner column */}
                     <div className="min-w-0">
-                        <div className="relative ml-28">
+<div className="relative ml-28">
                             {/* Gradient line */}
                             <div
                                 className="pointer-events-none absolute -left-px top-3 bottom-3 w-0.5 bg-linear-to-b from-blossom-400 via-lantern-400/60 to-transparent"
@@ -968,7 +975,13 @@ export default function Schedule() {
                                             <div className="pointer-events-none absolute -left-28 top-1 bottom-1 w-0.5 origin-center scale-y-0 rounded-full bg-blossom-400 shadow-[0_0_6px_rgba(244,92,141,0.8)] transition-transform duration-300 ease-out group-hover:scale-y-100" />
 
                                             {/* Time */}
-                                            <time className="absolute right-full mr-4 w-24 -translate-x-1 text-right text-sm tabular-nums font-medium text-lantern-300/90 transition-all duration-300 ease-out group-hover:translate-x-0 group-hover:text-lantern-200" style={{ textShadow: "0 1px 6px rgba(0,0,0,0.8)" }}>
+                                            <time
+                                                className="absolute right-full mr-4 w-24 -translate-x-1 text-right text-sm tabular-nums font-medium text-lantern-300/90 transition-all duration-300 ease-out group-hover:translate-x-0 group-hover:text-lantern-200"
+                                                style={{
+                                                    textShadow:
+                                                        "0 1px 6px rgba(0,0,0,0.8)",
+                                                }}
+                                            >
                                                 {time}
                                             </time>
 
@@ -976,7 +989,13 @@ export default function Schedule() {
                                             <div className="absolute left-0 z-10 h-2.5 w-2.5 -translate-x-1/2 rounded-full bg-blossom-400 shadow-[0_0_10px_2px_rgba(244,92,141,0.9)] transition-all duration-300 ease-out group-hover:scale-[1.5] group-hover:bg-blossom-300 group-hover:shadow-[0_0_0_2px_rgba(244,92,141,0.45),0_0_20px_rgba(244,92,141,1)]" />
 
                                             {/* Title */}
-                                            <span className="text-[0.9375rem] leading-relaxed text-warm-white/90 transition-all duration-200 ease-out group-hover:translate-x-0.5 group-hover:text-warm-white" style={{ textShadow: "0 1px 8px rgba(0,0,0,0.9)" }}>
+                                            <span
+                                                className="text-[0.9375rem] leading-relaxed text-warm-white/90 transition-all duration-200 ease-out group-hover:translate-x-0.5 group-hover:text-warm-white"
+                                                style={{
+                                                    textShadow:
+                                                        "0 1px 8px rgba(0,0,0,0.9)",
+                                                }}
+                                            >
                                                 {title}
                                             </span>
                                         </li>
