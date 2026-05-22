@@ -190,6 +190,13 @@
     },
     {
         "type": "crafts",
+        "name": "Silkin",
+        "booth": "12",
+        "location": "Lower Red Square",
+        "specificType": "Student Arts/Crafts"
+    },
+    {
+        "type": "crafts",
         "name": "Colored Lifestyle",
         "booth": "13",
         "location": "Lower Red Square",
