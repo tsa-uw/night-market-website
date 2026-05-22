@@ -21,6 +21,7 @@ const SPONSOR_NAME_OVERRIDES: Record<string, string> = {
     "teco-seattle-logo": "TECO Seattle",
     "tnt-supermarket-logo": "T&T Supermarket",
     "weichuan-logo": "Wei-Chuan",
+    "tta-logo": "Taiwan Tourism Administration",
 };
 
 function getSponsorSlug(path: string) {
