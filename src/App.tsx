@@ -25,7 +25,34 @@ export default function App() {
                 <FAQ />
             </main>
             <footer className="border-t border-night-700 bg-night-900 px-4 py-8 text-center text-sm text-lantern-100/55">
-                &copy; 2026 TSA Night Market. All rights reserved.
+                <p>&copy; 2026 TSA Night Market. All rights reserved.</p>
+                <p className="mt-3">
+                    Site by{" "}
+                    <a
+                        href="https://connorlin.dev"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-lantern-100/75 underline-offset-2 transition-colors hover:text-lantern-100 hover:underline"
+                    >
+                        Connor Lin
+                    </a>
+                    {" · "}
+                    <a
+                        href="https://www.linkedin.com/in/connor-lin-dev/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-lantern-100/75 underline-offset-2 transition-colors hover:text-lantern-100 hover:underline"
+                    >
+                        LinkedIn
+                    </a>
+                    {" · "}
+                    <a
+                        href="mailto:me@connorlin.dev"
+                        className="text-lantern-100/75 underline-offset-2 transition-colors hover:text-lantern-100 hover:underline"
+                    >
+                        me@connorlin.dev
+                    </a>
+                </p>
             </footer>
         </>
     );
